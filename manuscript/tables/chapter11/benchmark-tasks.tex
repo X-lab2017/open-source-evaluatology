@@ -1,0 +1,20 @@
+\begin{table}[htbp]
+\caption{The nine task benchmarks defined in OpenPerf. Condensed and translated from Tables 1--2 of \citet{han2025openperf}. Only three tasks receive comparative experimental results in that paper.}
+\label{tab:ch11-tasks}
+\centering\small\renewcommand{\arraystretch}{1.17}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.33\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Task} & \textbf{Target or reference} & \textbf{Evaluation in the source}\\\midrule
+Behaviour completion and prediction & Behaviour series from five projects; observations removed to form a completion problem. & NMSE, NRMSE, NMAE; comparative experiment.\\[5pt]
+Bot identification and classification & Account features with labels assembled using existing detectors and manual work. & Classification measures; comparative experiment.\\[5pt]
+Comment sentiment classification & Positive and negative issue comments; manually assigned labels. & F1 and precision specified.\\[5pt]
+Software supply-chain risk prediction & Project attributes used to construct a maintainability assessment. & No task evaluation measure specified in source Table 2.\\[5pt]
+Project influence ranking & A repository collaboration graph and influence-ranking procedure. & Algorithm runtime specified.\\[5pt]
+Archived-project prediction & Repository features and archive status from GitHub. & F1 and precision specified.\\[5pt]
+Network influence-index prediction & Project metrics used to predict an influence value. & MSE and RMSE specified.\\[5pt]
+Community anomaly detection & Behaviour series; labels informed by clustering and expert judgment. & F1 and precision specified.\\[5pt]
+Project recommendation by link prediction & Graphs based on shared participation, shared topics, and their combination. & AUC and runtime; comparative experiment.\\
+\bottomrule
+\end{tabularx}
+\tablenote{The descriptions retain the roles of the source tasks. Recovery of removed observations or links does not, without a temporal protocol, establish performance on future events. A model-generated index is also distinct from an independently observed outcome.}
+\end{table}

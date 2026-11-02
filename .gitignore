@@ -1,0 +1,12 @@
+*.pdf
+*.zip
+*.aux
+*.log
+*.toc
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+manuscript/fonts/*.otf
+.openai/

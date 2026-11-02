@@ -1,0 +1,50 @@
+[
+  {
+    "name": "SourceSerif4-Regular.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-Regular.otf",
+    "size": 241392,
+    "sha": "fc9f84e94b2537b3cc10aaebcab08a0bc2a0e16b"
+  },
+  {
+    "name": "SourceSerif4-It.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-It.otf",
+    "size": 169132,
+    "sha": "550c8547051aefd8a40632307e6e3433dbd103b3"
+  },
+  {
+    "name": "SourceSerif4-Semibold.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-Semibold.otf",
+    "size": 252852,
+    "sha": "5732c382071691b21aa76a6e340a1944dea7a567"
+  },
+  {
+    "name": "SourceSerif4-SemiboldIt.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-SemiboldIt.otf",
+    "size": 174988,
+    "sha": "5a8f82c2ebfaa220b43b156bcf5a52f1b8aee5ff"
+  },
+  {
+    "name": "SourceSans3-Regular.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-Regular.otf",
+    "size": 334924,
+    "sha": "7a261d93d6bd4046f5e51a865b6957849b8e14b5"
+  },
+  {
+    "name": "SourceSans3-It.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-It.otf",
+    "size": 239048,
+    "sha": "00dbccb862f999428863c678881d42b6357a6eb7"
+  },
+  {
+    "name": "SourceSans3-Semibold.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-Semibold.otf",
+    "size": 339636,
+    "sha": "86494ddbec66719a3f42c0f1ab0e2903b17bdab5"
+  },
+  {
+    "name": "SourceSans3-SemiboldIt.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-SemiboldIt.otf",
+    "size": 239736,
+    "sha": "146af728cf16a72929b540a9121e117357a1ea58"
+  }
+]

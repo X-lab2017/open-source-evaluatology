@@ -1,0 +1,44 @@
+% Approved architecture with linked chapter cells.
+\chapter*{Book Structure}
+\pdfbookmark[0]{Book Structure}{bookstructure.bookmark}
+\label{bookmap}
+\markboth{Open Source Evaluatology}{Book Structure}
+\noindent Evaluatology supplies the foundation. Theory specifies the inquiry, methods construct its evidence, and empirical studies examine its use. Institutional applications and shared research practice return new requirements to this foundation.
+\par\vspace{8pt}
+\noindent\begin{tikzpicture}[x=1mm,y=1mm,
+ cell/.style={sebox,text width=36mm,minimum height=21mm,font=\sffamily\fontsize{8.6}{10.2}\selectfont},
+ band/.style={seband,text width=127mm,minimum height=8mm},
+ result/.style={sebox,text width=127mm,minimum height=7mm,font=\sffamily\fontsize{8.3}{10}\selectfont}]
+\node[band,minimum height=13mm] (base) at (65,0)
+ {EVALUATOLOGY\\[-1pt]\normalfont\sffamily\fontsize{8.6}{10.2}\selectfont Objects and effects \quad$\cdot$\quad Conditions and comparison \quad$\cdot$\quad Value};
+\node[band,fill=FrameworkTeal] (t) at (65,-17) {I\quad THEORY \hfill Define the domain and its inquiry};
+\node[cell,fill=FrameworkTeal!12] (c1) at (21,-33) {\hyperref[ch:one]{\textbf{1}\\Foundations of Open\\Source Evaluatology}};
+\node[cell,fill=FrameworkTeal!12] (c2) at (65,-33) {\hyperref[ch:two]{\textbf{2}\\Value and Sustainability\\in Open Collaboration}};
+\node[cell,fill=FrameworkTeal!12] (c3) at (109,-33) {\hyperref[ch:three]{\textbf{3}\\A Framework for\\Open Source Evaluation}};
+\node[result,fill=FrameworkTeal!6] (r1) at (65,-49) {Evaluation questions, collective capability, stakeholder effects, and research design};
+\node[band,fill=FrameworkBlue] (m) at (65,-61) {II\quad METHODS \hfill Construct and examine the measures};
+\node[cell,fill=FrameworkBlue!12] (c4) at (21,-77) {\hyperref[ch:measurement]{\textbf{4}\\Measuring Activity in\\Open Collaboration}};
+\node[cell,fill=FrameworkBlue!12] (c5) at (65,-77) {\hyperref[ch:five]{\textbf{5}\\OpenRank: Influence\\and Contribution}};
+\node[cell,fill=FrameworkBlue!12] (c6) at (109,-77) {\hyperref[ch:six]{\textbf{6}\\OpenDigger: Evaluation\\in Practice}};
+\node[result,fill=FrameworkBlue!6] (r2) at (65,-93) {Measurements, relational models, infrastructure, and observed consequences};
+\node[band,fill=FrameworkAmber] (e) at (65,-105) {III\quad EMPIRICAL STUDIES \hfill Examine evidence in use};
+\node[cell,fill=FrameworkAmber!12] (c7) at (21,-121) {\hyperref[ch:seven]{\textbf{7}\\Recognizing Contributions\\in Open Collaboration}};
+\node[cell,fill=FrameworkAmber!12] (c8) at (65,-121) {\hyperref[ch:sustainability]{\textbf{8}\\Evaluating Community\\Sustainability}};
+\node[cell,fill=FrameworkAmber!12] (c9) at (109,-121) {\hyperref[ch:governance]{\textbf{9}\\Evaluating Ecosystem\\Governance}};
+\node[result,fill=FrameworkAmber!6] (r3) at (65,-137) {Recognition and recourse \quad$\cdot$\quad Continuity through change \quad$\cdot$\quad Bounded judgment};
+\node[band,fill=FrameworkViolet,minimum height=11mm] (v) at (65,-151)
+ {IV\quad APPLICATIONS AND DISCIPLINARY DEVELOPMENT\\[-1pt]\normalfont\sffamily\fontsize{8.3}{10}\selectfont Connect institutional use with cumulative research};
+\node[cell,text width=58mm,minimum height=18mm,fill=FrameworkViolet!7,draw=FrameworkViolet!60] (c10) at (32,-169) {\hyperref[ch:thinktanks]{\textbf{10}\\Open Source Science and\\Technology Think Tanks}};
+\node[cell,text width=58mm,minimum height=18mm,fill=FrameworkViolet!7,draw=FrameworkViolet!60] (c11) at (98,-169) {\hyperref[ch:discipline]{\textbf{11}\\Disciplinary Development\\and the Tool Ecosystem}};
+\draw[searrow] (base.south)--(t.north);
+\draw[searrow] (r1.south)--(m.north);
+\draw[searrow] (r2.south)--(e.north);
+\draw[searrow] (r3.south)--(v.north);
+\foreach \a/\b in {c1/c2,c2/c3,c4/c5,c5/c6,c7/c8,c8/c9,c10/c11} \draw[searrow] (\a.east)--(\b.west);
+\draw[sefeedback,draw=FrameworkAmber] (r3.east)--(135,-137)--(135,-17)--(t.east);
+\draw[sefeedback,draw=FrameworkViolet] (c11.east)--(139,-169)--(139,-61)--(m.east);
+\end{tikzpicture}
+\par\vspace{6pt}
+\noindent{\sffamily\fontsize{9}{11.5}\selectfont\raggedright
+\textbf{Figure P.1. Architecture of the book.}
+Solid arrows mark the progression of the argument. Dashed arrows return empirical requirements to theory and lessons from applications and validation to methods. They indicate intellectual feedback, not estimated causal effects. Original conceptual diagram.\par}

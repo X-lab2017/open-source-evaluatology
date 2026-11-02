@@ -1,0 +1,14 @@
+\begin{table}[htbp]
+\caption{Interaction weights in the 2025 course configuration. Values reproduced from Section IV-C of \citet{seetmanuscript}.}
+\label{tab:ch7-weights}
+\small\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}Xr@{}}\toprule
+Qualifying interaction & Weight $\lambda_h$\\\midrule
+Issue opening & 2.2235\\
+Issue comment & 0.5252\\
+Pull-request opening & 4.0679\\
+Review comment & 0.7427\\
+Pull-request merge & 2.0339\\\bottomrule
+\end{tabularx}
+\tablenote{Actor--artifact relations were bidirectional before outgoing normalization. Artifact--repository links had unit weight. Closures remained in descriptive activity analysis without an additional propagation weight; reactions modified initial values.}
+\end{table}

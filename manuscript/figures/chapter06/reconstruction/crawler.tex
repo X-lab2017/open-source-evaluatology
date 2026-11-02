@@ -1,0 +1,20 @@
+\begin{table}[tbp]
+\centering
+\caption{Reported support for collection functions.}\label{tab:ch6-crawler}
+\fontsize{9.5}{12}\selectfont
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xccccccc@{}}
+\toprule
+Tool & DCP & DF & IPS & RRC & EH & MTH & ST\\
+\midrule
+Scrapy & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & --- & $\bullet$\\
+BeautifulSoup & $\bullet$ & $\bullet$ & --- & --- & $\bullet$ & --- & ---\\
+Selenium & --- & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & --- & ---\\
+Puppeteer & --- & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & --- & ---\\
+Octoparse & $\bullet$ & $\bullet$ & --- & --- & $\bullet$ & --- & $\bullet$\\
+ParseHub & $\bullet$ & $\bullet$ & --- & --- & $\bullet$ & --- & $\bullet$\\
+OpenCrawler & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$\\
+\bottomrule
+\end{tabularx}
+\tablenote{Marks reproduce \citet[Table 3]{wang2026digger}: $\bullet$ = marked in the source; --- = unmarked in the source. DCP: data cleaning and parsing; DF: data format; IPS: IP proxy support; RRC: request rate control; EH: error handling; MTH: multiple-token handling; ST: scheduling tasks. This comparison records functions, not correctness, throughput, completeness, or current product capability.}
+\end{table}

@@ -1,0 +1,15 @@
+\begin{table}[tbp]
+\caption{Historical metric semantics retained for the case study.}
+\label{tab:ch9-metrics}
+\centering\small\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{25mm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}\toprule
+Measure & Source implementation & Interpretation boundary \\\midrule
+Activity & Weighted sum of five behavior types, normalized by elapsed days. & Retain the source series; later formulas are separate versions.\\
+OpenRank & Reported collaboration-network scores with temporal initialization. & Preserve graph and normalization semantics; influence and local contribution remain distinct.\\
+Participants & Accounts engaged in issue or pull-request interactions. & Includes discussion; not a count of code authors alone.\\
+Stars / forks & Monthly platform attention measures. & Platform forks do not each represent a sustained alternative project.\\
+Bus factor & Commit concentration at a 50\% contribution threshold. & A historical concentration measure, not verified departure resilience.\\
+Open-item age & Ages of unresolved issues or change requests. & Describes the remaining stock, not time to completion of closed items.\\\bottomrule
+\end{tabularx}
+\tablenote{Source definitions from \citet[Section 4]{han2026redis}; interpretation boundaries are aligned with Chapters 4--6. The article does not print numerical weights for the five Activity behaviors.}
+\end{table}

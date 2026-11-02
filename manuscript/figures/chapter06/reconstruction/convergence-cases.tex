@@ -1,0 +1,19 @@
+\begin{table}[tbp]
+\centering
+\caption{Convergence in the six largest reported benchmark cases.}\label{tab:ch6-convergence}
+\fontsize{9.3}{11.6}\selectfont
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrr@{}}
+\toprule
+Repository & Nodes & Edges & Iterations\\
+\midrule
+langchain-\allowbreak ai/\allowbreak langchain & 3,134 & 8,576 & 21\\
+ZeroK-\allowbreak RTS/\allowbreak CrashReports & 3,338 & 6,672 & 24\\
+mergifyio-\allowbreak testing/\allowbreak functional-\allowbreak testing-\allowbreak repo-\allowbreak Greesb & 3,659 & 8,182 & 24\\
+godotengine/\allowbreak godot & 3,663 & 9,842 & 21\\
+zed-\allowbreak industries/\allowbreak zed & 3,704 & 6,600 & 24\\
+digitalinnovationone/\allowbreak dio-\allowbreak lab-\allowbreak open-\allowbreak source & 3,908 & 8,354 & 21\\
+\bottomrule
+\end{tabularx}
+\tablenote{Reproduced from \citet[Table 5]{han2026rank}. The mean for all six cases is 22.5 iterations; the three cases that the paper identifies as retaining historical continuity each require 21 iterations. Repository identifiers, counts, and iterations are preserved.}
+\end{table}

@@ -1,0 +1,156 @@
+[
+  {
+    "number": 1,
+    "title": "Foundations of Open Source Evaluatology",
+    "sections": [
+      "The Evaluation Problem in Open Collaboration",
+      "Foundations in Evaluatology",
+      "Open Collaboration as an Evaluation Domain",
+      "From Measurements to Evaluative Claims",
+      "Connecting Theory and Practice",
+      "Research Questions and Scope"
+    ],
+    "part": 1,
+    "title_zh": "开源评价学基础"
+  },
+  {
+    "number": 2,
+    "title": "Value and Sustainability in Open Collaboration",
+    "sections": [
+      "Activity, Contribution, and Collective Capability",
+      "Influence and Recognition in Collaboration Networks",
+      "Effects, Stakeholders, and Value",
+      "Time, Continuity, and Sustainability",
+      "The Consequences of Evaluation",
+      "Implications for Evaluation Design"
+    ],
+    "part": 1,
+    "title_zh": "开放协作中的价值与可持续性"
+  },
+  {
+    "number": 3,
+    "title": "A Framework for Open Source Evaluation",
+    "sections": [
+      "Specify the Question and Intended Use",
+      "Translate the Question into an Evaluation System",
+      "Define Objects, Observations, and Measurements",
+      "Select Models and Reference Conditions",
+      "Plan Validation and Interpret Evidence",
+      "Three Completed Evaluation Designs"
+    ],
+    "part": 1,
+    "title_zh": "开源评价框架"
+  },
+  {
+    "number": 4,
+    "title": "Measuring Activity in Open Collaboration",
+    "sections": [
+      "Collaboration Events as Observations",
+      "Activity: Definitions and Aggregation",
+      "The 4WH Analytical Framework",
+      "Patterns of Collective Collaboration",
+      "Aggregation Choices and Comparative Evidence",
+      "Activity, Sustainability, and Evaluation"
+    ],
+    "part": 2,
+    "title_zh": "开放协作的活跃度测量"
+  },
+  {
+    "number": 5,
+    "title": "OpenRank: Influence and Contribution",
+    "sections": [
+      "From Collaboration to Relational Evaluation",
+      "The OpenRank Algorithm",
+      "Global Influence across Repositories and Developers",
+      "Contribution within a Community",
+      "Validation across Models and Settings",
+      "Interpreting Relational Scores"
+    ],
+    "part": 2,
+    "title_zh": "OpenRank：影响力与贡献"
+  },
+  {
+    "number": 6,
+    "title": "OpenDigger: Evaluation in Practice",
+    "sections": [
+      "Evaluation Requirements and System Design",
+      "Data, Labels, and Observation Boundaries",
+      "Metric Services and Scalable Computation",
+      "Validation of the Evaluation Infrastructure",
+      "Deploying Contribution Recognition",
+      "Behavioural Feedback and Model Revision"
+    ],
+    "part": 2,
+    "title_zh": "OpenDigger：评价实践"
+  },
+  {
+    "number": 7,
+    "title": "Recognizing Contributions in Open Collaboration",
+    "sections": [
+      "Contribution and the Purpose of Recognition",
+      "Designing a Recognition System",
+      "Evidence from Two Educational Deployments",
+      "Relational Evidence and Contextual Judgment",
+      "Feedback, Recourse, and Participation",
+      "Validity and Consequences of Recognition"
+    ],
+    "part": 3,
+    "title_zh": "开放协作中的贡献认可"
+  },
+  {
+    "number": 8,
+    "title": "Evaluating Community Sustainability",
+    "sections": [
+      "Continuity beyond Repository Survival",
+      "Designing the Archived-Project Study",
+      "Why Projects Are Archived",
+      "Development Trajectories and Maintenance Conditions",
+      "Exit, Transfer, and Renewal",
+      "Evaluating Continuity through Transition"
+    ],
+    "part": 3,
+    "title_zh": "社区可持续性评价"
+  },
+  {
+    "number": 9,
+    "title": "Evaluating Ecosystem Governance",
+    "sections": [
+      "Governance as an Evaluation Problem",
+      "Observing the Redis Governance Transition",
+      "Organizational Contributions and Ecosystem Reconfiguration",
+      "Attribution across Organizations, Regions, and Fields",
+      "From Evidence to Governance Judgments",
+      "Accountability and Learning from Evaluation"
+    ],
+    "part": 3,
+    "title_zh": "生态治理评价"
+  },
+  {
+    "number": 10,
+    "title": "Open Source Science and Technology Think Tanks",
+    "sections": [
+      "From Evaluation to Decision Support",
+      "Goals, Indicators, and Observatory Design",
+      "Mapping Global Open Source Development",
+      "Regional and Organizational Applications",
+      "Visual Investigation with OpenDipper",
+      "Knowledge Products and Institutional Use"
+    ],
+    "part": 4,
+    "title_zh": "开源科技智库"
+  },
+  {
+    "number": 11,
+    "title": "Disciplinary Development and the Tool Ecosystem",
+    "sections": [
+      "A Framework for Disciplinary Development",
+      "An Open Evaluation Tool Ecosystem",
+      "Tools for Evidence and Interpretation",
+      "Validation and Shared Benchmarks",
+      "Interdisciplinary Foundations",
+      "Building a Cumulative Research Programme"
+    ],
+    "part": 4,
+    "title_zh": "学科建设与工具生态"
+  }
+]

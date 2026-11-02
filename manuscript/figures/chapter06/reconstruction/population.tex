@@ -1,0 +1,22 @@
+\begin{table}[tbp]
+\centering
+\caption{Population of collaboration networks in January 2024.}\label{tab:ch6-population}
+\fontsize{9.5}{12}\selectfont
+\renewcommand{\arraystretch}{1.13}
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}rrrrr@{}}
+\toprule
+$\lfloor\ln n\rfloor$ & Networks & Mean nodes & Mean edges & Density & Mean degree\\
+\midrule
+1 & 59,376 & 6 & 4 & 0.1229 & 1.59\\
+2 & 81,304 & 12 & 13 & 0.0797 & 2.04\\
+3 & 40,573 & 32 & 41 & 0.0397 & 2.49\\
+4 & 13,437 & 84 & 114 & 0.0173 & 2.73\\
+5 & 2,982 & 223 & 317 & 0.0068 & 2.83\\
+6 & 642 & 619 & 931 & 0.0026 & 2.98\\
+7 & 100 & 1,641 & 2,326 & 0.0009 & 2.84\\
+8 & 6 & 3,568 & 4,019 & 0.0003 & 2.26\\
+Total & 198,420 & 25 & 32 & 0.0788 & 2.06\\
+\bottomrule
+\end{tabular*}
+\tablenote{All eight bins and the total row are reproduced from \citet[Table 4]{han2026rank}. Means and densities retain the source rounding. The reported total density is not a density calculated from the rounded mean node and edge counts. The latest paper specifies an eligibility threshold of at least two nodes; no separate two-node bin appears in its table.}
+\end{table}

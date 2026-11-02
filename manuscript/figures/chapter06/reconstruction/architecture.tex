@@ -1,0 +1,20 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\node[sebox,text width=130mm,minimum height=14mm,fill=FrameworkViolet!10,draw=FrameworkViolet!65] (apps) at (0,77) {\textbf{5\quad Applications}\\Research reports\quad Repository insights\quad Contribution recognition\quad Governance};
+\node[sebox,text width=130mm,minimum height=13mm,fill=FrameworkBlue!10] (analytics) at (0,57) {\textbf{4\quad Analytics Service Layer}\\Metric queries\quad Interactive notebooks and CLI\quad Public metric files};
+\node[sebox,text width=59mm,minimum height=20mm,fill=FrameworkTeal!11,draw=FrameworkTeal!65] (metrics) at (-35,32) {\textbf{2\quad Metrics}\\Statistical measurements\\G-OpenRank and C-OpenRank};
+\node[sebox,text width=59mm,minimum height=20mm,fill=FrameworkAmber!10,draw=FrameworkAmber!65] (info) at (35,32) {\textbf{3\quad Information Service}\\Metric and label services\quad Datasets\\Domain knowledge\quad Visualization};
+\node[sebox,text width=130mm,minimum height=22mm,fill=FrameworkBlue!5] (crawler) at (0,3) {\textbf{1\quad OpenCrawler and data storage}\\Collection, scheduling, validation, and import\\\textsf{ClickHouse: event aggregation}\qquad\textsf{Neo4j: relational representation}};
+\draw[searrow] (crawler.north -| metrics.south) -- (metrics.south);
+\draw[searrow] (crawler.north -| info.south) -- (info.south);
+\draw[searrow] (metrics.north) -- (analytics.south -| metrics.north);
+\draw[searrow] (info.north) -- (analytics.south -| info.north);
+\draw[searrow] (analytics) -- (apps);
+\draw[searrow] (metrics.east) -- (info.west);
+\node[selabel,text width=128mm] at (0,-17) {Platform records and profiles\quad Package ecosystems\quad Vulnerability and Q\&A data};
+\draw[searrow] (0,-12) -- (crawler.south);
+\end{tikzpicture}
+\caption{OpenDigger as an evaluation infrastructure. Redrawn from \citet[Figure 2 and Sections 3.1--3.5]{wang2026digger}, retaining the five functional modules and grouping their services for book presentation. Arrows show functional dependencies, not a measured execution trace. The mapping to Evaluatology in the text is this book's synthesis.}
+\label{fig:ch6-architecture}
+\end{figure}

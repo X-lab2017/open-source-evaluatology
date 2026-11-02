@@ -1,0 +1,297 @@
+[
+  {
+    "svg": "figures/ch4-correlation-data.svg",
+    "pdf": "figures/ch4-correlation-data.pdf",
+    "original_sha256": "09602e72eeda413b4b27d8c78277e3980a1fd3a6e575b9600679be2e0b661ac8"
+  },
+  {
+    "svg": "figures/ch4-rank-data.svg",
+    "pdf": "figures/ch4-rank-data.pdf",
+    "original_sha256": "bb964287b3e454946deaa1b375aabbc7a85db745d3e426be29e9fc71ce08a901"
+  },
+  {
+    "svg": "figures/chapter04/behaviour-cncf.svg",
+    "pdf": "figures/chapter04/behaviour-cncf.pdf",
+    "original_sha256": "d156f71f2626a13b8e7eac8bc5fedaa6276adab31b5218f9164cbf9691ccc7bb"
+  },
+  {
+    "svg": "figures/chapter04/behaviour-global.svg",
+    "pdf": "figures/chapter04/behaviour-global.pdf",
+    "original_sha256": "bc4992585f2e94ea87f8edaae8bb9a36b8a3441337e5184bbfa36209826b6f8a"
+  },
+  {
+    "svg": "figures/chapter04/behaviour-maturity.svg",
+    "pdf": "figures/chapter04/behaviour-maturity.pdf",
+    "original_sha256": "49cf95acb2652c068216eb3df26935f4f8e78347f8be01a9f5afd5753b4ba6a7"
+  },
+  {
+    "svg": "figures/chapter04/behaviour-projects.svg",
+    "pdf": "figures/chapter04/behaviour-projects.pdf",
+    "original_sha256": "ef90d36225be8f7401fd96b2587e6a37db400d3060790e0a205773931f2854a3"
+  },
+  {
+    "svg": "figures/chapter04/concentration-cncf.svg",
+    "pdf": "figures/chapter04/concentration-cncf.pdf",
+    "original_sha256": "5f9ddbc740c71ad5df18401df641a05076be1b806efbc258449815436250c71f"
+  },
+  {
+    "svg": "figures/chapter04/concentration-global.svg",
+    "pdf": "figures/chapter04/concentration-global.pdf",
+    "original_sha256": "881124e79e451f231440a574d18ce0a147e15289db8750e8e59258e19f32d487"
+  },
+  {
+    "svg": "figures/chapter04/concentration-projects.svg",
+    "pdf": "figures/chapter04/concentration-projects.pdf",
+    "original_sha256": "c7a917728dc1fc5e23f338644f84e8bee04a94c7d4b8e697d73faced0447b0cc"
+  },
+  {
+    "svg": "figures/chapter04/time-global.svg",
+    "pdf": "figures/chapter04/time-global.pdf",
+    "original_sha256": "870d80b375d8f21204db63179e4d7b6005983ccbcb6c1b08c6264bdc6bddead1"
+  },
+  {
+    "svg": "figures/chapter04/time-kubernetes.svg",
+    "pdf": "figures/chapter04/time-kubernetes.pdf",
+    "original_sha256": "28cfd61d47d5b9db916bd8d6153a3c7e5a3d912e6a5df96bd73d1a0cca317cba"
+  },
+  {
+    "svg": "figures/chapter04/time-tikv.svg",
+    "pdf": "figures/chapter04/time-tikv.pdf",
+    "original_sha256": "942e47821c76f063da3c696b5b12ed94e7bc7900255e698324f84561ed76b4cd"
+  },
+  {
+    "svg": "figures/chapter05/injection.svg",
+    "pdf": "figures/chapter05/injection.pdf",
+    "original_sha256": "912695f868fec4fa77aed4f4250040bddbdb9fca32050c69d123d3011a0e0930"
+  },
+  {
+    "svg": "figures/chapter05/retention_sensitivity.svg",
+    "pdf": "figures/chapter05/retention_sensitivity.pdf",
+    "original_sha256": "b1095c520f3a61f09e4dcf11b403a7414168dc8d101b4a960488c81cb6b8d7ad"
+  },
+  {
+    "svg": "figures/chapter05/source_ic_reach.svg",
+    "pdf": "figures/chapter05/source_ic_reach.pdf",
+    "original_sha256": "8f883b5fea156f260b4a4b460e693683150d6ce2280b76fa9c3be83fee9520c8"
+  },
+  {
+    "svg": "figures/chapter05/source_lt_reach.svg",
+    "pdf": "figures/chapter05/source_lt_reach.pdf",
+    "original_sha256": "4caa2bbf927bcfb3ff912b95706d6b613b67ebbc5dbf66c5a25f9d47f1c0afb5"
+  },
+  {
+    "svg": "figures/chapter05/source_missing_rank.svg",
+    "pdf": "figures/chapter05/source_missing_rank.pdf",
+    "original_sha256": "f6acb6b901d9235d70b4bb6904015c489b61be1a00e44c66a5e9144204df7fdf"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/orl-comments.svg",
+    "pdf": "figures/chapter06/reconstruction/orl-comments.pdf",
+    "original_sha256": "a72ee867cb3e6ad442fdbe431627942e06d8f166284ef9a57e3a9b0801170457"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/orl-control.svg",
+    "pdf": "figures/chapter06/reconstruction/orl-control.pdf",
+    "original_sha256": "57816bb06a1a048a1225dc60e6291a4113a07bfec3af6c18756602500b90bcc1"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/orl-prs.svg",
+    "pdf": "figures/chapter06/reconstruction/orl-prs.pdf",
+    "original_sha256": "c0e3f6c5641b53e5650939690a5baf951a8d85da31d0f457cd8705852be89082"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/orl-reactions.svg",
+    "pdf": "figures/chapter06/reconstruction/orl-reactions.pdf",
+    "original_sha256": "400d96fd686d325af75511af8465851d24da270bacec979d696c1979b29f3ecc"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/rank-iterations.svg",
+    "pdf": "figures/chapter06/reconstruction/rank-iterations.pdf",
+    "original_sha256": "e0b5070baacffdea1e733176d5cb4718754c9d80eaf03c7dd99e2c5ecbc51cb9"
+  },
+  {
+    "svg": "figures/chapter06/reconstruction/rank-runtime.svg",
+    "pdf": "figures/chapter06/reconstruction/rank-runtime.pdf",
+    "original_sha256": "87a64a8b4890bbd33dd75980835b177a063c365568fc94121e740d626167ffb3"
+  },
+  {
+    "svg": "figures/chapter07/alignment.svg",
+    "pdf": "figures/chapter07/alignment.pdf",
+    "original_sha256": "bb3d099e432a04e108d460d0acbcde2adb4d5d7217c527d940476ff361005cbc"
+  },
+  {
+    "svg": "figures/chapter07/recourse.svg",
+    "pdf": "figures/chapter07/recourse.pdf",
+    "original_sha256": "c27bd06ac3c92c1c0f1e69410a98541f6af2bf24330a7b5f0199ee2b7e5b627f"
+  },
+  {
+    "svg": "figures/chapter07/sensitivity.svg",
+    "pdf": "figures/chapter07/sensitivity.pdf",
+    "original_sha256": "57ad7dd3e0a6c721aa9bcaf83c11c9a48043a3ed0a66927eb9d566ebbacd1640"
+  },
+  {
+    "svg": "figures/chapter07/stages.svg",
+    "pdf": "figures/chapter07/stages.pdf",
+    "original_sha256": "7456fd44bebb13badae500463679386b7012533bcd317b20f2abff7889e3ce29"
+  },
+  {
+    "svg": "figures/chapter07/survey.svg",
+    "pdf": "figures/chapter07/survey.pdf",
+    "original_sha256": "1e1b6e3dbed324e4970f3c593d5ea430b65cd37e49887b3c2cfe9c7014807884"
+  },
+  {
+    "svg": "figures/chapter08/distributions.svg",
+    "pdf": "figures/chapter08/distributions.pdf",
+    "original_sha256": "54751dc72700fd19391edd7c1bd14ea291f6692267b56325171a89ed916d27b3"
+  },
+  {
+    "svg": "figures/chapter08/helm.svg",
+    "pdf": "figures/chapter08/helm.pdf",
+    "original_sha256": "6c628bed11c985f7532c7947638fb33996bddd3b8d92d866593cac68ef1a86c4"
+  },
+  {
+    "svg": "figures/chapter08/pathways.svg",
+    "pdf": "figures/chapter08/pathways.pdf",
+    "original_sha256": "31a342b5f16614d4840d668fb97a13e199f8f92d0827438c336efc47d3cf8853"
+  },
+  {
+    "svg": "figures/chapter08/reasons.svg",
+    "pdf": "figures/chapter08/reasons.pdf",
+    "original_sha256": "ff678897b4bc6f98f8f4e42226ae0dd9ab0ea6c9c8eef570061067d910bdb487"
+  },
+  {
+    "svg": "figures/chapter08/sampling.svg",
+    "pdf": "figures/chapter08/sampling.pdf",
+    "original_sha256": "554b3d9f50be4a272e6ecfc2ad47fae45818874b575fda782f0f49764246beec"
+  },
+  {
+    "svg": "figures/chapter08/trajectories.svg",
+    "pdf": "figures/chapter08/trajectories.pdf",
+    "original_sha256": "6ce9eb4758e3e4f56e49745de4ac15f9e0600777249fa91fa3970939de39b730"
+  },
+  {
+    "svg": "figures/chapter08/tree.svg",
+    "pdf": "figures/chapter08/tree.pdf",
+    "original_sha256": "681336c4e99ca0d9546bfa1f69f087b4df39218dbb4777384acfb5f3a41d397c"
+  },
+  {
+    "svg": "figures/chapter09/affiliations.svg",
+    "pdf": "figures/chapter09/affiliations.pdf",
+    "original_sha256": "4fb14a37f3d246ea00a63e60c380b788f29e6f9369a2cc560fa461a9f019d4a3"
+  },
+  {
+    "svg": "figures/chapter09/comparators.svg",
+    "pdf": "figures/chapter09/comparators.pdf",
+    "original_sha256": "c436b41de30363af944f6ea98a38b5273deefd394230e67af4673e2be6c1486c"
+  },
+  {
+    "svg": "figures/chapter09/domains.svg",
+    "pdf": "figures/chapter09/domains.pdf",
+    "original_sha256": "948b73250b2551f289eeaeccb9f044764f83ea1b5de902388e7a26208eac5b83"
+  },
+  {
+    "svg": "figures/chapter09/fork.svg",
+    "pdf": "figures/chapter09/fork.pdf",
+    "original_sha256": "3e63d076ff71e6df52a24e99a4a927af69bb4d260ce48bccbf3c5a62783706c2"
+  },
+  {
+    "svg": "figures/chapter09/groups.svg",
+    "pdf": "figures/chapter09/groups.pdf",
+    "original_sha256": "3ca11dfff6c000264dfb595dde2d42a376068c9adc62c4b94139cfccbfbbae30"
+  },
+  {
+    "svg": "figures/chapter09/open-items.svg",
+    "pdf": "figures/chapter09/open-items.pdf",
+    "original_sha256": "b11a1bc914738860f1477dff4ebd3fd212ed2b4f276d4f99eef292ce9f0077a1"
+  },
+  {
+    "svg": "figures/chapter09/response.svg",
+    "pdf": "figures/chapter09/response.pdf",
+    "original_sha256": "9d6279ec328164eb818a4a52de884257a9c112ac4195c5c38a5cf2de75627663"
+  },
+  {
+    "svg": "figures/chapter10/fig10-01-openthink.svg",
+    "pdf": "figures/chapter10/fig10-01-openthink.pdf",
+    "original_sha256": "8bb80a50eaeee306418747c22abbe4a4e93623e08ca0d41a72e30b7a60c55ee2"
+  },
+  {
+    "svg": "figures/chapter10/fig10-02-goals.svg",
+    "pdf": "figures/chapter10/fig10-02-goals.pdf",
+    "original_sha256": "76b1ef2f76cd43d84c946e4a60c36f2d3867b34f914d9e242eb4af8af6e4ec6e"
+  },
+  {
+    "svg": "figures/chapter10/fig10-03-global-maps.svg",
+    "pdf": "figures/chapter10/fig10-03-global-maps.pdf",
+    "original_sha256": "1395fae84d98d0b1e0357d6cdef8b0b4e3b07f4c343f023ecad30415b4484c32"
+  },
+  {
+    "svg": "figures/chapter10/fig10-04-contribution-origins.svg",
+    "pdf": "figures/chapter10/fig10-04-contribution-origins.pdf",
+    "original_sha256": "3f087d8bff1171adef61d64455566efc982823f7016e556302c7325f6af880c0"
+  },
+  {
+    "svg": "figures/chapter10/fig10-05-city-trajectories.svg",
+    "pdf": "figures/chapter10/fig10-05-city-trajectories.pdf",
+    "original_sha256": "2cdcee3a703b244ae94d6104820ea4ce0325e8f34302578c67c606044c1efb93"
+  },
+  {
+    "svg": "figures/chapter10/fig10-06-applications.svg",
+    "pdf": "figures/chapter10/fig10-06-applications.pdf",
+    "original_sha256": "dcb3974ad762d2205a39de341cc8182ac33c23a6a2355cba9cd51f52df36f6a2"
+  },
+  {
+    "svg": "figures/chapter10/fig10-07-observatory.svg",
+    "pdf": "figures/chapter10/fig10-07-observatory.pdf",
+    "original_sha256": "0aa3b51fbb50592836b63d1ebd05a0eeed56ec9dbbbc8add1ba5c5cc3d785018"
+  },
+  {
+    "svg": "figures/chapter10/fig10-08-project-evidence.svg",
+    "pdf": "figures/chapter10/fig10-08-project-evidence.pdf",
+    "original_sha256": "fea1145ab6aaee0ab2ea463e7a29b7335a415bfefa83bdc8993ee2d108af082a"
+  },
+  {
+    "svg": "figures/chapter10/fig10-09-dissemination.svg",
+    "pdf": "figures/chapter10/fig10-09-dissemination.pdf",
+    "original_sha256": "3e8816d23c5ad308dea2cf78360a03f964b02435a1fb4c45698280e95db45787"
+  },
+  {
+    "svg": "figures/chapter11/fig11-01-framework.svg",
+    "pdf": "figures/chapter11/fig11-01-framework.pdf",
+    "original_sha256": "4cdaf96e19c1985db7792b8f115e011a3e1dfb55cd028d381148b85de2d2bcaf"
+  },
+  {
+    "svg": "figures/chapter11/fig11-02-ecosystem.svg",
+    "pdf": "figures/chapter11/fig11-02-ecosystem.pdf",
+    "original_sha256": "02d0035cee9a58aed12ef703db70d809bdb96b6429d62d319f05defe9716b6ec"
+  },
+  {
+    "svg": "figures/chapter11/fig11-07-openperf.svg",
+    "pdf": "figures/chapter11/fig11-07-openperf.pdf",
+    "original_sha256": "f3228fdd66533b8d6dae54713811fc84515b61fd0bcb66744f3e950b42796bb4"
+  },
+  {
+    "svg": "figures/frontmatter/cover-d2-assets/bcpress.svg",
+    "pdf": "figures/frontmatter/cover-d2-assets/bcpress.pdf",
+    "original_sha256": "78dc418cd16128fd42b3eb20ee2ea4e4cb618fd04d099fa9b43c1f1ef6638940"
+  },
+  {
+    "svg": "figures/frontmatter/part-1-motif.svg",
+    "pdf": "figures/frontmatter/part-1-motif.pdf",
+    "original_sha256": "afcec3af3c352e7d8375c0a9ac6bbe9b012056d068167e341440cab0a33257c6"
+  },
+  {
+    "svg": "figures/frontmatter/part-2-motif.svg",
+    "pdf": "figures/frontmatter/part-2-motif.pdf",
+    "original_sha256": "79500ca5f44672b30e8fa8a97b3302429dbcd2bfa33e9585f6dc2b1a5f4b9f09"
+  },
+  {
+    "svg": "figures/frontmatter/part-3-motif.svg",
+    "pdf": "figures/frontmatter/part-3-motif.pdf",
+    "original_sha256": "c3eac1e3dfdc2f8b0cecf988901b1f92bb923c1458eaf74f631dc9e15ecc9890"
+  },
+  {
+    "svg": "figures/frontmatter/part-4-motif.svg",
+    "pdf": "figures/frontmatter/part-4-motif.pdf",
+    "original_sha256": "9a1555b7b8515e0a3e9b1639a950db79090e33236b715150e4ecccfb3fe86822"
+  }
+]

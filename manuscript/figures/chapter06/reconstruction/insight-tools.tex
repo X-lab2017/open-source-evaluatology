@@ -1,0 +1,19 @@
+\begin{table}[tbp]
+\centering
+\caption{Insight tools as classified in the OpenDigger paper.}\label{tab:ch6-tools}
+\fontsize{9}{11.1}\selectfont
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{@{}p{22mm}rr>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Tool & Stat. & Net. & Source data & Emphasis\\
+\midrule
+OpenDigger & 20 & 2 & GitHub, Gitee, NPM, PyPI, CVE, security, and more & Network metrics; continuous collection across platforms\\
+OSSInsight & $\sim$20 & 0 & GitHub & Real-time trends; dashboards and SQL\\
+OSS Compass & 20+ & 0 & GitHub, Gitee & Community health and governance; LF APAC\\
+GrimoireLab & $\sim$30--50 & 0 & GitHub, GitLab, Gerrit, mailing lists, Jira, and more & Extensible OSPO analytics\\
+World of Code & 0 & 0 & GitHub & Global dependency research\\
+Augur & $\sim$30 & 0 & GitHub, GitLab, mailing lists, Slack, Discourse, etc. & CHAOSS; community health and risk\\
+\bottomrule
+\end{tabularx}
+\tablenote{Adapted from \citet[Table 2]{wang2026digger}; counts and platform lists retain the source snapshot. Stat. and Net. denote the paper\textquotesingle s categories of statistical and network metrics. A zero means no item was counted in that category by that comparison. It does not imply absence of analytic or network-research capability. These are reported classifications, not results of a new feature audit.}
+\end{table}

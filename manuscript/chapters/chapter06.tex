@@ -1,0 +1,253 @@
+\chapter[OpenDigger: Evaluation in Practice]{OpenDigger:\\Evaluation in Practice}
+\label{ch:six}
+\markboth{Open Source Evaluatology}{OpenDigger: Evaluation in Practice}
+
+A measure becomes part of an evaluation practice when its data can be renewed, its computation repeated, and its results interpreted by the people whose decisions it is intended to support. These requirements connect the two preceding chapters. Activity defines how recorded behaviours become a measurement. OpenRank defines how relations and prior information enter an allocation of influence or contribution. OpenDigger provides the infrastructure through which these procedures can operate across projects and over time.
+
+The infrastructure also creates a setting in which evaluation can be studied. Running an algorithm on many collaboration networks reveals the cost of preparing those networks, the importance of their size distribution, and the consequences of retaining history. Publishing contribution rankings reveals a different set of consequences: participants may make discussions public, change how they submit patches, or use the ranking to interpret their own work. Such observations bear directly on the theory of evaluation because they change the relationship between the object, its observable representation, and the use of the result.
+
+This chapter develops that connection through three bodies of our work: the OpenDigger framework, the OpenRank computing experiments, and the OpenRank Leaderboard deployment in seven communities \citep{wang2026digger,han2026rank,zhao2024}. The doctoral studies supply implementation details and a fuller account of the deployment and its interpretation \citep{zhao2025thesis,xia2024thesis}. We first explain the system and its observation boundaries, then examine the computational evidence, and finally follow contribution evaluation into community practice. This completes Part II's progression from measurement, through relational modelling, to an implemented and empirically examined evaluation process.
+
+\section{Evaluation Requirements and System Design}
+\label{sec:ch6-system}
+
+\subsection{From an evaluation question to a continuing service}
+The evaluation question \(\mathcal Q=\langle O,A,C,R,T,S,P\rangle\), introduced in Part I, specifies an evaluated object, affected objects and outcome quantities, conditions, a reference, a time horizon, stakeholders, and a purpose. A data platform cannot choose all of these on behalf of its users. It can, however, make some choices explicit and support their consistent implementation. A project comparison needs a declared population and common periods. A contribution analysis needs attributable interactions and a suitable collaboration boundary. A recurring report needs a procedure for distinguishing a new observation from a change in the measurement itself.
+
+OpenDigger was developed to support these connected requirements. Its contribution is the integration of data collection, statistical and network metrics, contextual information, and reusable access services. The same infrastructure supports ecosystem-level influence analysis and project-level contribution analysis, while preserving their different objects and graph constructions. It also permits a researcher to move between an aggregate measure and the records or relations used to construct it.
+
+Earlier research infrastructures establish the importance of this separation of concerns. GHTorrent organized the retrieval and reuse of GitHub data; World of Code supported analyses of version-control objects and relationships across projects; GrimoireLab made collection, enrichment, and visualization reusable across development platforms \citep{gousios2012,ma2019,duenas2021}. OpenDigger builds on this infrastructural tradition with a particular emphasis on recurring behavioural measurements and collaboration-network evaluation. Its place in this book follows from the evaluation methods it makes operational and the empirical questions it enables.
+
+\subsection{Five modules with distinct responsibilities}
+Figure~\ref{fig:ch6-architecture} presents the five modules of the latest framework. \emph{OpenCrawler and storage} acquire and organize platform data. The \emph{Metrics} module implements statistical measurements together with G-OpenRank and C-OpenRank. The \emph{Information Service} organizes metric access, labels, datasets, domain knowledge, and visualization support. The \emph{Analytics Service Layer} makes these resources usable through query interfaces, interactive environments, and exported metric files. \emph{Applications} combine them into reports, repository insights, contribution recognition, and governance services.
+
+\input{figures/chapter06/reconstruction/architecture}
+
+These modules differ from the five evaluation components developed in Section~\bookref{sec:ch3-system}{3.2}. Problem definition and the task instance determine which questions should be answered and what would constitute an adequate answer. The algorithmic mechanism comprises the measurement and propagation procedures developed in Chapters 4 and 5. The implementation instance realizes those procedures in queries, graph programs, and services. The supporting system provides the data, labels, software, and computing resources that make execution possible. OpenDigger spans several of these components; its module boundaries are engineering decisions within that larger account.
+
+The distinction is useful in practice. A database schema organizes records; an object causal model represents mechanisms relating objects and their effects. A collection of repositories is an observation product, not a self-contained system in the sense defined in Section~\bookref{sec:foundations}{1.2}. A comparison also requires compatible objects, periods, and measurement definitions. OpenDigger supplies mechanisms for implementing those requirements; the evaluation design supplies their justification.
+
+\subsection{Collection and storage as measurement infrastructure}
+OpenCrawler separates six responsibilities: HTTP requests, token management, proxy management, large-file downloads, multicore task execution, and scheduled tasks. In the reported GitHub workflow, hourly compressed event archives supply historical activity records, while API requests supply complementary information such as developer profiles. Scheduled imports identify locally missing archive files; download, decompression, validation, and database import are coordinated as recurring jobs. Resumable downloads and concurrent file processing address the engineering cost of repeatedly handling large archives \citep[Sections 3.2--3.3]{wang2026digger}.
+
+The significance for evaluation lies in the distinction between acquisition and interpretation. Successful import establishes that a file entered the local data process. It does not establish that the platform recorded every relevant contribution, that all historical files were available, or that profiles describe their owners at the time of each event. These remain observation questions. The familiar warnings about inferring software development directly from hosting-platform records therefore apply even to a well-engineered collection system \citep{kalliamvakou2014}.
+
+OpenDigger uses ClickHouse for columnar aggregation of event records and Neo4j for graph representation and analysis. The split follows two different access patterns. Counting selected behaviours over a period benefits from scanning a subset of event columns; constructing and traversing a collaboration network requires explicit relationships among entities. ClickHouse's analytical design supports the first pattern \citep{schulze2024}. The justification for the second comes from the relational models in Chapter 5. Neither storage choice alone determines the validity of a metric, but both affect which measurement tasks can be performed repeatedly at an acceptable cost.
+
+\section{Data, Labels, and Observation Boundaries}
+\label{sec:ch6-observation}
+
+\subsection{A dated inventory of what is observed}
+Table~\ref{tab:ch6-inventory} records the data holdings reported for September 2025. Keeping the date is essential: an inventory describes a historical state of the infrastructure. The table combines several kinds of object, including activity records, packages, vulnerabilities, and question-and-answer posts. Its rows therefore describe coverage across domains rather than components of one homogeneous sample.
+
+\input{figures/chapter06/reconstruction/inventory}
+
+The integrated collaboration dataset is reported as containing approximately 800 million nodes and 1.9 billion edges. This scale describes a graph representation assembled by the infrastructure. It must be distinguished from the monthly networks used for a particular metric and from the 198,420 networks in the algorithm experiment examined below. Storage scale, analysis population, and experimental sample answer different questions. A claim about one cannot be established by substituting the size of another.
+
+The service inventory makes a similar distinction. The framework reports 20 statistical metrics and two network metrics. Seventeen of the statistical metrics implement CHAOSS definitions; stars, participants, and Activity complete the set. The CHAOSS subset covers participation and absence, issue creation and closure, response and resolution times, code-change volume, and the corresponding change-request measures \citep[Table 6]{wang2026digger}. G-OpenRank and C-OpenRank add relational evaluation at ecosystem and community levels. Calling all of these metrics does not make their units or evidential roles equivalent: a duration, a count, and a propagated score require different interpretations.
+
+\subsection{Labels construct the comparison population}
+OpenDigger's labels associate platform identifiers with contextual categories such as initiating company, project, technical field, or foundation. The reported label schema includes an identifier, a name, a type, platform-specific entities, and references to child labels. Set operations then make it possible to select an intersection, union, or difference of labelled populations. For example, intersecting a regional project category with a foundation category defines a more specific collection than either category alone \citep[Appendix A.1]{wang2026digger}.
+
+This facility turns population construction into an explicit operation. Let \(\mathcal L_v(\ell)\) denote the entity set associated with label \(\ell\) in label version \(v\). A comparison population might be
+\begin{equation}
+ \mathcal P_v=
+ \bigl(\mathcal L_v(\ell_1)\cap\mathcal L_v(\ell_2)\bigr)
+ \setminus\mathcal L_v(\ell_3).
+ \label{eq:ch6-population}
+\end{equation}
+The equation is a formal account of the supported set operations, not a claim that every historical result stored its label version. It shows why the operation and the underlying labels both belong in the evidence for a comparison. Re-running the same intersection after labels change can produce a different population without any change in repository behaviour.
+
+The September 2025 account reports 619 label integrations, covering 413 organizations and more than 10,000 repositories. It lists 144 initiating-company labels, 101 technical-category labels, 344 project labels, and 15 foundation labels. These reported category counts do not sum to the stated integration total. We retain them as reported categories rather than treating them as an exhaustive partition or supplying an unreported remainder. The value of the label service rests on documented membership and meaning, not on interpreting every label as a mutually exclusive class.
+
+Some technical-category assignments in the framework are inferred from repository descriptions, README files, and topics with assistance from a language model, followed by manual inspection. Such a label is an interpreted attribute with an evidential basis. A company label likewise needs to distinguish initiation, present stewardship, and employment affiliation. These relations can overlap or change. A collection labelled by initiating company should not silently become a collection of all current employees' projects.
+
+\subsection{Identity, time, and selection remain part of the measure}
+Attribution requires a stable account of the measured entity. A developer may use several identities; a repository may change its name or organizational location; an automated account may participate in the same event stream as people. Chapter 4 treats these choices as components of the measurement specification. The infrastructure must carry them into aggregation and graph construction. A name displayed in a result is useful to a reader, but the name alone is insufficient to establish identity continuity.
+
+Time introduces two further distinctions. The time an action occurred differs from the time it was collected. The time a profile or label was observed may differ from both. Assigning a current company profile to all of a developer's historical actions, for example, makes a retrospective assumption about affiliation. An evaluation can use such an assumption, but should identify it because the resulting historical series answers a different question from one constructed using contemporaneous affiliations.
+
+The online metrics service introduces selection at the point of publication. In the reported design, OpenRank is used to identify repositories and developers for which implemented metrics are computed and exported. This is a useful service strategy, but availability in the exported collection is not equivalent to membership in the entire open source population. An absent file may indicate exclusion from the publication population or lack of an exported result. It should not be converted automatically into a zero score or zero activity.
+
+These boundaries give concrete content to the support layer of Evaluatology. The question is not simply how much data the system holds, but which objects and activities can enter a particular observation. Documenting identifiers, meanings, provenance, and access conditions follows the data-stewardship concerns expressed in the FAIR principles \citep{wilkinson2016}. Here those concerns become requirements for comparing communities through a shared infrastructure.
+
+\section{Metric Services and Scalable Computation}
+\label{sec:ch6-services}
+
+\subsection{From a query to an interpretable result}
+The metric query interface separates analytical functions from the SQL needed to retrieve their inputs. The published interface accepts temporal bounds, entity identifiers or names, labels, sorting and limiting rules, grouping options, precision, and metric-specific options \citep[Table 8]{wang2026digger}. These parameters are consequential. Sorting by the latest period answers a different question from sorting by the sum over periods. A limit applied to each month yields a changing set of objects; a limit applied to the overall result can retain a fixed selected set. Grouping by organization or technical category changes the unit presented to the reader.
+
+We can express a service result as
+\begin{equation}
+ \widehat{\boldsymbol y}
+ =F_{m,v}\bigl(D_{\tau},\mathcal P_v,[t_0,t_1),\theta\bigr),
+ \label{eq:ch6-service}
+\end{equation}
+where \(D_{\tau}\) is the data available at extraction time \(\tau\), \(m\) identifies the metric, \(v\) its specified version and associated population definition, and \(\theta\) contains the remaining query and computation settings. The event interval \([t_0,t_1)\) is distinct from extraction time. This notation extends Chapter 4's versioned measurement into a service contract: the returned values become interpretable when the inputs and transformations that determine them can be recovered.
+
+Aggregation needs particular care. Counts over disjoint event intervals can often be added, whereas numbers of distinct participants generally require a union of identities. A response-time statistic requires the relevant event pairs and a stated treatment of unresolved cases. Activity has a specified order of weighting, transformation, and aggregation. OpenRank depends on the graph and prior, so summing monthly scores does not generally reproduce a score calculated on an annual graph. The presence of an annual grouping option is therefore not a mathematical guarantee that every metric aggregates in the same way.
+
+This issue is especially visible when the service is used to compare projects. A ranking by a rounded value can introduce ties absent at full precision. A top-ten query can conceal changes below its cutoff. A sum across labels can double-count repositories belonging to more than one category. These are properties of the requested result, not defects peculiar to one database. The interface makes such operations convenient; the evaluation task determines which of them is appropriate.
+
+\subsection{Three access routes for different analytical tasks}
+OpenDigger provides interactive Node.js and Python notebooks, a command-line interface, and publicly accessible metric files. Notebooks support exploratory analysis and visualization with access to the relevant services. The command-line interface supports querying, filtering, grouping, and basic analytical operations. Exported metric files lower the access cost for applications and researchers who need prepared results rather than direct access to the underlying databases \citep[Appendix A.5]{wang2026digger}.
+
+The exported service computes results on a recurring monthly schedule and supplies monthly, quarterly, and annual forms. This arrangement separates the cost of computation from the cost of reading a result. A dashboard can retrieve a prepared series without reconstructing a collaboration network on every request. The tradeoff is that a published series has a production date, a selected population, and an update policy. Those properties belong alongside the values when the series is used as research evidence.
+
+For this monograph, a reusable evaluation result should therefore be accompanied by a compact record of its metric version, population, observation interval, extraction date, parameter settings, and relevant software identity. This is a proposed documentation requirement, not an assertion that all existing endpoints already expose that record. It makes reproducibility operational without requiring every consumer to repeat the full acquisition process. Recording the transformations and versions that lead to a result is also central to reproducible computational research \citep{sandve2013}.
+
+\subsection{The algorithm and the execution path}
+For the fixed graph and prior of one measurement window, Chapter 5 expresses OpenRank as
+\begin{equation}
+ \boldsymbol x^{(k+1)}=AS\boldsymbol x^{(k)}+(I-A)\boldsymbol r,
+ \qquad
+ (I-AS)\boldsymbol x^*=(I-A)\boldsymbol r.
+ \label{eq:ch6-computation}
+\end{equation}
+Here \(A\) contains structural-dependence coefficients and \(\boldsymbol r\) is the fixed prior. A direct linear-algebra method and a graph-iteration method can target the same equation, provided that they use the same normalization, coefficients, prior, treatment of missing links, and stopping criterion. That agreement must be checked before a runtime comparison is interpreted as a comparison of implementations of one model.
+
+The graph implementation follows a vertex-oriented computation: each node aggregates incoming messages, combines them with retained prior information, and distributes the result through weighted outgoing relations. Pregel provides the established computational pattern of iterative vertex programs and message exchange \citep{malewicz2010}. OpenRank's use of that pattern connects a mathematical recurrence to a practical graph engine. It does not require the empirical collaboration graph to be a model of literal information transmission.
+
+The distinction between dense and sparse operations matters. A dense direct solution can have cubic time and quadratic storage costs. One sparse iteration instead visits the represented nodes and edges, with cost proportional to \(n+|E|\), before accounting for runtime overhead and the number of iterations. A dense matrix--vector product is quadratic, not cubic. Consequently the experiment below concerns the particular direct matrix-algebra implementation and graph implementation used in the study; it is not evidence that every matrix-based method is intrinsically slower than a graph engine.
+
+A practical execution time also includes preparing and transporting data:
+\begin{equation}
+ t_{\mathrm{total}}
+ =t_{\mathrm{prepare}}+t_{\mathrm{solve}}+t_{\mathrm{return}}.
+ \label{eq:ch6-time}
+\end{equation}
+These terms define an accounting framework rather than a decomposition fitted to new measurements. They explain why a method with favourable iterative complexity may lose on small graphs: fixed preparation overhead can dominate the solve. They also explain the value of selecting an execution path by network size. The doctoral implementation describes a pool of 12 matrix-algebra workers and four Neo4j graph-computation threads, with dispatch informed by the observed crossover \citep[Section 4.3.2]{zhao2025thesis}. This is a reported scheduling configuration, not a separately measured speedup or a claim that thread counts equal physical cores.
+
+\section{Validation of the Evaluation Infrastructure}
+\label{sec:ch6-validation}
+
+\subsection{Capability coverage and its evidential limits}
+The OpenDigger study compares insight tools and collection tools separately. Tables~\ref{tab:ch6-tools} and \ref{tab:ch6-crawler} preserve this distinction. The first records the source paper's classification of metric families, data sources, and intended uses. The second records collection functions such as scheduling, error handling, and token management. Together they locate the integrated design; they do not constitute a controlled benchmark of all the listed systems.
+
+\input{figures/chapter06/reconstruction/insight-tools}
+\input{figures/chapter06/reconstruction/crawler}
+
+For example, World of Code supports research on relationships across the open source software universe even though the OpenDigger comparison assigns zero entries to its two metric-count categories. Its primary research account makes that broader purpose clear \citep{ma2019}. Similarly, a collection framework can be extended by its users beyond the functions counted in a comparison. Keeping the original classification while stating what was counted avoids turning a study-specific table into a universal judgment about another infrastructure.
+
+The collection comparison supports a narrower, useful claim: OpenCrawler combines the listed functions within the workflow examined by the authors. Establishing record completeness, duplicate handling, recovery after interrupted imports, or sustained query latency would require different evidence. The distinction between capability coverage and measured performance is part of the evaluation design, not a qualification to be added only after a result is obtained.
+
+\subsection{Population and computing conditions}
+The OpenRank algorithm study reports 198,420 repository-associated collaboration networks for January 2024 and groups them by \(\lfloor\ln n\rfloor\), where \(n\) is node count. Table~\ref{tab:ch6-population} retains all eight size bins and the total row. Small graphs dominate the population; the largest bin contains only six cases. An average over all networks and a conclusion about the largest networks therefore describe substantially different parts of the workload.
+
+\input{figures/chapter06/reconstruction/population}
+
+The latest paper specifies an eligibility threshold of at least two nodes. Its published table begins at \(\lfloor\ln n\rfloor=1\), and does not separately report a two-node bin. We retain the stated threshold and the reported population instead of inferring an unreported count. The table's rounded means also cannot recover the exact size of every graph or replace the original networks in a replication.
+
+The associated doctoral account specifies an eight-core Intel i9 at 2.4 GHz, 64 GB of memory, Neo4j Community 5.10.0, Graph Data Science 2.4.2, and OpenRank Pregel 2.4.2. It reports four graph-computation threads, a maximum of 50 iterations, and a local loopback connection between the calling program and the database \citep[Section 4.3.2]{zhao2025thesis}. These details describe the reported experimental environment; they are not current software recommendations. They also provide the context needed to interpret the absolute timing figures.
+
+The algorithm paper states that basic node, edge, and weight data were preprocessed and loaded into memory for both methods. The graph path additionally loaded the data into Neo4j to construct a temporary graph. Thus the experiment includes a preparation cost specific to that path. A deployment with persistent graph projections, different hardware, or a different concurrency policy could move the crossover even if the target equation remained unchanged.
+
+\subsection{What the timing experiment establishes}
+Figure~\ref{fig:ch6-runtime} preserves the original timing plot. The reported graph implementation takes an average of 4.2 seconds per graph: approximately 311 milliseconds are spent in the core computation and about 3.9 seconds in graph preparation. These are rounded components of the reported total. Their relative size explains the nearly flat graph-method curve over the studied range and the disadvantage of that path for small inputs \citep[Section 4.5]{han2026rank}.
+
+\input{figures/chapter06/reconstruction/runtime}
+
+In the same environment, the two methods reach comparable average time at about 146 nodes. The source therefore proposes a practical boundary near 150 nodes, with direct matrix algebra for smaller networks and graph iteration for larger ones. At about 3,900 nodes, the reported matrix-algebra time reaches 4.2 hours. The engineering lesson is to match the method to the workload distribution and include preparation in the comparison. The number 150 is an empirical dispatch setting under these conditions, rather than a property of OpenRank's mathematics.
+
+The population table strengthens this interpretation. A service processing many small communities can benefit from a low-overhead path even if its most demanding cases require graph iteration. Conversely, an aggregate average dominated by small graphs can conceal the costs of the tail. A convincing infrastructure evaluation therefore needs both the distribution of inputs and the behaviour of the implementation across that distribution. The source experiment supplies both, while leaving hardware portability and alternative sparse solvers as further empirical questions.
+
+\subsection{History, convergence, and the target of computation}
+The convergence experiment introduces temporal information. Scores are computed monthly from January 2015, with each subsequent month inheriting 15\% of the preceding month's OpenRank value; newly appearing nodes are initialized to one. For the January 2024 experiment, the relevant preceding values come from December 2023 \citep[Section 4.4]{han2026rank}. This is the recipe for that benchmark, and should not be substituted for every prior policy used by G-OpenRank or C-OpenRank.
+
+\input{figures/chapter06/reconstruction/iterations}
+\input{figures/chapter06/reconstruction/convergence-cases}
+
+Figure~\ref{fig:ch6-iterations} reports fewer iterations for the tested OpenRank configuration than for the tested PageRank configuration across the displayed bins. Table~\ref{tab:ch6-convergence} gives the six largest cases. Their mean is 22.5 iterations. The three cases identified in the paper as retaining historical continuity each take 21 iterations; the paper reports a 14.88\% reduction relative to PageRank for this subset. The subset mean and the all-case mean must remain distinct.
+
+Chapter 5 supplies the mathematical interpretation needed here. A previous result used as the numerical starting point can reduce the distance to an unchanged fixed point. A previous result used in the fixed prior can instead change the fixed point itself. The published history-based configuration may embody the latter modelling choice as well as an initialization advantage. Its results demonstrate the behaviour of the tested configurations. A pure solver-acceleration experiment would additionally hold the target equation fixed and compare starting points using a common residual tolerance.
+
+These experiments bring implementation constraints back into evaluation theory. Network size and sparsity affect the feasible procedure; temporal history affects both continuity of interpretation and potentially the target being computed. Computability is therefore part of task adequacy. It remains distinct from whether the computed score represents the desired attribute, and from whether publishing it benefits the community.
+
+\section{Deploying Contribution Recognition}
+\label{sec:ch6-deployment}
+
+\subsection{From a contribution score to a community arrangement}
+OpenRank Leaderboard places the community contribution model in a visible social setting. The seven projects in Table~\ref{tab:ch6-projects} were mature communities with company support and, on average, two to three committed full-time Alibaba employees. The deployment therefore examines a particular organizational setting: established projects with maintainers able to introduce and explain a shared recognition mechanism \citep[Section 3.1]{zhao2024}.
+
+\input{figures/chapter06/reconstruction/projects}
+
+The published leaderboard is updated monthly. It displays contributor identities and avatars, OpenRank contribution scores, changes from the preceding month, and labels identifying newcomers and bots. Maintainers were asked to circulate weekly reports through community channels; repository README badges linked to the leaderboard; network visualizations and calculation details connected scores to issues and pull requests. Explanations on the homepage described the algorithm. The study reports an average of 879 monthly page views after launch, without extensive promotion through external media.
+
+The intervention is consequently more than the ranking function. It combines measurement, public comparison, explanation, and repeated communication. A developer encounters the score through a community arrangement, and the arrangement affects which actions appear worthwhile or visible. This is consistent with research treating open source motivation as embedded in social practice \citep{vonkrogh2012}. The gamification literature likewise makes context and users central to interpreting an intervention's effects \citep{hamari2014}. Here the empirical contribution is to examine such an arrangement around a collaboration-network measure.
+
+The latest doctoral account also describes accumulated contribution points connected to tangible rewards, including community merchandise and other items \citep[Section 6.2]{zhao2025thesis}. This extends the design beyond the arrangement documented in the 2024 paper, where combining the leaderboard with a reward system appears as a development direction. We therefore distinguish the evolving mechanism from the dated evidence. The supplied accounts do not establish precisely when each reward component was introduced. The quantitative results below cannot identify a separate reward effect, or be reassigned retrospectively to an intervention version whose timing is unspecified.
+
+\subsection{The observation window and analysis}
+The quantitative study uses six monthly observations before launch and six afterwards for each project and metric. The pre-launch period is April--September 2022; launch occurs in October 2022; the post-launch period is October 2022--March 2023. The paper's endpoint of 1 April 2023 closes that final six-month interval. A screenshot from April 2023 illustrates the interface, but does not create a thirteenth monthly observation in the reported analysis.
+
+Eight outcomes cover issues, change requests, reactions, and community size. For the study's new-contributor outcome, the paper refers to developers whose new pull requests have been merged. Participants covers developers involved in project collaboration. These definitions matter: the two variables are not interchangeable measures of recruitment, and neither alone describes retention or the value of contributions.
+
+The paper describes its analysis as regression discontinuity design and reports the model
+\begin{equation}
+ Y_t=\alpha_0+\beta T_t+\gamma G_t+\delta A_t+\eta C_t+\varepsilon_t.
+ \label{eq:ch6-deployment-model}
+\end{equation}
+Here \(T_t\) indexes months from the start of observation, \(G_t\) indicates the post-launch period, and \(A_t\) is zero before launch and increases with months afterwards. The control series \(C_t\) records contemporaneous collaboration events across Chinese company-led projects collected and labelled in OpenDigger. It is intended to account for common temporal variation, including academic holidays and Chinese New Year. The intercept notation \(\alpha_0\) here is unrelated to the structural-dependence coefficients in Equation~\ref{eq:ch6-computation}.
+
+This is a segmented model with a time cutoff: \(\gamma\) describes a level change under the chosen coding, and \(\delta\) a slope change. Its interpretation therefore benefits from the interrupted-time-series literature, which emphasizes the impact model, autocorrelation, seasonality, and concurrent events \citep{bernal2017}. The local-comparability argument of conventional regression discontinuity also requires care when calendar time determines exposure and other conditions may change at the same date \citep{lee2010}. Merely naming the method does not establish that those conditions hold.
+
+The source gives the equation and aggregate results but does not provide enough detail in the supplied report to reconstruct every modelling decision, including the complete design matrix, project aggregation, and error specification. The first post-launch value assigned to \(A_t\) also matters for interpreting a coefficient labelled as a level change. We preserve the reported coefficients and the authors' labels rather than supplying unreported standard errors, confidence intervals, or a new fitted model. Twelve monthly observations per project are not 84 independent replications of the intervention.
+
+\subsection{Reported changes and their interpretation}
+Table~\ref{tab:ch6-estimates} reproduces the full published numerical result, including the negative mean change in participants and the original significance symbols. Figure~\ref{fig:ch6-trajectories} retains all four source panels, including the control series. Reading them together separates the outcomes, their temporal patterns, and the different summaries used in the paper.
+
+\input{figures/chapter06/reconstruction/estimates}
+\input{figures/chapter06/reconstruction/trajectories}
+
+Issue comments show a reported slope change of 255.66 and a mean increase of 52.75\%. The slope is a change in outcome units per month under the fitted model; it is not a 255-fold increase. New change requests show a slope change of 32.32 and a mean increase of 67.87\%. The coefficient 32.32 is likewise not itself a percentage. Reactions have significant reported changes in both level and slope and a mean increase of 118.18\%. These patterns concern visible collaborative actions, which is consistent with the behaviours discussed by interviewees.
+
+The outcomes do not move uniformly. Accepted change requests and reviews have positive descriptive mean changes, while their reported slope coefficients carry the paper's non-significance mark. Participants has a positive reported level coefficient but a mean change of \(-1.77\%\). These quantities need not have the same sign because they summarize different comparisons: one is a model coefficient conditional on the other regressors; the other compares period means. Suppressing the negative entry would obscure a central feature of the study: increased recorded interaction does not imply expansion of the participant population.
+
+Several collaboration measures changed during the deployment period within these communities. It also supports examining mechanisms through which public recognition changes practices. The design does not isolate the ranking formula from communication, explanations, concurrent project events, or any subsequently introduced rewards. The common control series addresses one source of temporal variation, but does not remove every project-specific change or guarantee an untreated counterfactual. Software quality, sustained retention, and effects in other governance settings remain separate evaluation questions.
+
+\section{Behavioural Feedback and Model Revision}
+\label{sec:ch6-feedback}
+
+\subsection{What participants reported}
+The qualitative study interviewed 18 people: seven maintainers and 11 external contributors. All seven maintainers were Alibaba employees. Among the external contributors, three were students, seven were employees, and one was a freelancer; seven appeared in the top ten of their project leaderboard and four did not. Interviews were conducted in Chinese, lasted approximately 30--45 minutes, and were transcribed. The first two authors coded the material independently, discussed disagreements, and checked interpretations with the interviewees \citep[Section 4.2]{zhao2024}.
+
+Thematic analysis provides a method for relating recurring accounts to the questions being investigated \citep{braun2006}. It does not make a purposively selected interview sample representative of all contributors. Table~\ref{tab:ch6-themes} preserves the 14 themes and frequencies consolidated in the doctoral accounts. A person can contribute to several themes, and the same empirical study appears in the paper and both theses. These are complementary descriptions of one evidence base.
+
+\input{figures/chapter06/reconstruction/themes}
+
+The most frequently reported communication change is a movement from private exchanges to public records, mentioned by 13 interviewees. Nine describe reactions as appreciation or acknowledgement. These accounts suggest two connected mechanisms: evaluation can make existing work more visible, and it can encourage social signals that were previously uncommon. A public discussion can also become a durable resource for later contributors, giving it a practical value beyond its immediate effect on a score.
+
+Development practices show a similarly mixed relationship to recorded volume. Eight interviewees report splitting large changes into smaller, independent pull requests; five describe using pull requests instead of direct commits; three describe waiting for another participant to review or merge a change. These practices can make collaboration more inspectable. They can also increase the number of recorded units without a proportional increase in the amount of underlying technical work. The interpretation therefore depends on what the task values: reviewable changes, independent contributions, coordination, or some combination.
+
+The accounts are not uniformly oriented toward maximizing rank. Eight interviewees describe the leaderboard as a channel for self-assessment and collaboration, while one established contributor reports editing or consolidating comments instead of adding more actions. Two maintainers describe using scores as additional information when assigning issues. These observations suggest that a contribution measure can function as an interpretive aid within existing norms, rather than solely as a competitive target. They also show why a final judgment should remain connected to the work and its context.
+
+\subsection{A change in work, a change in visibility, or both}
+Figure~\ref{fig:ch6-feedback} draws out the relationship between these practices and the measurement process. The diagram is a theoretical interpretation of the evidence, not an estimated causal graph. It links public recognition to collaboration practices, observable records, and the next round of metric construction. The proposed revision path asks whether a changed result reflects a changed attribute, a changed observation process, or both.
+
+\input{figures/chapter06/reconstruction/feedback}
+
+Write the observable record for period \(t\) as
+\begin{equation}
+ D_t=H_t(W_t,U_t),\qquad
+ \boldsymbol y_t=M_{v_t}(D_t),
+ \label{eq:ch6-reflexive}
+\end{equation}
+where \(W_t\) denotes the work and interactions of interest, \(U_t\) the observation conditions, and \(H_t\) the process through which that work becomes recorded. The measurement \(M_{v_t}\) has a declared version. Publishing \(\boldsymbol y_t\) can affect later work and the process that makes it visible. This equation is a conceptual decomposition; the study does not observe all of its components independently.
+
+Moving a discussion from a private channel to a public issue changes \(H_t\), even if the substance of the discussion is unchanged. Using a reviewed pull request instead of a direct commit can change both the workflow \(W_t\) and its recorded representation. Splitting a patch changes the unit counted by a pull-request metric. Reactions can express appreciation and, under the community model, modify the weight attached to a collaboration unit. The feedback is therefore specific to the measurement design, not simply a generic response to being ranked.
+
+This interpretation connects the deployment to Part I\textquotesingle s account of evaluation and observation. The contribution model represents selected actions and relations; an object causal model would additionally specify the mechanisms through which the arrangement affects collaboration. When recognition changes how actions are produced and recorded, both the measurement interpretation and the proposed mechanisms need examination. A longer time series provides more observations under that potentially changed process.
+
+\subsection{Revisions supported by the evidence}
+The evidence motivates three directions for model development. First, \emph{preserve the distinction between work and recorded units}. A higher pull-request count should be interpreted alongside the size, independence, review, and outcome of the changes. The interviews support the relevance of these questions, but do not establish that a particular content-scoring model solves them. Incorporating content value would require its own definition, measurement procedure, and validation against the intended contribution task.
+
+Second, \emph{make the path from action to recognition intelligible}. The deployed network visualizations and calculation explanations already connect a score to collaboration units. The two interviewees who requested content-sensitive evaluation identify an attribute that this representation may omit. The participant who saw content-agnostic evaluation as encouraging newcomers identifies a potentially different objective. Refining the model therefore involves a choice about purpose and stakeholders, rather than merely adding a more complex feature.
+
+Third, \emph{evaluate behavioural adaptation directly}. Four interviewees perceived the algorithm's complexity as making score manipulation more difficult. That is evidence about their perception, not a demonstration of resistance to coordinated or adversarial behaviour. A suitable follow-up would distinguish beneficial adaptation, such as improved review practices, from low-value fragmentation or reciprocal signalling. It would compare the resulting work with the community's declared objectives, rather than defining success only by a rise in the measure being promoted.
+
+These directions also shape future deployment studies. The version of the algorithm, the display and communication policy, and the introduction of points or rewards should have separate dated records. Outcome definitions should include the kinds of change the community values, alongside possible burdens or displacement of unmeasured work. Longer observation, explicit comparison conditions, and qualitative follow-up would help determine whether a response persists and whether it transfers beyond mature company-supported projects. These are extensions proposed by the present synthesis; they are not additional experiments claimed for the original deployment.
+
+\subsection{What practice contributes to Open Source Evaluatology}
+OpenDigger supplies more than a container for the preceding methods. Its data and label services show how an observation boundary can be made operational. The computing experiments show that population structure, preparation cost, and temporal information influence the feasible implementation of an evaluation. The leaderboard study shows that a result can become part of the collaboration process it describes. Together these findings give practical content to the relationship between theoretical specification and empirical revision.
+
+Three distinctions should therefore remain visible in a continuing evaluation: the attribute sought and the records available; the model's target and the procedure used to compute it; and the result produced and the community arrangement in which it is used. Chapters 4--6 have supplied a measurement, a relational method, and an infrastructure with deployment evidence for examining these distinctions. The next part of the book can now ask how the resulting evaluation practices transfer across purposes and settings, and how their use should be governed when those conditions differ.

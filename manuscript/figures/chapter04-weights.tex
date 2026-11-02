@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\caption{Five-behaviour definitions: predicates and published weights.}
+\label{tab:ch4-five-weights}
+\centering
+{\sffamily\fontsize{8.4}{10.7}\selectfont\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{@{}lXrrr@{}}
+\toprule
+Behaviour & Event predicate & 2022 & MDA & Monthly\\
+\midrule
+Comment & IssueCommentEvent, created & 1 & 1 & 0.5252\\
+Open issue & IssuesEvent, opened & 1 & 2 & 2.2235\\
+Open PR & PullRequestEvent, opened & 1 & 3 & 4.0679\\
+Review comment & PullRequestReviewCommentEvent, created & 1 & 4 & 0.7427\\
+Merged PR & PullRequestEvent, closed and merged & 1 & 2 & 2.0339\\
+\bottomrule
+\end{tabularx}}
+\tablenote{2022: \citet[Section IV.A and Table II]{xia2022}, equal weights and division by 366 days. MDA: \citet[Equation 5.1 and Table 5.2]{xia2024thesis}, weighted daily average. The historical linear Activity also uses the MDA weight vector, without division by days or a square root \citep[Section 3.5, Equation 3.1]{zhao2025thesis}. Monthly: the documentation and implementation snapshot inspected on 1 November 2026 \citep{diggerdocs2026,diggercode2026}; square root within each account--repository month, then summation across accounts, without division by days. These columns are distinct definitions, not interchangeable parameter settings for the published 2020 results.}
+\end{table}

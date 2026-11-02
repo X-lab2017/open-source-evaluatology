@@ -1,0 +1,292 @@
+\chapter{Evaluating Ecosystem Governance}
+\label{ch:governance}
+\markboth{Open Source Evaluatology}{Ecosystem Governance}
+
+A licensing dispute makes visible a question that ordinary development statistics can leave unresolved: how should the work, benefits, and authority of an open source ecosystem be related? A company may finance development, other companies may supply experienced contributors, maintainers may coordinate work across organizational boundaries, and users may depend on the resulting software. These relationships create several legitimate objects of inquiry. Counting contributions clarifies one part of the arrangement. Evaluating a change to that arrangement also requires an account of the people affected, the alternatives available to them, and the criteria by which consequences will be judged.
+
+Chapter~\bookref{ch:seven}{7} examined the recognition of individual contributions. Chapter~\bookref{ch:sustainability}{8} followed the continuity of collaborative functions when projects become inactive, move, or are replaced. This chapter extends the analysis to arrangements spanning projects and organizations. Its principal evidence is our exploratory study of the Redis license change and the development of Valkey \citep{han2026redis}. The study combines repository metrics, contributor profiles, organizational attribution, and comparisons with other licensing changes. Together, these observations show how an evaluation can move from a visible event to a more precise account of participation and its redistribution.
+
+The contribution developed here is a method for connecting ecosystem evidence to a bounded governance judgment. The method preserves the distinction between observed work, attributed relationships, institutional authority, and evaluated consequences. Redis and Valkey provide the central empirical case. Organizational and geographical mapping then expose the aggregation choices involved when the same infrastructure supports broader judgments. Strategic intelligence appears briefly as a destination for these results; its institutional development is reserved for a later treatment of evaluation applications.
+
+\section{Governance as an Evaluation Problem}
+\label{sec:ch9-question}
+
+\subsection{An ecosystem contains several kinds of relationship}
+An open source ecosystem is sustained through relationships that cannot all be represented by one network. A development network records who interacts with which projects. An affiliation map connects contributors to organizations under a stated attribution rule. A dependency network identifies where software is used by other software. A governance arrangement specifies who can admit maintainers, approve changes, allocate resources, or amend rules. Each representation answers a different question, even when many of its participants are the same.
+
+This distinction is already implicit in the separation of activity, influence, and contribution in Part II. An OpenRank score expresses a position within a specified collaboration model. Its interpretation depends on the graph, edge construction, initial values, and temporal procedure. It does not, by itself, record the authority to change a license or the responsibility to support a deployed service. An evaluator must establish the additional relationships that connect measured participation to the decision under examination.
+
+Research on open source governance supplies useful context. \citet{omahony2007} traced the development of authority in Debian, showing how formal organization and mechanisms of accountability emerged alongside technical contribution. \citet{omahony2022} examined a platform's changing governance arrangements and the relationship between access, control, and participation. These studies make authority and its organization substantive empirical questions. They support examining governance directly rather than inferring it from a contributor ranking.
+
+Table~\ref{tab:ch9-relations} separates the relationships needed in the present chapter. A contributor can be associated with an employer without speaking for that employer in every interaction. A project can receive substantial external work while a single entity retains particular decision rights. A user can be strongly affected by a change while leaving few public development events. Evaluation becomes more informative when these positions remain visible.
+
+\input{tables/chapter09/relations}
+
+\subsection{Specify the arrangement and the decision it informs}
+The question structure introduced in Part I remains the organizing device:
+\[
+\mathcal Q=\langle O,A,C,R,T,S,P\rangle.
+\]
+Here \(O\) is the evaluated object or arrangement; \(A\) identifies affected objects and relevant outcomes; \(C\) describes conditions; \(R\) supplies the reference; \(T\) fixes the horizon; \(S\) identifies stakeholders; and \(P\) states the purpose. For a governance inquiry, the evaluated arrangement may include licensing, contribution procedures, organizational support, and decision rights. The evaluation must say which of these is being investigated and which are treated as surrounding conditions.
+
+Consider the question of whether external organizations materially participated in Redis development before the 2024 change. Its object is a contribution arrangement; its evidence concerns attributed work over a historical period. A different question asks whether an operator should adopt a successor project. That inquiry concerns compatibility, maintenance commitments, migration effort, and the operator's required functions. The historical participation study informs it, but cannot complete it. A third question concerns the fairness of commercial returns. That requires an explicit standard of fairness and evidence about costs, benefits, and obligations that development logs do not contain.
+
+A useful starting practice is to write the decision question before selecting the indicator. For example: which external organizations supplied collaboration that the existing arrangement relied on, and where was that collaboration observed after the change? This question has identifiable entities, periods, and observations. It can be answered more directly than whether a company or a community ``won'' a dispute. It also leaves room for a consequential finding: development may contract at one location while an alternative arrangement acquires contributors.
+
+\subsection{Make the reference and the affected parties explicit}
+The same observed transition can have different consequences at different boundaries. For a vendor, maintaining a commercially sustainable product can be central. For an external contributor, continued participation under acceptable rules may matter more. For downstream users, availability of compatible software and support may dominate both concerns. A governance evaluation must identify these interests before aggregating them into a collective assessment.
+
+The reference matters equally. Comparing a repository with its own previous months establishes a historical difference. Comparing the original repository with a fork describes two developing arrangements. Neither comparison automatically identifies what would have happened without the licensing change. The distinction determines the strength of the conclusion, not merely its wording. In this chapter, the primary study supplies an exploratory account of observed changes; stronger causal or distributive judgments are assigned their additional evidential requirements.
+
+\section{Observing the Redis Governance Transition}
+\label{sec:ch9-redis}
+
+\subsection{The event, the questions, and the observation windows}
+On 20 March 2024, Redis announced that releases beginning with Redis 7.4 would use the Redis Source Available License v2 or the Server Side Public License v1 instead of BSD 3-Clause. Its announcement linked the change to the sustainability of investment and the commercial position of cloud providers \citep{redis2024}. On 28 March, the Linux Foundation announced Valkey, continuing development from Redis 7.2.4 under BSD 3-Clause, with support from maintainers and several companies \citep{valkey2024}. These statements establish the announced changes and their proponents' positions. They do not independently establish every claim made in the dispute.
+
+Our study \citep{han2026redis} asks six connected questions: how repository metrics changed; how contributor groups changed; which contributors and affiliated organizations were deeply involved; whether participation extended to Valkey; how organizational variety changed; and how the observed pattern compared with Elasticsearch and Terraform. The sequence moves from a repository-wide signal to the participants behind it, then to the wider arrangements through which their work could continue.
+
+The data combine public collaboration events obtained through GH Archive and OpenDigger with GitHub profile information used in contributor characterization. The principal monthly window is October 2023--January 2025. The investigation of core contributors extends from 2017 to June 2025. The comparison projects have separate windows around their respective changes, as shown in Table~\ref{tab:ch9-design}. Preserving these boundaries is necessary because the study combines different analytical samples rather than observing one uniform panel throughout.
+
+\input{tables/chapter09/design}
+
+There is a further historical boundary. On 1 May 2025, Redis announced AGPLv3 as an additional licensing option starting with Redis 8 \citep{redis2025}. This occurred after the main monthly window but within the final, partial year of the core-contributor analysis. Consequently, the monthly series cannot evaluate the later announcement, and the 2025 annual bar cannot be read as another full year under unchanged conditions. The case concerns a specified transition, not a permanent classification of all subsequent Redis releases.
+
+Licensing research has long shown that changes can arise from several considerations and that the rationale may be difficult to recover from repository records \citep{vendome2017}. This makes the combination of dated announcements and behavioral evidence particularly useful. The announcements locate decisions and stated reasons; the observations characterize participation around them. Maintaining that separation prevents the public explanation of a change from becoming its presumed empirical effect.
+
+\subsection{Retaining the historical meaning of the measures}
+The study uses several measures already developed in Part II, but their historical implementation must be retained. Its Activity measure aggregates five recorded behaviors with weights and normalizes by elapsed days. The five behaviors are issue comments, opened issues, opened pull requests, pull-request review comments, and merged pull requests. Replacing the reported series with a later Activity formula would create a new analysis, even if the new implementation were preferable for another purpose.
+
+The OpenRank account describes a monthly collaboration network of developers and repositories, with previous-month scores entering the initialization. The study also draws on the OpenRank Leaderboard formulation. The published series are therefore treated here as the study's reported OpenRank outputs. Their exact historical graph and normalization procedure should accompany any computational replication. The distinction between ecosystem influence and project-level contribution established in Chapter~\bookref{ch:five}{5} remains necessary; a shared name does not make differently constructed scores interchangeable.
+
+Participants include people engaged in issue or pull-request interactions. A person who comments during a controversy can therefore enter the participation count without contributing code. Stars and platform forks provide further observations of attention, while added and removed lines describe code changes of potentially very different kinds. The source also reports a commit-based bus factor using a 50\% contribution threshold. Its value describes the concentration of the selected commits under that definition, rather than an independently observed capacity to survive the departure of particular maintainers.
+
+Two measures require special care: issue age and change-request age. They describe unresolved items. Their distributions are not distributions of the time taken to resolve completed work. A reduction in the age of open pull requests may accompany the arrival of new requests, closure of old ones, or changes in the composition of the backlog. It cannot establish faster resolution without following items to their outcomes. Table~\ref{tab:ch9-metrics} records the resulting interpretation rules.
+
+\input{tables/chapter09/metrics}
+
+The source identifies a data deposit at \url{https://zenodo.org/records/16888468}. The presentation here reuses the published observations and figures; it does not report a new execution of that dataset or a newly fitted statistical model. Where numerical point labels are available, they can be transcribed for a faithful redraw. Where they are absent or overlap, retaining the original plot geometry avoids manufacturing precision from a picture.
+
+\subsection{An attention peak and a changing pattern of work}
+The clearest aggregate feature is the March 2024 peak. The study reports 220 Redis participants in that month and more than 1,000 issue comments. Activity, stars, and platform forks also rose around the announcement. Figure~\ref{fig:ch9-response} presents the Activity and participation panels at a scale suitable for reading their temporal pattern. The joint increase locates a period of intense attention and interaction. Its meaning depends on which actions produced it.
+
+\begin{figure}[p]\centering
+\includegraphics[width=\linewidth,height=.79\textheight,keepaspectratio]{figures/chapter09/response.pdf}
+\caption{Redis Activity and participation around the March 2024 announcement. Panels are retained from \citet[Figure 1(b,c)]{han2026redis} and arranged vertically. Numerical axes and trajectories are unchanged. The dashed line marks the source's event month. Participants include issue and pull-request interactions; the Activity panel uses the source study's historical implementation.}
+\label{fig:ch9-response}\end{figure}
+
+Participation and Activity subsequently settled below several of their earlier monthly values. Yet the source's other measures do not imply that all kinds of work moved together. The code-change series contains later bursts, which the authors associate with particular development changes. This is compatible with a smaller participant population undertaking substantial changes. Conversely, a large discussion count can coexist with limited expansion of the group doing sustained development. These combinations are precisely why the event stream should be decomposed before a governance judgment is made.
+
+The open-item distributions add another dimension (Figure~\ref{fig:ch9-open-items}). They show the changing stock of unresolved issues and change requests. Their value lies in identifying a workload that deserves investigation: the age and composition of work remaining open. For an assessment of responsiveness, the next evidence would be item-level arrival, first response, review, closure, and reopening histories, together with the handling of items still open at the end of observation. The monthly distributions alone support a description of backlog conditions.
+
+\begin{figure}[p]\centering
+\includegraphics[width=\linewidth,height=.79\textheight,keepaspectratio]{figures/chapter09/open-items.pdf}
+\caption{Ages of unresolved Redis issues and change requests. Source panels from \citet[Figure 1(h,i)]{han2026redis}; the original distributions, mean curves, and day scales are retained. These are open-item age measures. They should not be interpreted as the resolution times of completed issues or pull requests.}
+\label{fig:ch9-open-items}\end{figure}
+
+The study thus provides a useful first separation between attention and continuing collaboration. A controversy can increase the number of visible interactions while the composition of sustained participation changes in another direction. In the language of Chapter~\bookref{ch:four}{4}, an event count becomes evidence about a construct only through its definition and context. In the language of Chapter~\bookref{ch:sustainability}{8}, the continuity of a collaborative capability requires a temporal account of the work and responsibility that remain available.
+
+\subsection{Contributor groups reveal the composition of the response}
+To examine this composition, the study defines three operational groups using email characteristics and observed behavior. Table~\ref{tab:ch9-groups} retains the rules and the strict ``more than 20'' annual thresholds. The original labels refer to motivation; this chapter uses them as names for the source's inferred participation categories. Public traces provide evidence about behavior and affiliation signals, while motivation requires further evidence from contributors themselves.
+
+\input{tables/chapter09/groups}
+
+This qualification is consistent with the study's own discussion of construct validity. It also accords with survey research showing that contributors can have multiple, changing motivations \citep{gerosa2021}. A corporate email can accompany paid work, voluntary work, or a mixture; a personal email does not establish independence from commercial employment. In addition, an active issue-only contributor with a non-corporate email could satisfy descriptions associated with more than one group. A replication should state precedence rules, treatment of missing email information, and the disposition of contributors below the frequency thresholds.
+
+The group counts and OpenRank trajectories are presented together in Figure~\ref{fig:ch9-groups}. Counts for the company-driven and community-driven categories fall after the event relative to much of the preceding period. The communication-driven category shows a pronounced event-month increase and then returns toward its earlier range. The lower panel shows a substantial reduction in the company-driven group's reported OpenRank, a smaller decline for the community-driven group, and a comparatively stable trajectory for the communication-driven group.
+
+\begin{figure}[p]\centering
+\includegraphics[width=\linewidth,height=.78\textheight,keepaspectratio]{figures/chapter09/groups.pdf}
+\caption{Composition of observed Redis participation. Source Figures 2 and 3 from \citet{han2026redis}, combined without changing their data. The two count panels use different vertical scales. Group labels are operational classifications based on email and behavior, not direct measurements of individual motivation; their definitions and qualification are given in Table~\ref{tab:ch9-groups}.}
+\label{fig:ch9-groups}\end{figure}
+
+The distinction between counts and scores matters here. A brief increase in the number of discussants need not produce a similar increase in a network measure that incorporates relationships and previous scores. Likewise, a change in OpenRank can reflect both local activity and changes elsewhere in the modeled network. The two panels describe complementary aspects of participation; neither is a substitute for examining what work was performed or what responsibilities participants held.
+
+For governance, the result directs attention toward the sustained contributors and the arrangements under which they participate. The source's operational groups are useful for locating that question. Their aggregate trends should be followed by contributor-level histories and, where motives matter, explanations from the people concerned. This preserves the empirical contribution of the classification while giving its categories an appropriately limited interpretation.
+
+\FloatBarrier
+\section{Organizational Contributions and Ecosystem Reconfiguration}
+\label{sec:ch9-reconfiguration}
+
+The repository-level observations identify a change in participation. To examine its ecosystem significance, the study next follows the organizations associated with core work, the contributors participating in Valkey, and the different trajectories of two comparison cases. The evaluated boundary expands at each step: from a repository, to its organizational base, to related development arrangements. This is where Chapter~\bookref{ch:sustainability}{8}'s distinction between a local discontinuity and the continuity of a function becomes a governance question.
+
+\subsection{Core contributors and the organizational base}
+The third research question examines the ten contributors with the highest reported contribution scores in each year, from 2017 through June 2025, and attributes their contributions using organizational information. Figure~\ref{fig:ch9-affiliations} reproduces the resulting shares. The Redis category accounts for 65.5\% in 2020 and 46.4\% in 2023; AWS accounts for 19.2\% in 2023. Other named categories include Aliyun, Tencent, Huawei, and Ericsson. These observations establish substantial participation by organizations outside the Redis company within the selected core.
+
+\begin{figure}[tbp]\centering
+\includegraphics[width=\linewidth]{figures/chapter09/affiliations.pdf}
+\caption{Attributed shares within each year's top-ten contributor selection. Reproduced from \citet[Figure 4]{han2026redis}. The denominator is the contribution score represented by the selected contributors, not all project effort, financial investment, or commercial returns. The source preserves ``antirez'' as a separate category alongside organizational categories. The 2025 bar covers only the period through June; it is not a full-year observation.}
+\label{fig:ch9-affiliations}\end{figure}
+
+The result bears directly on a narrow factual proposition: cloud providers were not absent from the recorded core contribution history. It does not settle a broader question about whether their total contributions were proportionate to their benefits. The latter requires a reference principle and additional quantities, including relevant development costs, financial support, service provision, and returns. The contribution study makes an otherwise obscured part of the relationship visible; it does not supply an accounting system for the whole commercial ecosystem.
+
+The annual selection also needs to remain explicit. The top ten can change from year to year. The chart is therefore a sequence of selected cores, not a fixed cohort of ten people followed longitudinally. A rise in one category's share can reflect its own changing score, changes in other categories, or changes in membership of the selected set. Nor are all categories strictly organizational: the source identifies the original creator separately. Retaining that distinction is preferable to silently recoding a person as a company or redistributing the published percentages.
+
+Organizational involvement has dimensions beyond a selected core. Research on OpenStack, for example, characterizes company participation through intensity, extent, and focus, showing that firms' contribution patterns differ across projects \citep{zhang2021}. For the present case, this supports asking which tasks and components external contributors supported, as well as how much score they received. A small number of experienced contributors can matter for particular maintenance responsibilities even when their share of the aggregate measure is modest.
+
+The fifth research question uses unique email domains as a proxy for organizational variety. Figure~\ref{fig:ch9-domains} shows a narrower observed range after the announcement, including one domain in July and September 2024. The proxy should retain its actual name. One organization may use several domains; public email services can combine unrelated contributors; and missing addresses can hide affiliations. The figure describes the variety observed under the study's rule. It does not establish that only one organization remained involved in the entire Redis ecosystem during those months.
+
+\begin{figure}[tbp]\centering
+\includegraphics[width=\linewidth]{figures/chapter09/domains.pdf}
+\caption{Unique email domains and repository OpenRank in the source study. Reproduced from \citet[Figure 6]{han2026redis}; both original axes are retained. The bars measure email-domain variety under the study's attribution procedure. Domain counts and organizational counts can differ, and neither directly measures independence of governance authority.}
+\label{fig:ch9-domains}\end{figure}
+
+Together, the core-contributor and domain analyses motivate a more exact governance inquiry: which contributions and responsibilities depend on which organizations, and how stable are those relationships? This is a richer question than counting logos or registered organizational accounts. It connects the measurement infrastructure of Chapter~\bookref{ch:six}{6} to an assessment of the collaboration on which a project relies.
+
+\subsection{Participation across Redis and Valkey}
+The fourth research question changes the boundary from Redis alone to Redis and Valkey. Figure~\ref{fig:ch9-fork} retains the source's monthly participant and OpenRank series. Redis has 220 participants in March 2024, 92 in April, and 65 in January 2025. Valkey has 146, 120, and 75 in the corresponding months. Redis OpenRank is 62.15 in March, 41.4 in April, and 24.92 in January 2025; Valkey's corresponding values are 29.33, 52.74, and 73.98. Table~\ref{tab:ch9-checkpoints} provides these printed checkpoints without requiring the reader to resolve overlapping plot labels.
+
+\input{tables/chapter09/checkpoints}
+
+\begin{figure}[p]\centering
+\includegraphics[width=\linewidth,height=.79\textheight,keepaspectratio]{figures/chapter09/fork.pdf}
+\caption{Observed participation and OpenRank for Redis and Valkey. Source Figure 5 from \citet{han2026redis}, with panels stacked and the participant panel's vertical-axis title corrected from ``OpenRank'' to ``Participants.'' All numerical marks and curves are retained. Valkey's pre-March zeros represent its absence from the source series before formation, not measured inactivity of an established community. The March observation is an entry period rather than a comparable full month of established operation.}
+\label{fig:ch9-fork}\end{figure}
+
+The contrast is informative, but it is not a flow diagram. A declining count in one repository and a rising count in another do not identify the same individuals moving between them. Contributors can participate in both, return after an interval, or leave both. The study's contributor-level investigation provides a more specific observation: seven of the ten leading Redis contributors selected for 2024 also contributed to Valkey. This supports a connection between the communities. It does not, by itself, establish exclusive transfer, the abandonment of all upstream work, or the migration of downstream users.
+
+The participant and OpenRank series also need not move proportionally. Their divergence reflects different measurement targets: a count of engaged accounts and a modeled position in collaboration. By the end of the observed period, Valkey's OpenRank exceeds Redis's while the participant counts remain much closer. This is evidence about the particular collaboration model and period, not a universal statement about software quality, installed use, or future viability.
+
+For an ecosystem evaluation, the fork therefore creates a second location at which continuity can be investigated. Chapter~\bookref{ch:sustainability}{8} showed why the continued availability of a function can matter more than survival at one address. Here, the history and overlap of contributors give evidence that the alternative location acquired collaborative capacity. A complete continuity judgment would additionally examine releases, maintenance responsibilities, compatibility, security response, and users' ability to move. These are the links through which a development alternative becomes an effective alternative for affected parties.
+
+The result also changes how a decline should be described. At the Redis repository boundary, some measures declined. At the combined development boundary, participation was being reorganized across two projects. At the level of downstream benefit, the available study does not measure the outcome. Keeping these boundaries separate allows the observed redistribution to inform governance without equating every local decline with an ecosystem loss.
+
+\subsection{Comparison cases and the limits of explanation}
+Elasticsearch and Terraform provide two further observations of licensing changes. Figure~\ref{fig:ch9-comparators} redraws all printed values from the source comparison figure, separating participant counts and OpenRank into different panels. The periods are July 2020--July 2021 and February 2023--February 2024, respectively. The source figure places the event markers in January 2021 and August 2023. Those plotted dates are retained here; descriptions in the source prose are not used to shift the series or relabel its points.
+
+\begin{figure}[tbp]\centering
+\includegraphics[width=\linewidth]{figures/chapter09/comparators.pdf}
+\caption{Elasticsearch and Terraform as comparison cases. Redrawn from all 52 printed values in \citet[Figure 7]{han2026redis}; dual axes are separated and source event months are retained. Terraform's plotted counts of 234, 158, and 318 belong to August, September, and October 2023. This follows the figure's dated observations where the surrounding source prose shifts those descriptions by one month. The panels use project-specific scales and do not constitute matched causal controls.}
+\label{fig:ch9-comparators}\end{figure}
+
+Elasticsearch's reported OpenRank declines gradually across the latter part of its window, while participant counts fluctuate. Terraform's series includes substantial month-to-month variation, including the September decline and October rebound shown in the figure. The patterns differ from the relatively abrupt post-March reduction in several Redis measures. The comparison establishes heterogeneity across these selected cases. Explaining that heterogeneity requires the different organizational arrangements, participant histories, and timing of alternatives to be examined.
+
+A later study by \citet{foster2026} follows Elasticsearch/OpenSearch, Terraform/OpenTofu, and Redis/Valkey using netnographic accounts and organizational contribution evidence. It examines how vendor arguments, changes in governance boundaries, and community responses unfold together. This provides complementary evidence about processes that repository curves alone cannot identify. Its contribution definitions and observation windows differ from ours, so its observations should not be silently merged into the same time series or treated as a numerical replication.
+
+The comparison is consequently explanatory in an exploratory sense. It helps identify mechanisms and competing interpretations. A causal estimate would require a design capable of addressing the counterfactual. Interrupted time-series methods, for example, require a justified intervention specification and attention to temporal dependence, concurrent changes, and other time-varying influences \citep{bernal2017}. The short pre-event Redis window, the partly observed entry of Valkey, and the coexistence of licensing and organizational changes make those considerations substantive.
+
+The central empirical conclusion remains strong within its scope. External organizations participated materially in the selected Redis contribution history; the announcement period combined intense discussion with subsequent changes in sustained participation; and Valkey became another location of collaboration involving contributors from the earlier community. These findings support an account of changing collaborative arrangements. They do not alone establish a causal effect of licensing, a complete financial balance, or an irreversible future trajectory.
+
+\section{Attribution across Organizations, Regions, and Fields}
+\label{sec:ch9-mapping}
+
+\subsection{Aggregation begins with an attributable entity}
+The Redis case exposes a general difficulty in ecosystem evaluation: the entities named in a governance question are often different from the entities recorded by a platform. An event identifies an account and a repository. A decision may concern a company, a regional community, or a technical field. Moving between these levels requires a mapping whose evidence, time validity, and uncertainty can be inspected.
+
+OpenDigger's entity and label mechanisms, described in Chapter~\bookref{ch:six}{6}, provide infrastructure for constructing such sets. They allow repository collections and contextual categories to be defined and reused. Their analytical value depends on the meaning assigned to membership. A repository listed under an organization can indicate platform ownership, stewardship, employment relationships, or a broader association. Those meanings should not be conflated. An organizational merger, a contributor's change of employer, or a repository transfer can alter the mapping without changing the underlying historical event.
+
+A robust record therefore distinguishes the event date, the date for which an attribution is asserted, and the date on which the attribution was collected or revised. Historical claims should use the applicable historical mapping when it is available. Applying today's profile information retrospectively may change the apparent distribution of past contributions. If the historical mapping cannot be recovered, the resulting uncertainty belongs in the interpretation of the aggregate.
+
+The account-to-person step needs similar care. One person can use several accounts, an account can be shared, and automation can produce events that resemble human activity. Research on mining GitHub demonstrates why platform records require interpretation and purpose-specific filtering \citep{kalliamvakou2014}. For governance analysis, the practical implication is to name the measured unit: accounts, identified people, attributed organizations, or repositories. Each can be useful; the claim must follow the unit actually established.
+
+\subsection{A public distribution report and its coverage boundary}
+Our published developer-distribution analysis offers a concrete example \citep{zhao2025geography}. Its reported ten-year GitHub collaboration population contains 22.08 million accounts with issue or pull-request participation. Approximately 4.06 million have parsed locations, giving the reported coverage of 18.4\%. It separately reports more than 6.07 million collaborators active in 2024. These populations differ in eligibility and period; their values should not be combined into one denominator.
+
+\input{tables/chapter09/coverage}
+
+Coverage constrains the meaning of a geographical map. Let \(D_r\) be the number of eligible accounts assigned to region \(r\), and \(U\) the number with unresolved location, within a fixed population of \(N\) accounts. If recorded assignments are correct and each account has exactly one relevant region, the number of accounts associated with region \(r\) is bounded by
+\begin{equation}
+ D_r\ \leq\ N_r\ \leq\ D_r+U.
+ \label{eq:ch9-geography}
+\end{equation}
+This is an identification bound under stated assumptions, not a confidence interval. It describes how much is left open by unresolved membership. The upper bounds for all regions cannot hold simultaneously because the same unknown accounts cannot each be assigned to every region. If the known assignments can themselves be wrong, their error must also be addressed.
+
+The bound clarifies why publishing a coverage rate is more useful than silently removing unknowns. A share among located accounts has denominator \(N-U\); a share of the entire eligible population has denominator \(N\). Replacing one with the other changes the claim. An estimate for the whole population would require additional assumptions about the location process, supported where possible by validation. Greater coverage in a highly active subset would not establish representativeness for less active accounts.
+
+Geographical research on open source also shows the importance of spatial scale. \citet{wachs2022} identify substantial concentration within countries, illustrating that a national total can conceal regional differences. For evaluation, this motivates matching the geographical unit to the decision. A local capacity-building question may require evidence about nearby institutions and collaboration, while a national descriptive report has a different scope. Neither a profile location nor a regional total establishes a person's nationality, an organization's ownership, or control over the resulting software.
+
+\subsection{Overlapping memberships require an explicit counting rule}
+Organizational and technical categories frequently overlap. A contributor can work across organizations over time; a project can serve several technical fields; and repositories can be related through shared packages, components, or ownership. The analytical task determines whether overlap should be retained or allocated.
+
+Let \(E_t\) be a deduplicated set of eligible observations for period \(t\), let \(x_e\) be a nonnegative quantity attached to observation \(e\), and let \(w_{eg,t}\) represent its attribution to group \(g\). An aggregate can be written as
+\begin{equation}
+ M_{g,t}=\sum_{e\in E_t}w_{eg,t}x_e.
+ \label{eq:ch9-aggregation}
+\end{equation}
+For a partition of an additive total, the weights across groups, including an unknown category, must sum to one for each observation. Full counting can instead assign the same observation to every relevant group. That is appropriate for questions about involvement, provided the resulting group totals are not presented as disjoint shares of the whole.
+
+The formula specifies attribution; it does not make every metric additive. Distinct contributor counts require set union when repositories share contributors. A network score requires its own interpretation of aggregation and normalization. Summing scores from incompatible graph constructions or different runs does not produce a common measure of ecosystem influence. Part II's metric distinctions therefore remain necessary at the aggregation stage.
+
+Cross-platform aggregation introduces a related issue. Combining two platform account totals requires a rule for linking accounts. If internally deduplicated entity sets \(G\) and \(H\) refer to the same kind of entity, then
+\[
+ |G\cup H|=|G|+|H|-|G\cap H|.
+\]
+Without the intersection, the combined entity count is bounded between the larger input count and their sum. These are counts under the chosen entity definition. They become bounds on people only if the within-platform and cross-platform identity assumptions are justified. A larger coverage footprint is useful, but it is not itself proof that a deduplicated population has been measured.
+
+\subsection{An aggregate supports claims at its own level}
+Even correctly attributed aggregates can be misused. A region's activity can be associated with institutional conditions without establishing that every contributor in the region has the same characteristics. The classic distinction between ecological and individual relationships explains why evidence at one level cannot automatically identify a relationship at another \citep{robinson1950}. In an open source setting, the analogous error is to infer an individual's motivations or a firm's control from an aggregate regional share.
+
+Table~\ref{tab:ch9-mapping} summarizes the different mappings. The common requirement is an attribution record that can be revised without erasing the history of the published result. This allows an evaluator to distinguish a change in the ecosystem from a change in what has been identified about it. It also gives affected participants a concrete basis for correcting an assignment.
+
+\input{tables/chapter09/mapping}
+
+\section{From Evidence to Governance Judgments}
+\label{sec:ch9-judgment}
+
+\subsection{Separate the factual proposition from the criterion}
+The Redis study is most useful to governance when its findings are translated into explicit propositions. ``External cloud organizations participated in the selected core contribution history'' is a factual proposition supported by the attribution analysis. ``Those organizations returned a fair share of the benefits they received'' is an evaluative proposition requiring a criterion of fairness and additional evidence. The first can inform the second without being equivalent to it.
+
+This distinction prevents both overreach and the loss of useful evidence. A contribution analysis can challenge a claim that an organization provided no development contribution. It can locate dependence on external expertise and show a redistribution of participation. Those are consequential findings even when financial proportionality remains unmeasured. A governance discussion becomes more precise by identifying which part of its argument the evidence resolves.
+
+A similar separation applies to authority. A large contribution share can support recognition of expertise and dependence. It does not automatically confer a particular legal right, a vote, or control of a project. Conversely, formal authority can exist without a proportionate share of recorded development. Evaluating the arrangement requires a declared view of how authority should relate to contribution, responsibility, and affected interests. That view should be open to examination alongside the observations.
+
+\subsection{Compare arrangements through several substantive criteria}
+For the present case, a governance judgment can be organized around four questions. Can the required technical functions be maintained? Can participants continue to work under conditions they are willing and able to sustain? Are decision procedures and responsibilities clear to those affected? How are the benefits and burdens of the arrangement distributed? These questions connect the capability account of Chapter~\bookref{ch:two}{2} with the empirical work in Chapters 7--9.
+
+Table~\ref{tab:ch9-judgments} shows what the available evidence contributes and what remains to be established. It deliberately keeps criteria separate. There is no observed exchange rate by which an increase in OpenRank compensates for an unmet support obligation, nor a demonstrated weight that converts a contribution share into a fair commercial return. If a decision requires a composite score, its weighting and compensability assumptions become part of the evaluation design. The methodological literature on composite indicators emphasizes the need to expose such choices and examine the robustness of the conclusions to them \citep{oecd2008}.
+
+\input{tables/chapter09/judgments}
+
+This approach permits a conclusion that is useful without being artificially complete. The evidence can justify closer examination of a changed organizational base, a successor's collaborative capacity, or the concentration of particular responsibilities. The decision about an arrangement then incorporates the additional evidence relevant to its purpose. It may remain conditional on compatibility work, support commitments, or an unresolved attribution. A conditional judgment is a well-specified result when those conditions are material.
+
+\subsection{Construct a decision record from the case}
+Consider an organization reviewing its dependence on software affected by a governance transition. The following is a proposed use of the evidence, not a report of a decision observed in the Redis study. The organization would first specify its required functions, operational horizon, and the releases or services under consideration. It would then use the collaboration evidence to identify the people and organizations supporting each candidate arrangement, and examine whether the required responsibilities are covered.
+
+The historical results would support a concise finding: development participation changed around the announcement, and an alternative project acquired collaboration involving contributors from the original community. The organization would next obtain evidence about its own conditions---compatibility, migration effort, release support, maintenance ownership, and obligations associated with the selected arrangement. The decision record would connect each option to those requirements, identify unresolved questions, and name a review date or event that would reopen the assessment.
+
+This sequence gives the evaluator and the decision maker different responsibilities. The evaluator warrants the evidence and the scope of its interpretation. The decision maker identifies the relevant priorities, accepts responsibility for the chosen action, and records why the available evidence is sufficient for that action. Keeping these responsibilities visible is especially important when the evaluator also develops the measurement infrastructure or has relationships with the communities being evaluated.
+
+The record should preserve a path back to the observations. A statement about organizational diversity should identify the affiliation method; a statement about a fork's participation should identify its period and population; a statement about dependence should identify the required function. This makes disagreement productive. A reviewer can challenge the mapping, supply missing evidence, or contest a criterion without having to reject the entire evaluation as a single undifferentiated score.
+
+\subsection{Use disagreement to locate the unresolved question}
+Two assessments can differ because they use different observations, because they interpret the same observations differently, or because they prioritize different outcomes. These disagreements require different responses. A disputed affiliation calls for evidence about the attribution. A disputed causal claim calls for a stronger design or a narrower conclusion. A disputed distribution of benefits calls for an explicit discussion of the criterion and the interests represented.
+
+In the Redis case, a disagreement over financial reciprocity cannot be settled merely by adding more months to an Activity chart. A disagreement about whether experienced contributors appeared in Valkey can be investigated through linked histories. A disagreement about downstream continuity requires following the functions and users affected. The evaluation system contributes by locating the question that additional evidence could resolve and identifying where a value judgment remains necessary.
+
+\subsection{The interface with strategic intelligence}
+\label{sec:ch9-intelligence}
+
+Strategic intelligence is one important application of ecosystem evaluation. The OpenThink practice manuscript describes an effort to connect open source observation, assessment, and decision support \citep{openthink}. For this chapter, its relevance is the interface between an evaluation result and the institution that may use it. The broader organization of a think tank, its products, and its application cases require a separate treatment.
+
+At this interface, a report should carry a decision question, the population and period observed, the principal findings, the criteria needed for interpretation, and the unresolved evidence that could change the judgment. This preserves the analytical work when a technical result is condensed for an audience responsible for action. \citet{cash2003} distinguish the credibility, salience, and legitimacy of knowledge used in decision processes. In the present setting, the corresponding practical task is to make a result technically defensible, relevant to a stated use, and examinable by those whose interests it affects.
+
+The public distribution report discussed in Section~\ref{sec:ch9-mapping} illustrates the importance of this handoff: its population definition and location coverage must travel with any geographical conclusion. The Redis case provides another example: evidence of external contributions should retain its denominator when it enters a discussion of governance. A published report establishes that an analysis has been communicated. Evidence that it informed a decision, and evidence that the resulting action improved an outcome, are further observations. Later application studies can examine those steps directly.
+
+\section{Accountability and Learning from Evaluation}
+\label{sec:ch9-accountability}
+
+\subsection{The evaluation procedure is itself part of governance}
+Once an evaluation influences recognition, resource allocation, or the treatment of organizations, its own procedures become consequential. The choice of population determines whose work is visible. The affiliation rule affects who receives credit. The selection of a reference affects which differences appear meaningful. Publishing these choices is therefore part of making the evaluation accountable.
+
+\citet{parkhurst2017} develops a complementary account of evidence use in which appropriate evidence, transparency, accountability, and contestability belong to the institutional process. Applied here, the point is concrete: a technically reproducible score can still be used for a question it was not designed to answer. Evaluation quality includes the relationship between the result and its authorized interpretation, as well as the computation that produced it.
+
+An accountable release should consequently preserve the source snapshot, metric version, entity mapping, and stated interpretation. A correction should identify whether it changes an observation, an attribution, a calculation, or a conclusion. Where individual or organizational identification is uncertain, the public output can report an unresolved category rather than convert a weak proxy into a confident assignment. Participants need an intelligible route to raise a factual correction, while disagreements about criteria need a forum appropriate to the decision.
+
+\subsection{Different uncertainties require different follow-up evidence}
+The case contains several distinct uncertainties. Observation coverage concerns what the platform records. Attribution concerns the relation between an account and a person or organization. Construct interpretation concerns whether a measure supports the property being discussed. Causal uncertainty concerns the alternative history against which a change is compared. Normative disagreement concerns which outcomes and obligations should govern the judgment.
+
+These uncertainties should be handled at their respective levels. Reconstructing historical affiliations can improve an organizational analysis. Interviews can improve an account of contributor motives. Item-level histories can improve an assessment of response and completion. A stronger comparative design can improve a causal claim. Deliberation about benefits and responsibilities can clarify a fairness criterion. Treating all of these as measurement noise would conceal the work required to improve the evaluation.
+
+The historical metric issue has a related implication. A later method can improve future evaluations without rewriting the meaning of an earlier published result. If a new implementation is applied retrospectively, the result should be released as a versioned reanalysis with a comparison to the original. This allows theory and methods to improve while preserving an inspectable account of what the earlier evidence actually supported.
+
+\subsection{Follow the consequences of using an evaluation}
+Policy learning begins when a judgment is connected to an action whose consequences can be observed. If an organization changes its contribution policy, a community revises its decision procedure, or a public institution supports a development capability, the follow-up evaluation should return to the outcomes and affected parties originally specified. More activity may be relevant, but it should be connected to the intended benefit and the burdens created by the intervention.
+
+Follow-up can also revise the original interpretation. A successor may attract contributors while leaving a downstream need unmet; apparent organizational diversity may conceal a common employer; recognition may reveal maintenance work and alter participation. Such findings concern the evaluation model as well as the immediate decision. They return the consequences of using an evaluation to the objects, conditions, and claims specified in Part I.
+
+\subsection{From empirical studies to cumulative knowledge}
+Across Part III, the question changes from recognizing a person's work to sustaining a collaborative capability and judging an ecosystem arrangement. The studies are connected by the framework of Part I and the measurement resources of Part II. They are not replications of one experiment: educational assessment, retrospective archival analysis, and an exploratory governance study have different populations, outcomes, and comparisons. Their shared contribution lies in identifying where an evaluation needs a more exact account of observation, interpretation, and use.
+
+\input{tables/part3/validation}
+
+Table~\ref{tab:part3-validation} identifies the resulting validation questions. Chapter~10, \emph{Open Source Science and Technology Think Tanks}, examines how situated findings become reports, observatories, and evidence for institutional decisions. Chapter~11, \emph{Disciplinary Development and the Tool Ecosystem}, develops the shared validation, benchmark comparisons, and research practices needed to make such work cumulative. The cases supply a basis for that return: evidence can refine a framework while also identifying the claims that still require investigation.

@@ -1,0 +1,27 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\path[use as bounding box] (0,0) rectangle (140,101);
+\node[seheading,anchor=west,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (2,97) {EVALUATION COMPONENT};
+\node[seheading,anchor=west,font=\sffamily\bfseries\fontsize{8.5}{10}\selectfont] at (49,97) {SPECIFICATION AND REALIZATION};
+\foreach \y/\c/\n/\t/\d in {
+85/FrameworkBlue/1/{Problem definition}/{Purpose, objects, affected parties, reference\\Participation; influence; public recognition},
+67/FrameworkTeal/2/{Task instance}/{Population, period, inputs, assessment criterion\\4WH analysis; ranking comparison; deployment},
+49/FrameworkViolet/3/{Algorithm mechanism}/{Representation, assumptions, computation\\Activity; OpenRank; temporal comparison},
+31/FrameworkAmber/4/{Implementation instance}/{Executable rules, parameters, versions\\Queries, graph construction, numerical solver},
+13/HeadingInk/5/{Supporting system}/{Records, context, storage, computing\\OpenDigger data, labels, analytics and services}}
+{
+\fill[\c!8] (1,\y-7.2) rectangle (128,\y+7.2);
+\fill[\c] (1,\y-7.2) rectangle (2.3,\y+7.2);
+\node[anchor=west,align=left,text width=42mm,inner sep=0pt,font=\sffamily\bfseries\fontsize{9}{10.6}\selectfont,text=\c] at (5,\y) {\n\quad\t};
+\node[anchor=west,align=left,text width=76mm,inner sep=0pt,font=\sffamily\fontsize{8.5}{10.5}\selectfont,text=HeadingInk] at (49,\y) {\d};
+}
+\foreach \a/\b in {77.6/74.4,59.6/56.4,41.6/38.4,23.6/20.4}
+ {\draw[searrow] (70,\a) -- (70,\b);}
+\draw[sefeedback] (128,13) -- (132,13) -- (132,85) -- (128,85);
+\node[selabel,rotate=90,font=\sffamily\fontsize{8}{10}\selectfont] at (137,49) {evidence revises the design};
+\end{tikzpicture}
+\caption{From evaluation questions to implementation. Each component makes a different part of the design inspectable; the examples connect the framework to Chapters 4--6. The feedback path represents revision informed by empirical findings.}
+\label{fig:ch3-architecture}
+\tablenote{Adapted from the five-component framework in \citet[Figure 2 and Section 3.1]{han2024ose}. The examples and feedback path are this book's synthesis. These are evaluation responsibilities, distinct from OpenDigger's software-module decomposition.}
+\end{figure}

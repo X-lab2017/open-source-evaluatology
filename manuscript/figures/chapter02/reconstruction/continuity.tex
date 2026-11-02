@@ -1,0 +1,27 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\path[use as bounding box] (0,0) rectangle (140,76);
+\fill[FrameworkBlue!5] (28,49) rectangle (139,68);
+\fill[FrameworkTeal!5] (28,25) rectangle (139,46);
+\fill[FrameworkAmber!6] (28,1) rectangle (139,22);
+\node[selabel,anchor=west,text width=25mm,align=left] at (0,59) {\textbf{Repository}\\status};
+\node[selabel,anchor=west,text width=25mm,align=left] at (0,35) {\textbf{Maintenance}\\stewardship};
+\node[selabel,anchor=west,text width=25mm,align=left] at (0,11) {\textbf{Use}\\function};
+\draw[MetaInk,densely dashed,line width=.6pt] (77,2) -- (77,68);
+\node[selabel,anchor=south] at (77,70) {transition};
+\node[selabel,text=HeadingInk,text width=41mm] at (51,59) {Original repository\\accepts changes};
+\node[selabel,text=HeadingInk,text width=52mm] at (109,59) {Original repository archived};
+\draw[searrow] (68,59) -- (84,59);
+\node[selabel,text=HeadingInk,text width=40mm] at (51,35) {Existing maintainers\\and release process};
+\node[selabel,text=HeadingInk,text width=52mm] at (109,35) {Transfer, maintained fork,\\replacement, or discontinuation};
+\draw[searrow,draw=FrameworkTeal] (68,35) -- (84,35);
+\node[selabel,text=HeadingInk,text width=40mm] at (51,11) {Users depend on\\the existing artifact};
+\node[selabel,text=HeadingInk,text width=52mm] at (109,11) {Continue, migrate, adapt,\\or lose the required function};
+\draw[searrow,draw=FrameworkAmber] (68,11) -- (84,11);
+\draw[searrow,draw=FrameworkTeal] (109,26) -- (109,21);
+\end{tikzpicture}
+\caption{Repository status and continuity can diverge. A transition is evaluated by following the required function and its maintenance conditions, as well as the original repository. Each right-hand track contains alternatives, not a single observed trajectory.}
+\label{fig:ch2-continuity}
+\tablenote{Conceptual synthesis informed by the archival study in \citet[Chapter 4]{xia2024thesis}. The figure does not estimate transition probabilities or assert that a linked successor is viable.}
+\end{figure}

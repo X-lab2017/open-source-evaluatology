@@ -1,0 +1,20 @@
+% Approved design, with destinations for continuous book navigation.
+\input{frontmatter/review/design}
+\newcommand{\bookpart}[8]{%
+\clearpage\thispagestyle{empty}\null
+\pdfbookmark[-1]{Part #1: \BookPartTitle}{part.#6}\phantomsection\label{part:#6}
+\begin{tikzpicture}[remember picture,overlay]
+\draw[#3,line width=1.1pt] ($(current page.north west)+(34mm,-27mm)$)--($(current page.north west)+(49mm,-27mm)$);
+\node[anchor=north west,inner sep=0,text=#3] at ($(current page.north west)+(34mm,-31mm)$) {\sffamily\bfseries\fontsize{11}{14}\selectfont PART #1};
+\node[anchor=north west,inner sep=0,text width=142mm,align=left,text=HeadingInk,font=\sffamily\bfseries\fontsize{#4}{#4}\selectfont]
+at ($(current page.north west)+(34mm,-43mm)$) {#2};
+\node[anchor=north west,inner sep=0,text width=142mm,align=left,text=HeadingInk,font=\fontsize{16}{20}\selectfont]
+at ($(current page.north west)+(34mm,-84mm)$) {#5};
+\node[anchor=north west,inner sep=0] at ($(current page.north west)+(34mm,-109mm)$) {\includegraphics[width=142mm]{figures/frontmatter/part-#6-motif.pdf}};
+\node[anchor=north west,inner sep=0,text width=142mm,align=left,text=HeadingInk,font=\fontsize{10.5}{14}\selectfont]
+at ($(current page.north west)+(34mm,-159mm)$) {#7};
+\node[anchor=north west,inner sep=0,text width=142mm,align=left]
+at ($(current page.north west)+(34mm,-193mm)$) {#8};
+\node[anchor=south west,inner sep=0,text=MetaInk] at ($(current page.south west)+(34mm,19mm)$) {\sffamily\fontsize{8.7}{11}\selectfont OPEN SOURCE EVALUATOLOGY};
+\node[anchor=south east,inner sep=0,text=#3] at ($(current page.south east)+(-34mm,19mm)$) {\sffamily\fontsize{8.7}{11}\selectfont #1\ /\ IV};
+\end{tikzpicture}\clearpage}

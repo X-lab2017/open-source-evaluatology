@@ -1,0 +1,17 @@
+\begin{table}[tbp]
+\caption{Benchmark roles and task specifications.}
+\label{tab:ch3-benchmarks}
+\begingroup\fontsize{9.2}{11.8}\selectfont
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{23mm}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Role in OpenPerf} & \textbf{What supplies the reference} & \textbf{Use in the evaluation}\\
+\midrule
+Data-science task benchmark & A stated problem, dataset, candidate methods and evaluation criterion; for example, bot identification. & Compare methods on a common task. Preserve labels, partitions, metrics and execution conditions.\\[5pt]
+Index benchmark & A defined quantitative representation, such as an influence index for developers or repositories. & Compare entities on the stated dimension. Specify population, scale, period and version.\\[5pt]
+Exemplar benchmark & A selected entity or practice treated as a reference level, such as developers identified in a recognition scenario. & Interpret a target or comparison through concrete examples. Document selection and seek evidence beyond the selecting index.\\
+\bottomrule
+\end{tabularx}
+\endgroup
+\tablenote{Adapted from \citet[Section 3]{han2025openperf}. A data-science task is specified by six fields: task name, open source scenario, task type, dataset, model and evaluation criterion. The distinctions in the final column are this book\textquotesingle s methodological interpretation.}
+\end{table}

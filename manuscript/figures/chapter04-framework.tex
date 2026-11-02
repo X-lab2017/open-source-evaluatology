@@ -1,0 +1,33 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm,font=\sffamily\fontsize{9}{11}\selectfont]
+\fill[FrameworkBlue!9] (0,0) rectangle (142,12);
+\node[anchor=west,text=HeadingInk] at (3,6) {\textbf{Public collaboration records}};
+\node[anchor=east,text=MetaInk] at (139,6) {object \enspace $\times$ \enspace period \enspace $\times$ \enspace definition};
+\fill[FrameworkBlue!5] (0,-7) rectangle (57,-77);
+\draw[FrameworkBlue,line width=.6pt] (3,-10) rectangle (54,-73);
+\node[anchor=north west] at (5,-12) {Observed accounts};
+\fill[FrameworkTeal!12] (7,-28) rectangle (50,-69);
+\node[anchor=north west] at (9,-30) {Non-bot contributors};
+\node[anchor=west,text=MetaInk] at (9,-42) {$a_u(T)>0$};
+\fill[FrameworkTeal!32] (11,-49) rectangle (46,-65);
+\node[align=center] at (28.5,-57) {Active contributors\\top 20\% in the study};
+\draw[-{Stealth[length=2mm]},FrameworkAmber,thick] (54,-22) -- (67,-22);
+\node[anchor=west,text=FrameworkAmber] at (69,-22) {Bots: a separate analytical population};
+\draw[-{Stealth[length=2mm]},FrameworkBlue,thick] (50,-40) -- (64,-38);
+\draw[FrameworkTeal,thick] (46,-57) -- (61,-57);
+\draw[FrameworkTeal,thick] (61,-50) -- (61,-74);
+\foreach \y in {-50,-62,-74}{\draw[-{Stealth[length=2mm]},FrameworkTeal,thick] (61,\y) -- (64,\y);}
+\foreach \y/\col/\name/\desc in {
+ -38/FrameworkBlue/Who/Participation and concentration,
+ -50/FrameworkTeal/What/Composition of recorded behaviour,
+ -62/FrameworkViolet/When/Hourly and weekly patterns,
+ -74/FrameworkAmber/Where/Working-time inclination and offsets}{
+ \fill[\col] (67,\y+4) rectangle (69,\y-4);
+ \node[anchor=west,font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=\col] at (71,\y+1.3) {\name};
+ \node[anchor=west,font=\sffamily\fontsize{8.2}{10}\selectfont,text=HeadingInk] at (71,\y-2.7) {\desc};
+}
+\end{tikzpicture}
+\caption{The 4WH analytical framework. Reorganized from \citet[Figure 1 and Section IV]{xia2022} and \citet[Figure 5.1]{xia2024thesis}. Who concerns the full contributor distribution; What, When, and Where focus on the selected active contributors, with bots examined separately. The top-20\% threshold is a study choice, and the nested sets describe recorded accounts rather than verified unique people.}
+\label{fig:ch4-4wh}
+\end{figure}

@@ -1,0 +1,17 @@
+{
+  "source_version": 36,
+  "chapters": {
+    "chapters/chapter05.tex": "9d26fd1a1cbdc8cf47cd5a3ce723346b58317c2cfe205dc29be8c90b91d8d3a3",
+    "chapters/chapter11.tex": "ae83fcd9474feaca6b8cf3bf94d4e5e4d334502d3605d382edc60489252d8bc7",
+    "chapters/chapter03.tex": "496b21e5ede6b3f9072252c8ff2100a1d5ca6414bc28641a50c9c61b7d253d0b",
+    "chapters/chapter08.tex": "fb47f279cfeec03ec19272f350ffb9ab118e73f5731542d8a29797c076dbc2fc",
+    "chapters/chapter04.tex": "8f3483c7cb71f3a32dff1640299052af43a9f5c5e01045ac52fe562fd9712fd0",
+    "chapters/chapter09.tex": "6e84ecc99f01f740e7ffa147e30e072e2fa2b3decd73866380b7eb99369b24f0",
+    "chapters/chapter10.tex": "b2e78608ebf5a548d4c346cd5d1698b46ae32d0e3701a8235aa93bb4977a74a6",
+    "chapters/chapter02.tex": "becd45cae91c4fbd05b08a436fd67d1172893545c45ac88a100feadb0d4f30bc",
+    "chapters/chapter01.tex": "82947242ed615f8f2da2343423ef3742a26adb13bdea740cd022128eb21b45a9",
+    "chapters/chapter06.tex": "2f0eadf22a0e7d5673c8fce1858e92d35fa9243741df2b6fa4ceccefd4a59856",
+    "chapters/chapter07.tex": "2e72b576c2ab32841b0ae1609190c45a7f3d0b0b619ba4d48535240747dc3e12"
+  },
+  "missing_dependencies": []
+}

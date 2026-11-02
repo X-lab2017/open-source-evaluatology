@@ -1,0 +1,14 @@
+% Publication reading pass, scoped to the complete edition.
+\hypersetup{bookmarksnumbered=true,pdfstartview=FitH}
+\newif\ifBookChapterRunning
+\BookChapterRunningfalse
+\newcommand{\BookRunningHead}{\runningfont\ifBookChapterRunning\thechapter\enspace\textperiodcentered\enspace\fi\rightmark}
+\makeevenhead{monograph}{\runningfont Open Source Evaluatology}{}{\BookRunningHead}
+\makeoddhead{monograph}{\runningfont Open Source Evaluatology}{}{\BookRunningHead}
+\renewcommand{\bibfont}{\fontsize{9.7}{12.4}\selectfont\raggedright}
+\renewcommand{\reviewpartchapter}[4]{%
+\noindent\begin{tabularx}{142mm}{@{}p{10mm}>{\raggedright\arraybackslash}Xr@{}}
+{\sffamily\bfseries\fontsize{20}{22}\selectfont\color{#4}#1}&{\sffamily\bfseries\fontsize{11.6}{14}\selectfont\color{HeadingInk}\hyperref[\csname bookchapterlabel#1\endcsname]{#2}}&{\sffamily\fontsize{8.5}{11}\selectfont\color{#4}\hyperref[\csname bookchapterlabel#1\endcsname]{p.\,\pageref*{\csname bookchapterlabel#1\endcsname}}}\\[2pt]
+&{\sffamily\fontsize{9.2}{12}\selectfont\color{MetaInk}#3}&
+\end{tabularx}\par\vspace{5mm}}
+\input{frontmatter/complete/chapter-labels}

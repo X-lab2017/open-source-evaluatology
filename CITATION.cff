@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "Please cite this public review manuscript, identifying the commit used."
+title: "Open Source Evaluatology: Theory, Methods, and Empirical Studies"
+type: software
+version: "2026-11-02-preview"
+date-released: 2026-11-02
+authors:
+  - family-names: Wang
+    given-names: Wei
+  - family-names: Zhao
+    given-names: Shengyu
+  - family-names: Han
+    given-names: Fanyu
+  - family-names: Xia
+    given-names: Xiaoya
+repository-code: "https://github.com/will-ww/open-source-evaluatology"
+url: "https://will-ww.github.io/open-source-evaluatology/"
+preferred-citation:
+  type: book
+  title: "Open Source Evaluatology: Theory, Methods, and Empirical Studies"
+  year: 2026
+  notes: "Public review draft; not the final published edition."
+  authors:
+    - family-names: Wang
+      given-names: Wei
+    - family-names: Zhao
+      given-names: Shengyu
+    - family-names: Han
+      given-names: Fanyu
+    - family-names: Xia
+      given-names: Xiaoya

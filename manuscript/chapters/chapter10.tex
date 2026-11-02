@@ -1,0 +1,323 @@
+\chapter{Open Source Science and Technology Think Tanks}
+\label{ch:thinktanks}
+\markboth{Open Source Evaluatology}{Open Source Think Tanks}
+
+A map of open source development can answer several different questions. It can locate participating developers, attribute collaborative contributions, or show where influential projects are based. These views often produce different orders of prominence. In the geographical snapshots used in the \emph{2026 Global Open Source Development Report}, India ranks second in active participation, Germany second in developer contribution, and China second in project influence. Each result describes a particular object, measure, and period. Their differences become useful when an analyst connects them to a substantive question: which capabilities are present, which relationships sustain them, and what additional evidence would justify an intervention?
+
+This chapter examines that connection. Parts I and II established the conceptual and measurement foundations of Open Source Evaluatology. Part III applied them to contribution recognition, sustainability, and governance. Chapter~9 concluded by asking how a bounded finding can enter strategic intelligence while retaining its conditions of interpretation. We now examine the institutional setting in which that transfer takes place: how evaluations are assembled, communicated, and used. An open source science and technology think tank connects sustained observation with the questions of governments, enterprises, foundations, communities, and universities. Its contribution is the production of interpretable knowledge for decisions, supported by an infrastructure that permits scrutiny and revision.
+
+Our principal materials are the OpenThink practice framework, the OSDGs and OSIDX development materials, the global development report, and OpenDipper. They occupy different stages of maturity: an institutional design, an evolving indicator architecture, published analytical products, and an implemented visual exploration system. We integrate their software-ecosystem components into one account of evaluation in use. The empirical illustrations retain the scope and dates of their sources; the integration developed here supplies the chapter's analytical argument.
+
+The argument proceeds from a decision question to an observatory, then through global and regional evidence to visual investigation and knowledge products. The final section examines how these products enter institutional practice and what evidence of their use should be retained. Chapter~\bookref{ch:discipline}{11} takes up the resulting requirements for an open tool ecosystem, shared validation, and cumulative research. Here the organizing question is how evaluation serves a decision; there it is how experience with such evaluations develops the field.
+
+\section{From Evaluation to Decision Support}
+\label{sec:ch10-decision}
+
+\subsection{The decision context of a measurement}
+A local authority considering support for an open source community, a company reviewing its project portfolio, and a foundation identifying maintenance needs may consult the same collaboration data. Their decisions nevertheless require different evidence. The local authority needs to understand participation in its region and the mechanisms through which support might help. The company needs to connect projects with its contribution responsibilities and technical needs. The foundation needs to examine whether essential collaborative functions can be sustained. A common measurement infrastructure becomes useful through these differences in purpose.
+
+The question structure established in Part I remains applicable:
+\[
+\mathcal Q=\langle O,A,C,R,T,S,P\rangle.
+\]
+The evaluated object or arrangement is \(O\); \(A\) identifies affected objects and relevant outcomes; \(C\) describes conditions; \(R\) supplies the reference; \(T\) specifies the time horizon; \(S\) identifies stakeholders; and \(P\) states the purpose. For a regional programme, \(O\) might be a proposed support arrangement rather than the region itself. Existing developer participation then describes part of \(C\), while continued participation and improved access to collaborative work may belong to \(A\). A ranking can inform this question without becoming its answer.
+
+This distinction carries the evaluatological foundations into an application setting. \citet{zhan2024} establish evaluation as a scientific and engineering undertaking, while our Open Source Evaluatology position paper locates open source ecosystems within that undertaking \citep{han2024ose}. The present chapter develops the institutional connection: an evaluation must retain its object, reference, and conditions as it travels into a report, a dashboard, or an advisory discussion. The contribution is a coherent way to organize these transitions, illustrated with products and data from our practice.
+
+Consider two regional objectives: enlarging the participant base and strengthening the continuity of influential collaborative work. They may be compatible, but they are not interchangeable. The first calls for observations about entry, engagement, and access. The second calls for evidence about sustained contributions, roles, and the conditions under which maintainers continue working. A programme judged only by account registrations could meet one numerical target while leaving the second objective unresolved. Specifying the decision therefore precedes choosing the headline indicator.
+
+\subsection{Knowledge, institutions, and action}
+The science--policy literature gives this institutional problem a useful vocabulary. \citet{cash2003} distinguish the relevance of knowledge to users, the credibility of its construction, and the legitimacy of the process through which it is produced. \citet{guston2001} examine organizations that mediate between scientific and policy communities. These contributions help explain why a technically accurate dashboard may still have little practical value: its measures may answer an unfamiliar question, arrive after the relevant decision, or exclude affected participants from interpretation.
+
+The OpenThink framework connects these institutional requirements to five layers of practice \citep{openthink}. Figure~\ref{fig:ch10-openthink} redraws the complete supplied architecture in English. Read from the bottom upward, it connects a knowledge base, analytical capabilities, decision-support scenarios, application services, and intended forms of influence. The foundation brings together value orientation, evaluation theory, governance standards, and data. The capability layer turns these resources into insight, identification, analytical judgment, and projection. These functions support the monitoring, evaluation, and planning activities in the central layer.
+
+\begin{figure}[p]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-01-openthink.pdf}
+\caption{The five-layer OpenThink architecture. English redrawing of the framework supplied by the authors, preserving its layers, product classes, scenario groups, and component functions \citep{openthink}. The four functions within each scenario are arranged vertically for book-width readability. Arrows run from the foundational layer toward the intended forms of influence.}
+\label{fig:ch10-openthink}
+\end{figure}
+
+The three scenario groups give the architecture its operational content. Monitoring combines dynamic observation, early warning, situational understanding, and competitive intelligence. Evaluation addresses policies, research, competitiveness, and project effectiveness. Planning connects scenarios, roadmaps, policy options, and strategic simulation. Each group requires a different relation between evidence and judgment. A change in an activity series may initiate monitoring; assessing a support programme requires a reference and an outcome; choosing among future options requires explicit assumptions about conditions that have not yet occurred.
+
+The upper layers express what the institution produces and seeks to influence. Conceptual paradigms, situational awareness, evidence-based assessments, strategic plans, and action plans are different classes of knowledge product. Policy influence, standards leadership, academic voice, and ecosystem shaping describe their intended reach. The cases in this chapter instantiate selected parts of this architecture. They show how observations become usable products, while the final section examines what evidence would establish their subsequent institutional effects.
+
+This organization allows the same infrastructure to support several products without treating those products as equivalent. A comparative report offers a stable account of a defined period. A dashboard makes a selected state visible during review. A project dossier gathers evidence around a bounded object. An advisory brief relates findings to available options and their conditions. Their shared foundation reduces repeated collection work, while their different forms preserve the requirements of their users.
+
+The design also addresses the relationship between knowledge supply and demand. \citet{sarewitz2007} argue that this relationship itself requires investigation. In our setting, publishing more indicators is useful only when analysts can relate them to questions that users actually face. A regional analyst who needs to understand contributor retention gains little from a large collection of unrelated repository counts. A smaller, well-specified sequence of observations, accompanied by an explanation of its limitations, can support a more productive conversation.
+
+\subsection{Questions, audiences, and products}
+Table~\ref{tab:ch10-audiences} translates the OpenThink product matrix into an analytical design. Each row begins with an audience and a question. The evidence and product follow from that question. The table describes service designs supported by the materials; it is not a census of completed engagements or a claim that every audience has adopted every product.
+
+\input{tables/chapter10/audiences}
+
+Two responsibilities follow. First, the institution must preserve the connection between a reported finding and the observations that support it. Second, it must make room for purposes and consequences that the available data do not yet capture. \citet{parkhurst2017} distinguishes problems in the technical use of evidence from the narrowing of public questions through selective attention. For open source evaluation, this means that an accurate contribution ranking can still be an incomplete account of public value. Accessibility, stewardship, maintenance obligations, and the experience of affected users may require other forms of inquiry.
+
+The think tank's role is therefore to make a decision better informed and more inspectable. It does this by identifying a relevant observation, explaining why it matters, examining plausible interpretations, and showing what remains to be learned. The following sections develop this role through the observatory and its applications.
+
+\section{Goals, Indicators, and Observatory Design}
+\label{sec:ch10-observatory-design}
+
+\subsection{Development goals and observable questions}
+The Open Source Development Goals, or OSDGs, articulate what a developing open source ecosystem should be capable of sustaining. The preview materials in Figure~\ref{fig:ch10-goals} express this agenda through four families: \emph{Vitality}, \emph{Contribution}, \emph{Connection}, and \emph{Evolution}. Each family contains three indicator headings. Developer and repository scale characterize vitality; contribution depth, value, and technical influence make collaborative work visible; breadth, depth, and centrality describe connection; public, green, and fair technology express the intended direction of development.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-02-goals.pdf}
+\caption{The preview edition of the \emph{2026 Global Open Source Development Report} and its accompanying OSDG graphic, reproduced from the composite supplied by the authors. The right-hand graphic presents the historical P1--P4 families: Vitality, Contribution, Connection, and Evolution. It documents that version of the development agenda; the later indicator architecture discussed in the text retains its own definitions \citep{wang2026osidx,gosd2026}.}
+\label{fig:ch10-goals}
+\end{figure}
+
+The subsequent OSIDX and report materials organize the agenda around talent and diversity, technological output and open supply, global connection and network effects, and governance and public value \citep{wang2026osidx,gosd2026}. This evolution makes the version of the framework part of the evidence. The preview graphic provides a visible account of the initiative's conceptual development; the later working definitions supply the context for interpreting the current report. Their headings should therefore be retained as versioned formulations rather than silently combined into one unchanged taxonomy.
+
+For the software-ecosystem analysis developed here, these materials lead to four complementary questions. Who participates, and under what conditions can participation continue? What capabilities are created and maintained? How are contributions and influence distributed across collaborative relationships? How are responsibilities organized, and what public consequences follow? Participation measures, project histories, network observations, and evidence of governance or use answer different parts of this agenda. Their value lies in connecting a development goal to an observable question.
+
+The distinction between an agenda and an implemented measure is consequential. The current report's indicator architecture contains 29 working definitions, but their inclusion in the architecture does not establish that every corresponding series is available, comparable, and validated. An observatory should be able to display an important question as unresolved. Otherwise the availability of convenient data gradually determines the meaning of development, and difficult dimensions disappear from the framework.
+
+This approach also explains why the chapter uses a profile of complementary observations rather than constructing a new composite score. Aggregation introduces choices about normalization, weighting, substitutability, and missing data. The OECD handbook treats these choices as substantive parts of indicator construction \citep{oecd2008}. In the cases developed here, the value lies in exposing differences among participation, contribution, influence, and institutional arrangements. Combining them prematurely would conceal the very distinctions needed to formulate an appropriate response.
+
+\subsection{Distinct roles within the observatory}
+Several names recur in the practice materials. OSDGs supplies the goal framework. OSDI supplies an indicator architecture in the development report. OSIDX names the associated data and index development initiative. OpenDigger supplies collaboration-data analysis and measurement capabilities; OpenRank provides a model for interpreting relational influence under specified construction rules. OpenDipper supplies interfaces for observation and project investigation. The report assembles selected analyses into a stable knowledge product.
+
+These are functional roles across related projects. They should not be read as a claim that a single fully automated implementation already connects every goal to every policy outcome. The OpenDigger framework provides an implemented measurement foundation \citep{wang2026digger}; Chapters~4--6 examine its data, activity, and influence methods in detail. This chapter takes those foundations forward by showing how their outputs can be organized around decision questions. It does not redefine the algorithms when the audience changes.
+
+A useful observatory needs at least three separations in its information model. It distinguishes the entity observed from the category to which that entity is attributed; the observation period from the date on which a file was generated; and a measured value from the interpretation attached to it. A repository may be attributed to an organization, a developer to a location, and a project to a technical field. These assignments support different aggregations. None is a substitute for the others.
+
+For a measure \(m\), let an observation be represented as
+\begin{equation}
+z=\langle i,m,v,u,\tau,\sigma,\pi\rangle,
+\label{eq:ch10-observation}
+\end{equation}
+where \(i\) is an entity identifier, \(v\) the value, \(u\) its unit, \(\tau\) the observation window, \(\sigma\) its scope and availability status, and \(\pi\) its provenance. This notation summarizes the information needed when a measurement is carried into a product; it is not a new metric. The status distinguishes a reported zero from an unavailable observation. Provenance connects the displayed result to a source and a version. Both are necessary when a report outlives the interface through which it was first examined.
+
+The FAIR principles offer a broader basis for making research objects discoverable, interpretable, and reusable \citep{wilkinson2016}. For the present application, a practical consequence is that the chart, its machine-readable values, and its definition should remain connected. A downloadable table without an observation window is difficult to reuse correctly. A compelling map without its underlying values cannot readily be checked. A source link without a retained version may eventually lead to different evidence.
+
+\subsection{Attribution and temporal coherence}
+Geographical aggregation illustrates the consequences of these distinctions. Suppose \(q_i(\tau)\) is a source-defined measure for entity \(i\), and \(a_{ir}^{(v)}\) is its attribution weight to region \(r\) under mapping version \(v\). A regional aggregate can be expressed as
+\begin{equation}
+M_r(\tau;v)=\sum_{i\in\mathcal I(\tau)} a_{ir}^{(v)}q_i(\tau).
+\label{eq:ch10-attribution}
+\end{equation}
+This expression makes the measurement population, period, and attribution rule visible. Where each entity is assigned to at most one region, the weights can be binary. Fractional attribution requires a separately documented rule. An unattributed record remains outside the attributed total unless an explicit residual category is retained. Equation~\ref{eq:ch10-attribution} specifies a design requirement; the public aggregates examined below do not expose all the individual assignments needed for an independent reconstruction.
+
+Developer location and project location also have different meanings. A developer may contribute to a project associated with another region. The project's hosting organization may itself operate internationally. Consequently, developer-attributed contribution and project-attributed influence can yield different geographical distributions even when they derive from related collaboration data. Their difference is analytically useful; it does not imply that one of the two maps must be incorrect.
+
+GitHub observations require an additional boundary. Repository activity, account metadata, and public collaboration traces provide a rich but selective view of software work. The methodological analysis of \citet{kalliamvakou2014} supports treating platform records as observations with coverage and interpretation constraints. A think tank must state those constraints at the point of comparison, particularly when extending from public GitHub activity to a claim about an entire region's technological capacity.
+
+Temporal coherence deserves the same attention. The global report uses both a July--June reporting year and calendar-year map snapshots. The OpenDipper code network has a third window, August 2025--July 2026. These products can be discussed together, but an analyst cannot silently turn them into one synchronous panel. The cases below preserve each window. Where the evidence supports a comparison of perspectives, we make that comparison; where it would require a common denominator or aligned observations, we leave the stronger calculation unmade.
+
+\section{Mapping Global Open Source Development}
+\label{sec:ch10-global}
+
+\subsection{Three maps, three objects of inquiry}
+The \emph{2026 Global Open Source Development Report} is the principal global knowledge product used in this chapter \citep{gosd2026}. We use its public repository snapshot of 22 October 2026, including the published V-Map text and the associated machine-readable exports. The report's usual 2026 window runs from 1 July 2025 to 30 June 2026. Its contribution and influence maps retain calendar-year 2025 metadata. The distinction is visible in Figure~\ref{fig:ch10-global-maps}.
+
+The first panel describes active developer participation. The source provides 239 regional records and a global active-developer measure of approximately 28.904 million. The five largest reported regional values are the United States, 4.941 million; India, 2.851 million; China, 2.505 million; Brazil, 1.935 million; and Germany, 1.419 million. The export contains fractional aggregate values. We preserve those values in the underlying data and round them for display; we do not reconstruct them as an independently verified census of unique individuals.
+
+The second panel attributes OpenRank contribution to developers' regions. It contains 236 regional records. The United States contributes 4.237 million score units, Germany 1.551 million, China 1.210 million, the United Kingdom 1.085 million, and India 0.899 million. Here a value expresses a source-defined collaboration measure, not a count of people or projects. Its interpretation relies on the measurement foundations developed in Part II.
+
+The third panel attributes project influence to project regions. The exported geographical leaderboard contains the leading 30 regions. The United States has 1.882 million score units and China 0.551 million, followed by the Netherlands, Germany, and the United Kingdom. The report's separate global series gives a 2025 project-influence total of 2.739 million. The United States and China together account for approximately 88.8\% of that reported total. This percentage uses the global series as its denominator, rather than treating the listed top 30 as a complete census.
+
+\begin{figure}[p]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-03-global-maps.pdf}
+\caption{Three geographical views from the global report, redrawn from the supplied exports \citep{gosd2026}. The map scales are logarithmic; adjacent bars show the five largest values in millions. Panel A uses the 2026 reporting year; B and C use calendar year 2025. Grey indicates no value in the displayed source, including regions outside the top-30 influence export. Geographical shapes follow the OpenDipper basemap; source attribution is retained.}
+\label{fig:ch10-global-maps}
+\end{figure}
+
+The three panels reveal a useful asymmetry. A broad participant base, a strong contribution position, and a concentration of influential projects are distinct ecosystem properties. India and Brazil are prominent in participation. Germany occupies a stronger position in developer contribution than in project-attributed influence. The Netherlands ranks third in the listed project-influence distribution. These observations invite examination of project portfolios, contributor roles, and attribution practices. They do not establish a causal explanation for the differences.
+
+The map is particularly useful for communicating spatial structure, while the bars make magnitude easier to compare. A large country occupies more visual area even when its value is modest; a small country can have substantial influence while remaining difficult to see. The paired design supplies both forms of reading. Missing values remain visibly separate from low values. This is essential in the influence panel, where absence often reflects the limited export rather than an observed absence of influential activity.
+
+\subsection{From geographical patterns to capability questions}
+An analyst can turn these observations into a sequence of questions. Where is participation expanding? Which kinds of work account for a region's contribution? Which projects concentrate influence, and what organizations and communities sustain them? Where do contributors and project stewardship cross geographical boundaries? These questions move from the distribution of an outcome to its possible organizational and collaborative basis.
+
+Research on the geography of open source software provides an important point of comparison. \citet{wachs2022} document geographical concentration at several scales and show why subnational patterns matter even in globally distributed collaboration. Our report extends the practice setting through complementary measures and a recurring knowledge product. The chapter does not combine the studies' samples into a new time series: their collection methods, populations, and periods differ. The relevant connection is the analytical need to examine both global dispersion and local concentration.
+
+Two familiar shortcuts would weaken the resulting advice. Dividing project influence by active developers would appear to yield a productivity rate, but the numerator and denominator refer to different objects and, here, different periods. Treating a region's aggregate position as a description of each of its developers would introduce a further error. The distinction between group-level and individual-level relationships is the central concern of \citet{robinson1950}. Regional profiles can identify questions for investigation; individual recognition still requires the contribution evidence examined in Chapter~7.
+
+A more useful interpretation retains a profile. A region with broad participation may warrant inquiry into pathways from initial engagement to sustained roles. A region with concentrated project influence may warrant inquiry into the maintenance of a small set of important projects. A region contributing strongly to projects located elsewhere may warrant inquiry into the visibility and recognition of its collaborative work. These are candidate questions suggested by the observations, not tested diagnoses of the named regions.
+
+\subsection{The geographical origins of project contributions}
+The report's comparison of contribution origins makes cross-border relationships more explicit. Figure~\ref{fig:ch10-origins} redraws its top-ten source table for China-based and US-based project groups. This comparison uses the report-year sample. It is separate from the calendar-year contribution map and from the report's contribution-flow dataset. Keeping these sources distinct avoids a superficially coherent picture assembled from different denominators.
+
+For China-based projects, the table attributes 79.22\% of contribution to domestic sources, 14.02\% to the listed external sources, and leaves 6.76\% outside the listed top ten. For US-based projects, the corresponding shares are 38.28\%, 39.66\%, and 22.06\%. The remainder is computed from the source's rounded percentages. It is shown as unlisted contribution, rather than assigned to a verified geographical category. The largest listed external source for China-based projects is the United States at 6.22\%; for US-based projects it is China at 7.78\%.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-04-contribution-origins.pdf}
+\caption{Contribution origins for the report's China-based and US-based project samples, July 2025--June 2026 \citep{gosd2026}. Upper bars retain the published domestic and listed external shares, with an explicit residual. Lower panels display the five largest listed external origins. These are project-group contribution shares, not migration flows, trade balances, or shares of the whole software economy.}
+\label{fig:ch10-origins}
+\end{figure}
+
+The figure supports an observation about the reported samples: US-based projects draw a larger listed share of contribution from outside their attributed location. That observation can inform questions about community reach, collaboration channels, documentation, and contributor experience. It does not identify the reason for the difference. Project age, technical field, sample selection, contributor attribution, and organizational concentration are all possible influences that need separate examination.
+
+The practical unit of follow-up should therefore be smaller than the national aggregate. An analyst could identify which project groups account for the pattern, compare projects in similar fields and stages of development, and examine how external contributors enter and sustain participation. Chapters~7--9 supply the relevant distinctions among contribution, continuity, and authority. International participation alone does not establish shared governance, just as domestic participation alone does not establish a closed community.
+
+Table~\ref{tab:ch10-findings} summarizes how the global and regional evidence can enter an advisory process. Each finding is accompanied by an interpretation of limited scope, a possible response, and the additional evidence needed to assess that response. This is the core movement from observatory output to decision support: the result becomes useful through a reasoned connection to a choice, with the conditions of that connection made explicit.
+
+\input{tables/chapter10/findings}
+
+\section{Regional and Organizational Applications}
+\label{sec:ch10-local}
+
+\subsection{Regional scale and development trajectories}
+National maps compress substantial variation. A regional programme needs to know whether a measured base is large, how it has changed, and which collaborative roles and projects sustain it. The report's fixed ten-city talent series offers a compact example. Figure~\ref{fig:ch10-cities} uses the same ten cities over the 2022--2026 reporting years, preserving the published values throughout. It avoids combining that series with the separate July 2026 city-map snapshot.
+
+Beijing rises from 790 to 971 source-defined talent records; Shanghai from 738 to 913; and Hangzhou from 350 to 486. Shenzhen rises from 292 to 346, while the smaller starting populations of Chengdu and Wuhan grow from 126 to 181 and from 72 to 105. The fixed ten-city total increases from 2,868 to 3,590. Beijing and Shanghai together account for 356 of the 722 additional records, or 49.3\% of the net increase in this selected group.
+
+Absolute and relative changes answer different questions. Wuhan's increase of 33 records is 45.8\% of its starting value; Chengdu's increase of 55 is 43.7\%; Hangzhou's increase of 136 is 38.9\%. A percentage-only ranking would emphasize the smaller bases, while an absolute-change ranking would emphasize larger additions. Neither is sufficient for choosing a programme. A useful regional profile presents both and then asks which capacity the proposed programme is intended to improve.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-05-city-trajectories.pdf}
+\caption{The report's fixed ten-city talent series, redrawn without changing its counts \citep{gosd2026}. A compares the 2022 and 2026 reporting-year values; B derives percentage changes from the same endpoints; C retains all five observations for Hangzhou. ``Talent'' denotes the source-defined sample. These city aggregates do not identify individual entry, exit, migration, or programme effects.}
+\label{fig:ch10-cities}
+\end{figure}
+
+The intermediate observations add a further distinction. Hangzhou's series is 350, 388, 421, 414, and 486. The endpoint increase therefore coexists with a decline between the 2024 and 2025 reporting years. A smooth trend fitted through the endpoints would erase that information. The local question becomes more precise: which projects, contributors, or attribution changes account for the dip and subsequent rise? Answering it requires the underlying records and their histories.
+
+Version control is especially important here. The newer indicator materials describe high-influence talent using a top-5\% rule, while earlier slides also use a fixed OpenRank threshold. These definitions cannot be interchanged. We reproduce the report's annual series as its published series and do not retrospectively relabel the earlier threshold-based slide results. The release does not expose every individual membership and tie-handling decision needed to recompute the city counts independently. A policy analysis requiring that reconstruction would need the corresponding population, period, and selection rules.
+
+\subsection{From a regional observation to a bounded intervention}
+For a regional analyst, Hangzhou provides a worked example of question formation. The source shows a substantial base, a net increase, and a non-monotonic path. A first follow-up could examine which technical fields and projects account for the count. A second could distinguish continuing contributors from newly observed participants. A third could examine whether local institutions provide the time, mentoring, and coordination required for sustained participation. These steps connect the aggregate to mechanisms that a regional institution might influence.
+
+The corresponding intervention should be specified at that level. A programme might support maintainers' time, improve newcomer pathways, or make shared infrastructure available to communities. Its evaluation would then observe the function it intends to change. If the goal is continued maintenance, retention in relevant roles and the continuity of review and release work are more informative than a change in a general regional ranking. If the goal is access, the experiences of participants who previously faced barriers become part of the evidence.
+
+This reasoning follows the distinction between measurement and evaluative judgment developed throughout the book. The ten-city chart establishes a descriptive pattern. It helps select questions and possible sites of inquiry. It does not establish that a particular policy caused the pattern or that the same intervention would have the same effect elsewhere. A comparison of programmes would need an appropriate reference and a record of their conditions, as specified by \(\mathcal Q\).
+
+Practical regional work also requires denominators. Talent per resident, per employed software worker, and per observed developer would each express a different relationship. The relevant population data would need the same spatial boundary and a compatible time period. For that reason, Figure~\ref{fig:ch10-cities} presents counts and changes from one consistent source instead of borrowing a population denominator from a differently dated presentation. The resulting profile is narrower, but its meaning is clear.
+
+\subsection{Project, developer, and community applications}
+Our Open Source Evaluatology position paper documents three implemented applications: the Nacos operation dashboard, Alibaba's open source contribution leaderboard, and the Mulan community governance dashboard \citep{han2024ose}. Figure~\ref{fig:ch10-applications} reproduces the paper's Figures~4--6 as three panels. Together they show how an evaluation infrastructure changes form when its immediate object changes from a project, to a contributor, to a community portfolio. The images retain their historical English interfaces and numerical displays.
+
+\paragraph{Project operations: Nacos.}
+The first application combines OpenDigger data services with the DataV presentation stack. Its Nacos-centred view juxtaposes activity and OpenRank trajectories, participant counts, issue and pull-request observations, a collaboration network, and contributor rankings. The comparison includes Nacos, ZooKeeper, Consul, and Apollo. An operator can therefore read the focal project in relation to a selected peer group while inspecting several aspects of collaborative work within the same display.
+
+\begin{figure}[tbp]
+\centering
+{\sffamily\small\bfseries (a) Project operations: Nacos\par}\smallskip
+\includegraphics[page=1,width=\linewidth]{figures/chapter10/fig10-06-applications.pdf}
+\caption{Applications of the evaluation framework at three levels, reproduced from Figures~4--6 of the supplied Open Source Evaluatology paper \citep{han2024ose}. Panel (a) is the Nacos operation dashboard; panels (b) and (c), continued below, show contributor recognition and community governance. Original English labels, displayed values, and image resolution are preserved. These are historical application states.}
+\label{fig:ch10-applications}
+\end{figure}
+
+The juxtaposition is analytically useful because activity and influence answer different questions. Activity describes the volume and composition of observed participation; OpenRank adds the relational evaluation developed in Chapter~5 and implemented through the services examined in Chapter~6. Issue and pull-request views bring the reading back to concrete work. If two trajectories diverge, the analyst can inspect the contributing projects and roles before attributing the change to a community condition. The dashboard supplies a way to formulate and investigate that question. Its comparative layout also makes the reference group visible, although a technology-selection decision would require additional evidence about the candidates' technical suitability.
+
+\paragraph{Contributor recognition: the Alibaba leaderboard.}
+The second application turns evaluation into a recurring recognition mechanism. The position paper describes Alibaba's monthly contribution incentive practice; its illustration is the Seata Open Source Contribution Leaderboard for April 2023. The interface combines a period selector, a GitHub identity search, ranked OpenRank scores, score changes, and markers for new entries. Recognition is thus attached to a named project and a defined review period, making the relationship between the observation and its recipient inspectable.
+
+\begin{figure}[tbp]
+\centering
+{\sffamily\small\bfseries (b) Contributor recognition: Alibaba / Seata\par}\smallskip
+\includegraphics[page=2,width=.94\linewidth]{figures/chapter10/fig10-06-applications.pdf}
+\contcaption{Continued. The Alibaba contribution leaderboard, illustrated by Seata's April 2023 view. Reproduced from Figure~5 of the supplied position paper \citep{han2024ose}. Monthly scores, changes, and newcomer markers make the basis of recognition visible.}
+\end{figure}
+
+For an enterprise or an open source programme office, the practical question is how to recognize contributions that support shared projects. The leaderboard creates a regular point of contact between measurement and community operation. Chapter~7 examines contribution recognition in greater depth; here the application shows how the same measurement foundation becomes a public-facing service. The score can inform recognition while maintainers retain responsibility for interpreting roles, reviewing exceptional cases, and acknowledging work that the recorded network represents incompletely. A visible rank alone does not establish the effect of the incentive on participation.
+
+\paragraph{Community governance: Mulan.}
+The third application brings multiple projects into an incubation and governance view. The Mulan dashboard displays organization and repository counts, contributor and merged-pull-request totals, activity and influence rankings, a community activity series, issue and pull-request histories, and a licence distribution. Its historical state covers eight organizations and eight repositories. The combination allows a community operator to move between a portfolio summary, project differences, and changes over time.
+
+\begin{figure}[tbp]
+\centering
+{\sffamily\small\bfseries (c) Community governance: Mulan\par}\smallskip
+\includegraphics[page=3,width=\linewidth]{figures/chapter10/fig10-06-applications.pdf}
+\contcaption{Continued. The Mulan community governance dashboard, reproduced from Figure~6 of the supplied position paper \citep{han2024ose}. The portfolio summary, project rankings, workflow histories, and licence distribution support complementary readings of the same community.}
+\end{figure}
+
+The position paper reports the use of community evaluation to identify participation and coordination concerns and to formulate operational responses. The displayed dashboard makes the supporting information service concrete. A portfolio-wide rise can nevertheless conceal a maintenance gap in an individual project; work can also move between repositories while a useful capability continues. Chapter~8 supplies the distinction between repository-level change and continuity of function, while Chapter~9 distinguishes observed contribution from authority and responsibility. These distinctions remain necessary when a dashboard enters a governance discussion.
+
+The three applications establish an important connection to the think-tank architecture. A project dashboard serves monitoring and diagnosis; a contribution leaderboard supports an operational recognition practice; a community dashboard supplies recurring portfolio intelligence. Their purposes differ, but their measures remain connected to the same data and methodological foundations. The think tank can draw on this application experience when designing a regional profile, comparing communities, or preparing an advisory product. Practice supplies both usable evidence and questions that return to evaluation theory.
+
+The progression is now from the global landscape, through regional scale and trajectory, to the collaborative units in which decisions are implemented. Interactive ecosystem exploration adds another connection: it helps analysts discover relevant projects and relationships before assembling evidence around a particular decision.
+
+\section{Visual Investigation with OpenDipper}
+\label{sec:ch10-visual}
+
+\subsection{Analytical tasks and interface design}
+OpenDipper connects geographical observation with project-level investigation. The public implementation offers selectable observation layers, regional details, source and scope explanations, a code-network view, and exportable project reports. The supplied system manuscript examines the underlying exploration and reporting functions \citep{opendipper2026}. We use the software-oriented subset here, together with a recorded inspection of the public interface on 1 November 2026.
+
+Figure~\ref{fig:ch10-dipper} shows the observatory in dark mode with the active-developer layer selected and World as the current observation. The right-hand panel exposes the global value, its July 2025--June 2026 window, and a regional top-ten list. The source-and-scope control makes the meaning of the selected layer available during inspection. These functions help an analyst move from an overview to a specific observation without detaching the value from its definition.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-07-observatory.pdf}
+\caption{OpenDipper's English observatory in dark mode, reproduced from the authors' screenshot supplied on 1 November 2026. The active-developer map, global value, regional comparison, and source controls remain visible. The interface's explicitly labelled demo and simulation counters are excluded from the chapter's empirical calculations \citep{opendipper2026}.}
+\label{fig:ch10-dipper}
+\end{figure}
+
+The design can be understood through established visualization research. \citet{shneiderman1996} distinguishes overview, filtering, inspection, and extraction tasks. \citet{brehmer2013} separates why an analysis is undertaken, how it is performed, and what information enters or leaves the task. In our application, ``find a region'' is an interaction; ``understand whether a regional participation base warrants further investigation'' is its purpose. Keeping both explicit makes it easier to assess whether the interface serves a useful evaluation question.
+
+The choice of visual encoding should follow the same logic. A choropleth identifies geographical patterns, a ranked bar chart supports magnitude comparison, a time series exposes change, and a network view exposes recorded relations. Putting all four on a screen does not by itself create an analysis. The user needs a coherent sequence in which a selection changes the next question and the relevant evidence follows it. \citet{heer2012} describe interaction as a set of operations supporting such analytical work; the OpenDipper implementation applies these operations to source-qualified ecosystem observations.
+
+The interface also demonstrates why presentation and evidence must be distinguished. Its animated activity area includes simulated increments and illustrative event streams. These features can explain a product concept, but they cannot be used as observations of current global activity. For the figures and calculations in this chapter, values come from the retained report exports and documented source-network metadata. The interface illustration documents what a user can inspect, with simulation labels preserved.
+
+\subsection{From geographical distributions to project relationships}
+Geography and collaboration describe different forms of proximity. Two developers can work in different regions while contributing to the same project. Two repositories can share contributors without either depending technically on the other. OpenDipper's code galaxy offers a complementary view of this second form of relationship.
+
+The retained source network contains 19,771 GitHub repositories and 106,650 shared-contributor affinity edges for August 2025--July 2026. It is the connected subset retained after selection and edge pruning from a top-20,000 candidate set. Its scope is therefore an observed network sample, not an inventory of all open source projects. Edges express overlap among known non-bot contributors. They do not establish a software dependency, a contractual relationship, or direct coordination between project organizations.
+
+Node size also has a specific meaning. The imported code-network weight is the sum of twelve inherited monthly Global OpenRank values. For repository \(i\), the displayed summary can be written as
+\begin{equation}
+W_i=\sum_{t\in\mathcal T_{12}}\operatorname{OpenRank}_i(t).
+\label{eq:ch10-window-score}
+\end{equation}
+It summarizes the supplied monthly scores; it is not a newly computed annual centrality on a graph pooled across the year. This distinction connects the interface to the relational definitions in Chapter~5 and the versioned services in Chapter~6. A visual representation should preserve the measurement operation rather than silently replacing it with a more convenient label.
+
+The source coordinates are layout positions. Their distances help organize the display but do not measure geographical distance or a calibrated degree of technical similarity. A neighborhood can be useful for finding related projects precisely because the relation is explicit. It becomes misleading if visual proximity is allowed to stand in for an unspecified form of dependence or quality.
+
+\subsection{Open Galaxy: exploration and research products}
+Open Galaxy places project discovery, relationship exploration, and evidence collection in one workspace. Figure~\ref{fig:ch10-project} reproduces the authors' dark-mode overview of the module within OpenDipper. Its spatial display provides an entry into a large network, while the adjacent controls allow a user to search names or tasks, select a domain, filter by entity type and programming language, and inspect a list of landmarks. The interface makes discovery a visible part of the evaluation process: the analyst must decide which objects warrant closer attention before comparing them.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-08-project-evidence.pdf}
+\caption{Open Galaxy in OpenDipper, reproduced from the authors' dark-mode screenshot. The Universe overview places the code galaxy beside a separate model/data/Space collection; the displayed 43,771 nodes refer to their combined inventory. This chapter examines the code network and its investigation workflow. The source dates and within-source size encoding remain visible \citep{opendipper2026}.}
+\label{fig:ch10-project}
+\end{figure}
+
+The overview contains two collections, with separate Code and Models controls. Its 43,771-node inventory combines 19,771 code repositories with 24,000 model, dataset, and Space records. The rounded ``126K recorded relations'' label likewise combines recorded relations from the two collections. It is not the edge count of the code graph. The code-network analysis here retains the 106,650 shared-contributor edges and the August 2025--July 2026 period defined above. The second collection has a separate source snapshot, shown as 5 August 2026. Keeping these identities explicit allows the interface to bring collections together without turning them into a single, methodologically homogeneous population.
+
+For a software-oriented investigation, the analyst begins with the Code view and a question that bounds the search. A community development team might seek projects in a particular technical field that connect otherwise separate groups of contributors. A programme office might investigate where several projects share maintenance participants. Domain and language filters help form an initial set of candidates; the network then exposes recorded connections that a list of independent rankings would conceal. The visible landmarks, such as \texttt{llvm-project} and \texttt{nixpkgs}, help orient exploration. Their prominence in the drawing initiates inquiry rather than deciding which project should receive support.
+
+The next step is to inspect a selected project's neighborhood. Shared contributors indicate an observed overlap between projects. Following a recorded path can expose intermediate projects through which an analyst might investigate that overlap. Neither operation establishes technical dependency or common governance. The useful question is what work creates the relation: packaging, integration, review, documentation, or another collaborative function. Project records and maintainer knowledge are needed to distinguish these possibilities. The graph makes the search tractable by locating candidate relations within a defined source network.
+
+Open Galaxy then allows up to three research objects to be placed on a shortlist and supports the export of source-qualified reports in Markdown, HTML, or JSON. This turns an exploratory session into an inspectable product. A subsequent reviewer can examine the selected identities, source periods, available relations, and gaps in the record without reproducing every navigation step. The important transition is from a visually discovered pattern to a bounded claim that another analyst can check.
+
+This workflow has a direct role in the think tank's product family. A global or regional observation identifies an area for inquiry; Open Galaxy helps locate the projects and collaborative relations that may explain it; a retained report carries that inquiry into a briefing or a community discussion. For example, a regional profile showing a substantial contributor base could lead to an investigation of which projects connect that base to wider collaboration. Completing such an inquiry would require a compatible geographical attribution layer. The galaxy supplies relational evidence, while the geographical inference must retain its own data and conditions.
+
+The supplied system manuscript evaluates record coverage, selected query behaviour, report contents, and function execution times. These are forms of evidence about the implemented system. Assessing its value for an analyst requires a complementary study. \citet{munzner2009} distinguishes domain questions, data and task abstractions, visual encodings, and algorithms as different levels of design and validation. \citet{sedlmair2012} explains how problem-driven design studies connect these choices to domain users. For Open Galaxy, useful tasks include forming a defensible shortlist, explaining an edge correctly, identifying a period mismatch, and carrying a traceable finding into a brief. Chapter~11 places this task-oriented validation within the wider evaluation system.
+
+\section{Knowledge Products and Institutional Use}
+\label{sec:ch10-products}
+
+\subsection{A shared evidence base for knowledge products}
+The cases in this chapter suggest a product family whose members serve different stages of inquiry. A global report provides a stable comparative account. A regional profile supplies a smaller set of relevant observations. A community dashboard supports recurring review. A project dossier preserves the results of focused investigation. An advisory brief relates those results to a choice and the conditions under which a response may be appropriate.
+
+Their common core is a question, a set of observations, an interpretation, and a record of the evidence still required. What changes is the degree of compression and the expected interaction with the reader. A dashboard allows the reader to explore; a brief must select and explain. A published report should remain stable enough to cite, while the underlying observatory can continue to update. A versioned connection between them permits both timeliness and reproducibility.
+
+This organization helps avoid two practical failures. One is to reproduce the same indicators in every product regardless of the audience's decision. The other is to rewrite each product so extensively that the same number acquires a different definition in each setting. A shared observation model, such as Equation~\ref{eq:ch10-observation}, allows the presentation to change while the source, unit, window, and scope remain intact.
+
+The OpenThink materials describe this relationship through a matrix of products and intended users \citep{openthink}. We have made it operational here through the global report, the ten-city profile, the Nacos and Mulan dashboards, the contribution leaderboard, and the Open Galaxy investigation workflow. These examples demonstrate several forms of evidence delivery. The remaining question is what happens when those products enter institutional practice.
+
+\subsection{What dissemination establishes}
+The global development report also illustrates how an evaluation product enters public discussion. The supplied July 2026 activity report records international presentation and exchange around the preview edition and its framework materials \citep{ccosi2026}. The authors' photographs in Figure~\ref{fig:ch10-release} provide a complementary record of the report's release and on-site printed materials. The cover seen in Figure~\ref{fig:ch10-goals} is thus connected to a tangible dissemination activity.
+
+\begin{figure}[tbp]
+\centering\includegraphics[width=\linewidth]{figures/chapter10/fig10-09-dissemination.pdf}
+\caption{Release of the global development report's preview edition and on-site materials. Photographs supplied by the authors document public presentation and physical dissemination; subsequent institutional use requires its own evidence.}
+\label{fig:ch10-release}
+\end{figure}
+
+Dissemination is an important accomplishment for an emerging field. It gives potential users a common reference, makes the framework available for criticism, and creates opportunities to learn which questions are missing. The preview's later development into a public report repository also illustrates how a knowledge product can remain open to correction. Nevertheless, the evidence needed to establish reach differs from the evidence needed to establish use.
+
+\citet{weiss1979} shows that research can enter decisions in several ways, including gradual changes in how a problem is understood. This is relevant to a new field such as Open Source Evaluatology. A report may first change the vocabulary of a discussion: participants begin to distinguish activity from influence, or contribution from stewardship. Such conceptual use matters, but it requires evidence of the discussion or its subsequent products. It should not be inferred solely from distribution counts or photographs.
+
+Research on evidence use also emphasizes timely access and relationships between researchers and decision-makers \citep{oliver2014}. That literature, developed largely in other policy fields, provides a useful design consideration rather than an estimated effect for our setting. For an open source think tank, recurring exchanges with maintainers, programme staff, and community organizations can help identify whether the published observations answer their actual questions. The resulting record of questions and revisions is itself a valuable part of the evaluation process.
+
+\subsection{Institutional learning and theoretical revision}
+Table~\ref{tab:ch10-use} distinguishes the evidence already present in the materials from the evidence needed for stronger claims. Published files and retained data establish a product. Accessible features and exported reports establish functionality. Event materials establish dissemination. Documented references in a decision process would establish a form of uptake. An improvement in the consequences of decisions requires an additional evaluative design.
+
+\input{tables/chapter10/use}
+
+A practical record of institutional use can remain compact. It should identify the question brought by a user, the product version consulted, the finding taken into the discussion, the interpretation agreed or contested, and any subsequent action. Where a decision changes, the record should state which other considerations were involved. Where a product is unused, the reason may be equally informative: the evidence arrived too late, the unit of analysis was unsuitable, or a decisive dimension was missing.
+
+These observations can improve the theoretical system in three ways. First, they reveal whether the evaluation object was specified at the right level. A region may prove too broad when a programme acts on particular communities; a repository may prove too narrow when a capability is maintained across several projects. Second, they reveal whether a measure captures the function relevant to the decision. A prominent score may fail to expose a maintenance bottleneck, while a less visible role-based observation may prove decisive. Third, they reveal which references and time horizons support a fair comparison.
+
+Practice can, in turn, refine the theoretical framework. Evaluatology specifies the question, conditions, reference, and intended consequences. The OpenDigger and OpenRank infrastructure makes selected aspects observable. The report, dashboards, and OpenDipper expose those observations to users' questions. Experience with these products can identify definitions, attribution rules, coverage, or interpretations that need revision. The application thereby contributes to the development of the field.
+
+The cases connect global observation, regional and organizational diagnosis, and project investigation. Their common achievement is to carry a defined observation into a product that can inform a decision. They also identify what the wider field must maintain: interpretable definitions, traceable transformations, suitable comparisons, and a record of use. Chapter~\bookref{ch:discipline}{11} develops these requirements through the disciplinary framework, the tool ecosystem, and shared research practice. Institutional experience thereby becomes evidence for improving evaluation itself.

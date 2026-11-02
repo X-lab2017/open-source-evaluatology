@@ -1,0 +1,24 @@
+% Cover D: The Living Commons. Conceptual art; not an empirical graph.
+\clearpage\thispagestyle{empty}\null
+\definecolor{CommonsPaper}{HTML}{FCFAF5}
+\begin{tikzpicture}[remember picture,overlay]
+\fill[CommonsPaper] (current page.south west) rectangle (current page.north east);
+\node[anchor=north,inner sep=0,text width=170mm,align=center,text=HeadingInk,font=\rmfamily\bfseries\fontsize{56}{59}\selectfont]
+at ($(current page.north)+(0mm,-21mm)$) {Open Source\\Evaluatology};
+\node[anchor=north,inner sep=0,text=FrameworkTeal,align=center,font=\sffamily\fontsize{14.5}{18}\selectfont]
+at ($(current page.north)+(0mm,-73mm)$) {Theory, Methods, and Empirical Studies};
+\node[anchor=north,inner sep=0,text=HeadingInk,align=center,font=\rmfamily\fontsize{12}{16}\selectfont]
+at ($(current page.north)+(0mm,-89mm)$) {Wei Wang\enspace·\enspace Shengyu Zhao\\Fanyu Han\enspace·\enspace Xiaoya Xia};
+\node[anchor=north,inner sep=0] at ($(current page.north)+(0mm,-112mm)$)
+{\includegraphics[width=\paperwidth]{figures/frontmatter/cover-d-commons-art.png}};
+\draw[HeadingInk,line width=.55pt] ($(current page.north west)+(0mm,-112mm)$)--($(current page.north east)+(0mm,-112mm)$);
+\draw[HeadingInk,line width=.55pt] ($(current page.north west)+(0mm,-252mm)$)--($(current page.north east)+(0mm,-252mm)$);
+% Publisher wordmark only; original cover artwork and typography preserved.
+\begin{scope}[blend mode=multiply]
+\node[inner sep=0] at ($(current page.south)+(0mm,32mm)$)
+{\includegraphics[width=36mm,trim=131.25bp 87.75bp 141bp 19.5bp,clip]{figures/frontmatter/cover-d2-assets/bcpress.pdf}};
+\end{scope}
+\node[anchor=south,inner sep=0,text=HeadingInk,font=\rmfamily\fontsize{13}{16}\selectfont]
+at ($(current page.south)+(0mm,17mm)$) {BenchCouncil Press};
+\end{tikzpicture}\clearpage
+

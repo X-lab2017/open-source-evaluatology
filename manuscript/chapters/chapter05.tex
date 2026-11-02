@@ -1,0 +1,439 @@
+\chapter[OpenRank: Influence and Contribution]{OpenRank:\\Influence and Contribution}
+\label{ch:five}
+\markboth{Open Source Evaluatology}{OpenRank: Influence and Contribution}
+
+Activity records participation; a collaboration network records how that participation connects people and projects. A developer who resolves issues across a community and a developer who submits a substantial, self-contained change may both contribute important work. Their positions in the collaboration network can nevertheless differ. The same distinction applies to repositories: similar volumes of activity can arise from very different contributor populations and connections to the wider ecosystem. Relational evaluation begins with these differences.
+
+This chapter develops OpenRank at three connected levels. The general algorithm allocates importance through a weighted network while retaining node-specific prior information. G-OpenRank instantiates that algorithm for developers and repositories across an observed ecosystem. C-OpenRank instantiates it for contributions within a community, retaining issues and pull requests as collaboration units. The two models share a mathematical foundation, but their boundaries, priors, and evaluative purposes differ.
+
+The account draws primarily on the OpenRank algorithm study, the OpenDigger framework, and the OpenRank Leaderboard study, supported by the doctoral research in which these methods were developed and examined \citep{han2026rank,wang2026digger,zhao2024,zhao2025thesis,xia2024thesis}. We first establish the representation and algorithm, then derive the two evaluation models and examine their published evidence. The purpose is to explain how the method works, what its experiments establish, and how its use advances the framework of Open Source Evaluatology. Chapter 4 supplies the measurement procedures that generate the relations. Chapter 6 takes the resulting models into the data infrastructure and deployments through which they become a continuing evaluation practice.
+
+\section{From Collaboration to Relational Evaluation}
+\label{sec:ch5-meaning}
+
+\subsection{The object of a relational measure}
+In this chapter, \emph{relational influence} means importance allocated through recorded collaboration under a declared propagation model. A score is therefore a property of an object in a network and measurement setting. It is not an intrinsic property of the object alone. The evaluation question \(\mathcal Q=\langle O,A,C,R,T,S,P\rangle\), introduced in Equation~\bookref{eq:question}{1.1}, determines the objects, conditions, reference, time, stakeholders, and purpose for which this allocation is informative.
+
+Centrality offers several distinct interpretations of position. Degree, closeness, and betweenness describe immediate connectivity, distance, and mediation along paths, respectively \citep{freeman1979}. Recursive measures instead make importance depend on the importance of connected objects. Attenuated indirect influence appears in Katz's status index; HITS distinguishes mutually reinforcing hub and authority roles; personalized PageRank combines graph propagation with an external source of importance \citep{katz1953,kleinberg1999,gleich2015}. BiRank extends ranking with prior information to bipartite graphs \citep{he2017}. These are the mathematical antecedents against which OpenRank's contribution should be understood.
+
+OpenRank brings together weighted collaboration, heterogeneous node dependence on prior information, and recurring measurement of an evolving community. The substantive contribution lies in the resulting evaluation models and their connection to empirical open source work, as well as in the general algorithm. The choice of flow matters: a centrality is meaningful in relation to the process its paths and transfers represent \citep{borgatti2005}. In OpenRank, the calculation propagates modeled importance through collaboration. It does not establish that each traversed edge transmitted knowledge, caused adoption, or improved software quality.
+
+This distinction preserves the separation among activity, artifacts, capability, and outcomes developed in Part I. It also clarifies what a network adds to Chapter 4. An activity total discards the identities and relationships behind that total. Relational evaluation retains some of this structure and asks how it changes the allocation of importance. The resulting score complements the activity measure; its suitability is judged against the intended evaluation task.
+
+\subsection{From projected relations to typed networks}
+An earlier construction in the OpenDigger research projects developer--repository participation onto a repository network \citep[Section 3.5]{zhao2025thesis}. Let \(L_{ua}\) be the historical linear activity of developer \(u\) in repository \(a\). For two repositories sharing active developers, the reported projected weight is
+\begin{equation}
+ W_{ab}=\sum_{u:\,L_{ua}>0,\,L_{ub}>0}
+ \frac{L_{ua}L_{ub}}{L_{ua}+L_{ub}}.
+ \label{eq:ch5-projection}
+\end{equation}
+Each summand is half the harmonic mean of the two activity values. The formula retains the source's scale. A developer active in only one repository contributes no cross-repository link; a developer active in both connects them with a weight limited by the smaller participation value. Weighted ranking can then operate on the projected repository graph.
+
+Projection makes the relationship between repositories explicit, but removes the developer nodes through which it was formed. G-OpenRank retains both types of object and calculates their scores jointly. C-OpenRank changes the boundary again: its collaboration units are the issues and pull requests inside a project. Figure~\ref{fig:ch5-networks} shows the two constructions. A local contribution score is thus not obtained by taking a subset of a global ranking. It answers a different question using a different graph.
+
+\input{figures/chapter05/networks}
+
+Formally, write \(G=(V,E,\tau,\varphi,w)\), with node types \(\tau\), relation types \(\varphi\), and nonnegative weights \(w\). Developer--repository--developer paths represent shared project participation; developer--pull request--developer paths retain a particular collaboration unit. The importance of such typed paths is also explicit in heterogeneous-network methods such as PathSim \citep{sun2011}. Here, their semantics determine which forms of collaboration the ranking can express.
+
+Every activity-weighted edge inherits the specification of Equation~\bookref{eq:ch4-measurement}{4.1}: eligible behaviors, attribution, identity resolution, bot policy, weights, and time aggregation. A monthly square root, a sum of daily square roots, and a historical linear total can produce different edge proportions. They must not be substituted for one another merely because each is called Activity. Keeping this lineage is the first condition for interpreting a later OpenRank score.
+
+\section{The OpenRank Algorithm}
+\label{sec:ch5-formulation}
+
+\subsection{Normalize the direction of transfer}
+For a weight \(w_{ji}\) on the directed relation from source \(j\) to destination \(i\), define
+\begin{equation}
+ S_{ij}=\frac{w_{ji}}{\sum_v w_{jv}}.
+ \label{eq:ch5-transition}
+\end{equation}
+Column \(j\) distributes the outgoing importance of node \(j\); row \(i\) collects incoming importance at node \(i\). The product \(S\boldsymbol x\) is therefore an incoming aggregation. Although collaboration links may be represented in both directions, normalization can give the two directed transfers different proportions because their source nodes have different total outgoing weight.
+
+For a source with no outgoing weight, Equation~\ref{eq:ch5-transition} requires an explicit convention. A background connection or a redistribution vector can preserve a column sum of one. Leaving the column zero instead produces a column-substochastic matrix, with nonnegative entries and column sums at most one. The proof below covers both cases. They remain different models of unallocated importance.
+
+\subsection{Aggregate heterogeneous relations explicitly}
+Several behavior types can connect the same two objects. Let \(w^{(r)}_{ji}\) denote the weight for relation type \(r\), and let \(\beta_r\geq0\) encode its importance. Aggregating these relations before normalization gives
+\begin{equation}
+ w_{ji}=\sum_r\beta_r w^{(r)}_{ji},\qquad
+ S_{ij}=\frac{\sum_r\beta_r w^{(r)}_{ji}}
+ {\sum_r\beta_r\sum_v w^{(r)}_{jv}}.
+ \label{eq:ch5-edge-aggregation}
+\end{equation}
+This construction makes behavioral weights part of the propagation proportions. Multiplying every \(\beta_r\) by one positive constant leaves \(S\) unchanged. Altering their ratios generally changes it.
+
+The heterogeneous-edge reduction in the algorithm paper also admits a mixture of already normalized relation channels \citep[Section 3.1.4]{han2026rank}. If each \(S^{(r)}\) is column-stochastic and the nonnegative channel coefficients sum to one, then \(\sum_r\beta_rS^{(r)}\) is column-stochastic. The two constructions need not coincide: aggregating raw behavior weights makes a source's allocation depend on its observed volume in each channel, whereas mixing normalized channels can assign each available channel a prescribed share. Missing channels require a declared redistribution or leakage rule. Specifying the order of weighting and normalization therefore forms part of the model, not merely its implementation.
+\subsection{Separate the prior from the numerical starting point}
+Let \(\boldsymbol r\geq0\) be a fixed prior vector for the measurement window. Let \(A=\operatorname{diag}(\alpha_1,\ldots,\alpha_n)\), where \(0\leq\alpha_i<1\) measures node \(i\)'s dependence on incoming structural evidence. The scalar OpenRank recurrence is
+\begin{equation}
+ \boldsymbol x^{(k+1)}
+ =AS\boldsymbol x^{(k)}+(I-A)\boldsymbol r.
+ \label{eq:ch5-openrank}
+\end{equation}
+This is the formulation of \citet{han2026rank}, with notation that distinguishes the prior \(\boldsymbol r\) from the solver's initial iterate \(\boldsymbol x^{(0)}\). A previous month's score can supply either, but the two roles are different. Changing a fixed prior changes the target solution. Changing only the numerical start changes the path to that solution.
+
+The complementary coefficient \(d_i=1-\alpha_i\) is the \emph{prior-retention coefficient}. Some descriptions and implementation parameters use this complementary convention. In the public implementation, the update combines \texttt{retentionFactor} times the node's initial value with one minus that factor times incoming messages \citep{openrankgds2023}. Thus a repository retention of \(0.30\) corresponds to structural dependence \(\alpha_R=0.70\), not \(0.30\). We use \(\alpha\) for structural dependence and \(d\) for prior retention throughout this chapter.
+
+The model does not assume that a prior is an intrinsic value independent of observation. It may encode historical scores or a declared activity-based contribution. Calling it a prior identifies its mathematical role. Its empirical justification must come from the construction of the measure and the intended use.
+
+\subsection{A unique, nonnegative solution}
+Write \(B=AS\), \(\boldsymbol q=(I-A)\boldsymbol r\), and \(\bar\alpha=\max_i\alpha_i<1\). If \(S\) is nonnegative and column-substochastic, then
+\begin{equation}
+ \lVert B\rVert_1
+ =\max_j\sum_i\alpha_iS_{ij}
+ \leq\bar\alpha<1.
+ \label{eq:ch5-contraction}
+\end{equation}
+Consequently the spectral radius of \(B\) is less than one, and the iteration converges from any finite starting vector to
+\begin{equation}
+ \boldsymbol x^*
+ =(I-B)^{-1}\boldsymbol q
+ =\sum_{\ell=0}^{\infty}B^\ell\boldsymbol q.
+ \label{eq:ch5-fixedpoint}
+\end{equation}
+To see this directly, subtract the fixed-point equation from the recurrence. The difference after \(k\) steps is \(B^k(\boldsymbol x^{(0)}-\boldsymbol x^*)\), whose 1-norm is at most \(\bar\alpha^k\lVert\boldsymbol x^{(0)}-\boldsymbol x^*\rVert_1\). It tends to zero. Each term of the series in Equation~\ref{eq:ch5-fixedpoint} is nonnegative when the prior is nonnegative, establishing nonnegativity of the solution as well as uniqueness.
+
+The series provides an interpretation of the score. The zeroth term supplies retained prior information. The next term transfers it once through the graph. Later terms represent successively longer walks, attenuated at the destination of each step by the relevant structural-dependence coefficient. OpenRank thereby combines immediate evidence and indirect relational context. Repeated visits are permitted by the algebra; this is a walk-based allocation, not an enumeration of distinct independent contributions.
+
+When \(A=\alpha I\), \(S\) is column-stochastic, and \(\boldsymbol r\) sums to one, Equation~\ref{eq:ch5-openrank} has the familiar personalized PageRank form \citep{gleich2015}. Setting all coefficients to one would instead remove the external source term and the strict contraction guarantee. That undamped limit should not be confused with conventional damped PageRank.
+
+For heterogeneous coefficients, the total score need not sum to the total prior. Multiplying Equation~\ref{eq:ch5-openrank} by the all-ones row vector does not cancel the incoming and prior-retention terms unless additional conditions hold. A reported OpenRank value should therefore be treated as a score on a declared scale. Normalizing it into a share is a further transformation, with its own denominator and interpretation.
+
+\subsection{Checks implied by the formulation}
+The linear form makes several properties transparent. For fixed \(S\) and \(A\), scaling every prior value by the same positive constant scales every score by that constant and leaves ordering unchanged. Multiplying all outgoing weights of one source node by a positive constant leaves its normalized column unchanged. The latter invariance does not apply to the complete measurement pipeline if the same activity change also alters the prior.
+
+An approximate solution can be assessed without knowing the exact solution. Define its residual as \(\boldsymbol e=B\widehat{\boldsymbol x}+\boldsymbol q-\widehat{\boldsymbol x}\). Equation~\ref{eq:ch5-contraction} gives
+\begin{equation}
+ \lVert\boldsymbol x^*-\widehat{\boldsymbol x}\rVert_1
+ \leq\frac{\lVert\boldsymbol e\rVert_1}{1-\bar\alpha}.
+ \label{eq:ch5-residual}
+\end{equation}
+This bound is conservative but explicit. It separates numerical error from uncertainty in graph construction, which a smaller solver tolerance cannot remove. If two scores differ by no more than twice a valid bound on individual score error, their numerical order should not be treated as resolved by the approximation.
+
+The public implementation supplies a useful six-node fixture with three developer nodes and three repository nodes \citep{openrankgds2023}. Using its supplied weights and priors, a direct solution of Equation~\ref{eq:ch5-fixedpoint} gives, to the source's three-decimal precision,
+\[
+ (x_{u_1},x_{u_2},x_{u_3},x_{r_1},x_{r_2},x_{r_3})
+ =(1.072,1.291,0.478,0.293,1.118,1.398).
+\]
+The source includes columns summing to \(0.9\); retaining them reproduces the fixture and falls within the substochastic case proved above. Renormalizing those columns would solve a different problem. The accompanying chapter materials independently check this linear-system solution, iterative convergence, and scale covariance. These are numerical consistency checks on an existing software fixture, not new observations of developer performance.
+
+\subsection{A solver with an explicit stopping rule}
+The closed form in Equation~\ref{eq:ch5-fixedpoint} establishes the solution; it does not require forming an inverse. For a sparse graph, a matrix--vector multiplication and a componentwise update suffice. The following reference procedure makes the numerical contract explicit.
+
+\begin{definitionbox}
+\textbf{Algorithm 5.1. OpenRank iteration with an error certificate.} Given a nonnegative column-substochastic \(S\), nonnegative prior \(\boldsymbol r\), structural coefficients with \(\bar\alpha<1\), tolerance \(\varepsilon\), and a maximum iteration budget:
+\begin{enumerate}
+\item Set \(B=AS\), \(\boldsymbol q=(I-A)\boldsymbol r\), and choose a finite initial vector \(\boldsymbol x\).
+\item Compute \(\boldsymbol y=B\boldsymbol x+\boldsymbol q\) and \(\delta=\lVert\boldsymbol y-\boldsymbol x\rVert_1\).
+\item If \(\delta/(1-\bar\alpha)\leq\varepsilon\), return \(\boldsymbol x\) with that error certificate. Otherwise replace \(\boldsymbol x\) by \(\boldsymbol y\) and repeat.
+\item If the budget is exhausted, report nonconvergence at the requested tolerance together with the final residual.
+\end{enumerate}
+\end{definitionbox}
+
+The certificate applies to the iterate whose residual was computed. Returning a different vector requires evaluating or bounding its residual. A coordinate that changes little in one round should not be permanently frozen merely on that basis: later incoming changes can move it again. An optimized distributed implementation may use local stopping rules, but a final residual against the full operator supplies a common numerical check.
+
+For \(N\) represented states and \(m\) nonzero propagation entries, each sparse iteration costs \(O(m+N)\) arithmetic and requires \(O(m+N)\) storage. A dense matrix--vector iteration costs \(O(N^2)\), whereas explicitly forming a dense inverse generally entails cubic work. Sparsity, partitioning, communication, and graph preparation determine actual running time. Pregel's vertex-oriented supersteps provide a natural implementation pattern for sending weighted scores and aggregating incoming messages \citep{malewicz2010}; they do not remove the need to specify the operator and stopping criterion.
+
+\subsection{Several dimensions per node}
+The scalar recurrence already accommodates different node types. A genuinely multidimensional model goes further by assigning a vector of states to each node. Following the extension proposed in the OpenRank paper, let node \(i\) have \(q_{\tau(i)}\) dimensions and define the expanded state space
+\begin{equation}
+ \Omega=\{(i,h):i\in V,\ 1\leq h\leq q_{\tau(i)}\},
+ \qquad N=\sum_{i\in V}q_{\tau(i)}.
+ \label{eq:ch5-state-space}
+\end{equation}
+Stacking the node states in a fixed order produces an \(N\)-dimensional real vector \(\boldsymbol z\). Let the real matrix \(M\) of size \(N\times N\) describe the allowed transfers between those states, including their attenuation, and let the real vector \(\boldsymbol b\) of length \(N\) contain retained prior information. Then
+\begin{equation}
+ \boldsymbol z^{(k+1)}=M\boldsymbol z^{(k)}+\boldsymbol b,
+ \qquad
+ \boldsymbol z^*=(I-M)^{-1}\boldsymbol b
+ \quad\text{if }\rho(M)<1.
+ \label{eq:ch5-expanded}
+\end{equation}
+Nonnegative \(M\) and \(\boldsymbol b\) produce a nonnegative fixed point. One sufficient construction is \(M=\mathcal A\mathcal S\), where \(\mathcal S\) is a nonnegative column-substochastic state-transfer matrix and every diagonal entry of \(\mathcal A\) is below one. The scalar proof applies directly.
+
+This notation permits different dimensions for different node types without padding them with ambiguous states. A block from node \(j\) to node \(i\) has size \(q_{\tau(i)}\times q_{\tau(j)}\). When all nodes have the same number \(q\) of dimensions and structural propagation separates from dimension transfer, a special case is \(\mathcal S=S\otimes T\), where \(T\) is a \(q\times q\) column-stochastic matrix and the expanded vector has length \(nq\). A general heterogeneous model need not admit this factorization.
+
+Multilayer network theory provides the broader representation of node states and interlayer relationships \citep{dedomenico2013}. Learned heterogeneous models such as HGT likewise retain type distinctions, but estimate representations through a different objective \citep{hu2020}. OpenRank's explicit linear operator makes its propagation and priors inspectable. Its multidimensional extension remains a modeling capability: experiments on scalar G-OpenRank or C-OpenRank do not validate every possible choice of state dimensions and transfer blocks.
+
+\section{Global Influence across Repositories and Developers}
+\label{sec:ch5-global}
+
+\subsection{Joint influence in the ecosystem}
+G-OpenRank uses developers and repositories as nodes, with bidirectional weighted links representing observed participation. Its premise is reciprocal: repositories gain importance through participation by influential developers, while developers gain importance through work in influential repositories. The model retains the developer--repository structure instead of projecting it away. The OpenRank study develops this model in detail \citep[Section 3.2]{han2026rank}; OpenDigger identifies it as the global network metric \citep[Section 3.4.1]{wang2026digger}.
+
+The observation boundary is public platform collaboration within each calendar month. In the published model, issue and pull-request work provides the main behavioral evidence; stars and forks are excluded from collaboration intensity, and direct commits are not used as a substitute for the selected pull-based actions. This is a choice of observable work, with consequences for projects that organize their development differently. The word \emph{global} describes the intended ecosystem scope. It does not turn an observed platform network into a complete census of all open source work.
+
+A background node connects bidirectionally to the developer and repository nodes. The construction is motivated by LeaderRank's ground node \citep{lu2011}. It supplies a common connection across otherwise separate components and participates in the allocation of influence. Strict damping already guarantees the fixed point under Section~\ref{sec:ch5-formulation}'s conditions; the background node is therefore a model component whose edge weights and prior affect the result, rather than a mathematical necessity for uniqueness.
+
+Table~\ref{tab:ch5-models} collects the published settings for G-OpenRank and the community model developed next. The table separates model parameters from the common solver. In particular, prior retention is expressed throughout as \(d_i=1-\alpha_i\), avoiding a reversal of meaning when the source uses the complementary damping convention.
+
+\begin{table}[tbp]
+\caption{Two evaluation models built on the OpenRank algorithm. Global settings follow \citet[Section 3.2]{han2026rank}; community settings follow \citet[Section 3.3]{zhao2024} and \citet[Section 6.2]{zhao2025thesis}.}
+\label{tab:ch5-models}
+\centering\small
+\renewcommand{\arraystretch}{1.16}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{24mm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Choice&G-OpenRank&C-OpenRank\\
+\midrule
+Evaluation object&Developers and repositories in an observed ecosystem&Developer contributions within one community\\
+Represented nodes&Developers, repositories, background&Developers, issues, pull requests\\
+Relations&Activity-weighted developer--repository collaboration&Typed actions around issues and pull requests\\
+Time unit&Calendar month&Calendar month\\
+New-node prior&0 before activity-based increments&1 before node-specific adjustments\\
+Prior retention&Repository 0.30; developer 0.50; background 0.15&0.15 for all node types\\
+Current evidence&Activity-based developer increments; weighted relations&Behavior-weighted relations; reactions; merged-PR prior increment\\
+Historical state&Previous scores; decay and temporal combination described separately&Previous score inherited when available\\
+Interpretation&Relational influence across the specified ecosystem&Relational contribution under the community's recognition model\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{History, current evidence, and the numerical start}
+The global model assigns newly introduced developer and repository nodes a base prior of zero. Creating an account or repository alone consequently introduces no new influence through that base prior. Current developer activity supplies new influence. Previous scores provide historical information, with prior-retention coefficients of 0.50 for developers and 0.30 for repositories. The asymmetry expresses the modeling judgment that developer influence should persist more strongly than repository influence when current activity changes. The background node uses retention 0.15.
+
+These coefficients act inside the fixed-point calculation. They must be distinguished from the temporal combination reported in the algorithm study,
+\begin{equation}
+ \boldsymbol c_t=\gamma\boldsymbol c_{t-1}
+ +(1-\gamma)\widetilde{\boldsymbol c}_t,
+ \qquad \gamma=0.15,
+ \label{eq:ch5-smoothing}
+\end{equation}
+where \(\widetilde{\boldsymbol c}_t\) is the current result before combination. The study also specifies a multiplier of 0.85 applied in influence decay to repository and developer nodes, including inactive ones. In that convention, 0.85 is the fraction retained by the decay operation, not a loss of 85\%.
+
+A fixed-window convergence proof does not establish the behavior of this entire sequence across months. The temporal procedure must additionally specify when history is decayed, when activity is injected, how inactive nodes persist, and when the combination in Equation~\ref{eq:ch5-smoothing} is applied. The published description establishes these ingredients but does not recover every ordering detail of a production release. We therefore retain them as distinct model commitments instead of inventing a single executable update order. The pinned implementation cited in Section~\ref{sec:ch5-formulation} verifies the inner recurrence and its coefficient convention; it does not by itself verify all temporal operations.
+
+Monthly aggregation is also a substantive temporal choice. It preserves medium-term participation patterns while losing event ordering within the window. As temporal-network research shows, a path in an aggregated graph need not be a time-respecting path in the underlying events \citep{holme2012}. G-OpenRank should accordingly be read as monthly relational importance, not as a reconstruction of the chronological route by which ideas or changes spread.
+
+\subsection{Activity-based influence increments}
+Activity has two roles in the global model: it determines relative edge weights, and a transformed activity value supplies a developer's new influence. Normalization separates their scales. The source uses a sigmoid increment
+\begin{equation}
+ f(a)=\frac{1}{1+\exp[-s(a-b)]},
+ \qquad s=0.10425,\quad b=44.08.
+ \label{eq:ch5-sigmoid}
+\end{equation}
+The calibration starts from a monthly activity third quartile of 88.16 among active developers in 2024, chooses the midpoint at half that value, and sets the increment near 0.99 at the third quartile \citep[Section 3.2.3]{han2026rank}. The variable \(a\) denotes activity on that study's scale; it is unrelated to the structural-dependence coefficient \(\alpha\).
+
+Figure~\ref{fig:ch5-injection} preserves all five action profiles in the published comparison. A single issue comment has activity 5.252 in that table; opening two pull requests has activity 81.358. These inputs belong to the historical experiment and are not replaced with the later coefficients or square-root operations examined in Chapter 4. The comparison illustrates how the transformation changes new influence while the underlying action profile remains fixed.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{figures/chapter05/injection.pdf}
+\caption{Activity-based increments for five constructed action profiles, redrawn from Table 3 of \citet{han2026rank}. The right-hand column preserves the original activity inputs; the two markers retain the reported increments. These are calculation examples, not observations of five developers. The underlying numeric values are retained to three decimal places in the chapter data.}
+\label{fig:ch5-injection}
+\end{figure}
+
+The sigmoid suppresses increments relative to the linear mapping for the first four profiles and approaches its upper range for the fifth. It therefore limits the extent to which increasing a large activity count increases new influence. This is a design response to brief surges of low-intensity participation, not an empirical demonstration that a bounded increment eliminates manipulation. Identity splitting, coordinated interactions, and low-value actions can still change the graph.
+
+The mapping also makes eligibility important: \(f(0)>0\). Applying it only to eligible active developers differs from applying it to every registered account. A reproducible model must state that eligibility rule alongside its calibration population. When the observation or Activity definition changes, the old sigmoid parameters cannot automatically be assumed to express the same participation threshold.
+
+\section{Contribution within a Community}
+\label{sec:ch5-community}
+
+\subsection{Recognizing work around collaboration units}
+C-OpenRank asks how a developer participates in the continuing work of one community. Issues and pull requests retain the context in which participants open tasks, discuss problems, review changes, and complete work. The model is developed in the OpenRank Leaderboard study and in the doctoral studies of community sustainability and ecosystem data platforms \citep{zhao2024,xia2024thesis,zhao2025thesis}. OpenDigger subsequently incorporates the global/community distinction into its metric framework \citep{wang2026digger}.
+
+The motivating problem is that repository-level code counts can leave coordination poorly represented. Empirical studies of Apache and Mozilla already distinguished code production from the broader organization of development and problem resolution \citep{mockus2002}. A community measure should consequently make its definition of contribution explicit. C-OpenRank's definition emphasizes publicly recorded collaboration and the relationships formed through it. This is especially relevant to work such as answering issues, connecting participants, and reviewing proposed changes.
+
+The original design uses three principles inspired by the Apache Way: public communication supplies observable evidence; authority is earned through participation; and sustained community work matters beyond the quantity of code produced. These principles become concrete modeling choices. Newly appearing nodes receive the same base prior, without a privileged value assigned from an employer or personal attribute. Participants and collaboration units reinforce one another through the network. Community reactions and accepted changes modify the prior information attached to the units.
+
+The project defines the evaluation boundary. The core score-bearing objects are developers, issues, and pull requests. A repository shown as a containment object in a conceptual diagram should not automatically become an additional propagation node. Any deployment that adds such a node, or introduces additional relations, defines a model variant and must declare its transfer rules. This separation allows the collaboration model to remain interpretable as implementations develop.
+
+\subsection{Historical priors, reactions, and accepted changes}
+The published community model runs monthly. A node that already has a preceding-month score inherits it as prior information; a newly appearing node starts with a base prior of one. Issue and pull-request priors are then adjusted by recorded thumbs-up reactions, using the reacting developer's contribution proportion in the preceding month. The mechanism lets recognition from an established contributor carry more weight than an undifferentiated count of reactions \citep[Section 3.3.3]{zhao2024}.
+
+A pull request merged during the current month receives an additional 50\% increase in its prior. The later dissertation describes this increase after the reaction adjustment \citep[Section 6.2.1]{zhao2025thesis}. The merged-change signal is thus represented in the prior as well as in the collaboration history. It should not be collapsed into the unrelated merged-PR coefficient of an Activity formula. One operates on a node's retained information; the other weights a measured behavior.
+
+With \(S^C_t\) denoting the normalized community operator and \(\boldsymbol r^C_t\) the resulting prior, the inner calculation is
+\begin{equation}
+ \boldsymbol x^C_t=0.85S^C_t\boldsymbol x^C_t
+                  +0.15\boldsymbol r^C_t.
+ \label{eq:ch5-community}
+\end{equation}
+The prior-retention coefficient is 0.15 for every node type. The same convergence argument therefore applies with \(\bar\alpha=0.85\). Prior construction remains outside this inner solve: the reaction weighting uses historical contribution, not a repeatedly updated current score within the same iteration.
+
+These choices embody a recognition policy. Historical inheritance favors continuity; equal base priors admit newcomers; reaction weighting delegates part of the assessment to the community's existing participation structure; and the merged-PR adjustment recognizes integration. Their combined effect can make coordination visible, but can also reproduce the visibility of an established core. The model's legitimacy depends on whether these choices fit the community's purpose. Numerical convergence alone cannot decide that question.
+
+\subsection{Eliciting the relation weights}
+The relative weights of collaboration behaviors were elicited from the seven participating project maintainers using the Analytic Hierarchy Process (AHP). The study instructed maintainers to compare behaviors on a five-point scale and combined their judgments by geometric averaging. AHP supplies a way to express relative priorities and examine the internal consistency of pairwise comparisons \citep{saaty1987}. It does not turn those priorities into universal empirical constants.
+
+Table~\ref{tab:ch5-ahp} reproduces the six published weights. The same percentages appear in the later OpenDigger paper. Their common scale can be expressed as percentages or proportions when only normalized edge transfer is at issue. The absolute scale must still be preserved if the weights also feed an activity-based prior or another nonlinear transformation.
+
+\begin{table}[tbp]
+\caption{Community relation weights. Percentages follow Table 2 of \citet{zhao2024}, Table 6.1 of \citet{zhao2025thesis}, and the weight column of Table 7 of \citet{wang2026digger}. The bars show the same values, with opening a pull request as the visual reference.}
+\label{tab:ch5-ahp}
+\centering\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\linewidth}{@{}Xr p{36mm}@{}}
+\toprule
+Behavior&Weight (\%)&Relative magnitude\\
+\midrule
+Issue/PR comment&5.252&\textcolor{FrameworkTeal!55}{\rule{4.52mm}{5pt}}\\
+Pull-request review&7.427&\textcolor{FrameworkTeal!65}{\rule{6.39mm}{5pt}}\\
+Close issue&9.712&\textcolor{FrameworkTeal!75}{\rule{8.36mm}{5pt}}\\
+Close pull request&14.695&\textcolor{FrameworkTeal!85}{\rule{12.64mm}{5pt}}\\
+Open issue&22.235&\textcolor{FrameworkTeal}{\rule{19.13mm}{5pt}}\\
+Open pull request&40.679&\textcolor{FrameworkBlue}{\rule{35mm}{5pt}}\\
+\midrule
+Total&100.000&\\
+\bottomrule
+\end{tabularx}
+\tablenote{The original table's first behavior row is labeled ``Issue Comment''; its channel heading and model description cover issue/PR comments. The reported consistency check is $\lambda_{\max}=6.169$, $\mathrm{CI}=0.034$, $\mathrm{RI}=1.25$, and $\mathrm{CR}=0.027$. These are source-reported values.}
+\end{table}
+
+For a pairwise comparison matrix of order \(m\), the consistency index is \(\mathrm{CI}=(\lambda_{\max}-m)/(m-1)\), and the consistency ratio divides this value by the chosen random index. The study reports a ratio of 0.027 against its acceptance threshold of 0.1. This supports the internal consistency of the elicited comparison system under that test. It does not establish agreement among every maintainer, transferability to every project, or an objective ratio between the value of two individual contributions.
+
+The raw judgment matrices are retained separately from the published weight vector in the chapter materials. This distinction is necessary because the older table contains an inconsistent intermediate eigenvector entry; the later OpenDigger table reports the judgment matrix and weights without that intermediate column. The exposition uses the stable published weights and the reported consistency result; it does not silently repair a matrix and present the recalculation as an original experiment.
+
+\subsection{From local score to a recognition decision}
+The local score can be reported as a value, converted into an ordering, or transformed into points for a recognition system. These are different operations. A rank depends on the comparison population and tie rule. Accumulated points introduce a time horizon and aggregation policy. Rewards introduce a further decision about allocation. The OpenRank Leaderboard deployment combines a contribution measure with such recognition mechanisms; the measure itself is only one component of that intervention.
+
+C-OpenRank therefore supplies an inspectable account of relational contribution. It recognizes work through its location in the community, its typed interactions, and the declared prior adjustments. It does not directly inspect whether a comment was correct, a review was insightful, or an accepted patch was maintainable. For consequential decisions, the score can guide examination of the underlying work and the participant's context. The evidence below tests aspects of this interpretation before Chapter 6 examines how the recognition mechanism operates in practice.
+
+\section{Validation across Models and Settings}
+\label{sec:ch5-evidence}
+
+Validation must follow the claim made for the score. The algorithm study examines diffusion reach, sensitivity to edge weights, missing observations, and parameters \citep{han2026rank}. The community study examines differences from conventional contribution measures and agreement with participants' expectations \citep{zhao2024}. These evidence families address complementary questions. Their combination gives a fuller account of the method without treating simulation performance, numerical stability, and contribution recognition as interchangeable outcomes.
+
+The study settings remain distinct. The missing-data experiment uses January--June 2024 logs; the weight ablation uses June 2024; the coefficient examples use August 2025. The community cases and survey belong to the earlier seven-project OpenRank Leaderboard study. The later OpenDigger comparisons presented in Chapter 4 are additional metric comparisons, not a pooled replication of all these experiments. Engineering measurements of graph population, iteration counts, and running time are reserved for Chapter 6, where they can be interpreted alongside the implementation.
+\subsection{Diffusion reach depends on the propagation model}
+The algorithm study compares OpenRank with degree, betweenness, closeness, PageRank, BiRank, and graph-learning-based comparators labeled HEAT, HGT, and EdgeGFL. It evaluates propagation under independent cascade (IC), susceptible--infected--recovered (SIR), and linear threshold (LT) models. Figure~\ref{fig:ch5-diffusion} reproduces the original IC and LT reach panels, preserving the published curves and axes.
+
+These experiments concern simulated diffusion on collaboration graphs. Under IC, activation occurs through probabilistic opportunities along edges; under LT, accumulated influence must exceed a node's threshold. Such choices can change which seed sets perform well. The influence-maximization framework of \citet{kempe2003} makes the diffusion model and seed budget explicit; its approximation results for particular optimization procedures do not automatically apply to selecting the highest-ranked nodes under an arbitrary centrality.
+
+At 6,000 initial nodes under IC, the source reports that OpenRank activates 17,158 nodes: 58 more than HEAT, 78 more than EdgeGFL, and 88 more than HGT \citep[Section 4.3]{han2026rank}. These are differences in that simulation setting, not percentages of improved software quality. Under LT, HEAT attains the highest reach and OpenRank's relative advantage disappears. Taken together, the panels support a narrower and more useful conclusion than universal superiority: the ranking can identify effective seeds under the tested conditions, while the outcome depends on the assumed propagation mechanism.
+
+\begin{figure}[!tbp]
+\centering
+{\sffamily\bfseries\small\color{HeadingInk}(a) Independent cascade}\par\vspace{3pt}
+\includegraphics[width=.87\linewidth]{figures/chapter05/source_ic_reach.pdf}\par\vspace{13pt}
+{\sffamily\bfseries\small\color{HeadingInk}(b) Linear threshold}\par\vspace{3pt}
+\includegraphics[width=.87\linewidth]{figures/chapter05/source_lt_reach.pdf}
+\caption{Published diffusion reach under two propagation models. The reach panels are cropped from Figures 4 and 6 of \citet{han2026rank}, respectively, without redigitizing or changing their data, axes, legends, or plotted curves. The source's label ``activity nodes'' denotes activated nodes in the simulation. Different vertical scales are retained.}
+\label{fig:ch5-diffusion}
+\end{figure}
+
+The curves do not provide uncertainty intervals, and the published figures alone do not establish statistical significance for small differences. Interpretation of the neural comparators also requires their graph construction, learning objective, features, training protocol, and mapping to a ranking. HGT's original purpose is heterogeneous representation learning \citep{hu2020}; a comparator bearing its name is not sufficient evidence that every use of that model has been fairly tested. Reproducible comparative evaluation should retain the complete configurations and random seeds, rather than only final rankings.
+
+\subsection{Coordination work in two observed contribution profiles}
+The community study compares OpenRank with commits, lines of code, opened issues, opened pull requests, reviews, and comments. It selects developers in the top 200 under OpenRank for the reported comparison across the participating projects. Spearman correlations are positive and significant at the reported \(p<0.01\): opening issues has correlation 0.37, while the remaining measures lie between 0.63 and 0.66 \citep[Section 4.1.1]{zhao2024}. These associations show related but nonidentical rankings within the selected population. Selection on OpenRank and shared behavioral inputs limit their interpretation as independent validation.
+
+The two cases in Table~\ref{tab:ch5-cases} reveal what the differences can mean. All original values are preserved, but the subscripts used for ranks in the source are separated into explicit rows. This prevents a contribution amount from being mistaken for its position in the ranking.
+
+\begin{table}[tbp]
+\caption{Two contribution profiles from the published community study. Transposed from Table 4 of \citet{zhao2024}; also reported in the two dissertations. Lower rank numbers indicate higher positions within the respective project.}
+\label{tab:ch5-cases}
+\centering\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\linewidth}{@{}Xrr@{}}
+\toprule
+Measure&DanielLiu1123&GoodBoyCoder\\
+\midrule
+Project&\texttt{sca}&\texttt{seata}\\
+OpenRank score&9.83&0.95\\
+OpenRank rank&5&51\\
+Commits&5&47\\
+Commit rank&20&15\\
+Lines of code&381&7,275\\
+Lines-of-code rank&15&2\\
+Comments&62&0\\
+Opened issues&3&0\\
+Opened pull requests&2&3\\
+Pull-request reviews&11&1\\
+\bottomrule
+\end{tabularx}
+\tablenote{\texttt{sca} denotes \texttt{spring-cloud-alibaba}. Capitalization of developer identifiers follows the source table. The scores belong to different project networks and are not an absolute cross-project comparison.}
+\end{table}
+
+DanielLiu1123 ranks fifth in \texttt{spring-cloud-alibaba} despite contributing five commits. The study reports that the developer's 62 comments span 50 different issues or pull requests and identifies a problem-solving maintainer role. C-OpenRank recognizes the connections created through that work. The case makes concrete why a relational contribution model can place a coordinator above the position suggested by code counts alone.
+
+GoodBoyCoder ranks second by lines of code in \texttt{seata}, with 7,275 lines and 47 commits, but fifty-first by OpenRank. According to the maintainer account reported in the study, this contributor completed work through a Summer of Code program in three pull requests and participated little in other community discussions. The two measures emphasize different aspects of that contribution. The lower relational rank does not demonstrate that the submitted code had low quality or little technical value.
+
+Together, the cases support an interpretation of C-OpenRank as sensitive to community integration and coordination. They do not establish a universally correct ordering between code production and coordination. Nor are the repeated accounts in the dissertations independent replications: they belong to the same empirical study. Their role in the monograph is to connect the model's choices to inspectable examples of the work those choices recognize.
+
+\subsection{Agreement with participants' expectations}
+The same study solicited 527 developers and obtained 63 responses, a reported response rate of approximately 12\%. On a five-point question about whether the preceding 12 months of leaderboard results met expectations, the overall mean was 4.35. The 17 respondents with community roles had a mean of 4.65, compared with 4.24 among the 46 without a role; 55 respondents rated the results at least four \citep[Section 4.1.2]{zhao2024}.
+
+The study also reports an OpenRank-weighted mean of 4.88. Because the metric itself supplies the weights, that number expresses greater emphasis on the views of high-scoring contributors. It is not independent confirmation of the score's accuracy. The unweighted and role-specific results provide more direct descriptions of the observed responses, with the limited response rate remaining relevant to generalization.
+
+Participant feedback adds detail that correlation cannot supply. One maintainer discovered a previously overlooked issue responder whose repeated problem-solving had produced a prominent ranking. Other feedback asked the measure to consider the content of contributions as well as behavior and relationships. These observations support the visibility of coordination while identifying a boundary of the model. The interviews and deployment outcomes are developed with the complete study design in Chapter 6.
+\subsection{What weight ablation establishes}
+The June 2024 ablation compares AHP-derived edge aggregation with two alternatives: setting every edge weight to one, and sampling edge weights uniformly from the interval $(0,5)$. Table~\ref{tab:ch5-weights} retains the reported correlations with Activity. AHP gives the largest correlation, exceeding the uniform setting by 0.103. This is evidence that the weighting choice changes alignment with the study's activity reference.
+
+\begin{table}[tbp]
+\caption{Weight ablation and agreement with Activity, June 2024. Source: Table 6 of \citet{han2026rank}. Differences use the uniform setting as reference.}
+\label{tab:ch5-weights}
+\centering\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Weighting&Pearson correlation&Difference\\
+\midrule
+Uniform&0.682&---\\
+Random&0.645&$-0.037$\\
+AHP&0.785&$+0.103$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Activity and OpenRank share behavioral inputs, so this reference is not an independent ground truth for contribution quality. A high correlation can reflect coherent use of those inputs while leaving substantive quality untested. The table also does not report uncertainty intervals or repeated random-weight trials. It supports the stated comparison of these configurations; a claim of statistically reliable superiority over a distribution of alternative weights would require additional evidence.
+
+For Open Source Evaluatology, the ablation is nevertheless informative. It exposes a consequential judgment in the measurement design: how actions enter an allocation of importance. Pairwise elicitation from maintainers can make that judgment explicit. Validation then asks whether the resulting allocation is suitable for the intended task and affected stakeholders, rather than treating agreement with a related metric as the end of the inquiry.
+
+\subsection{Missing observations and operator perturbations}
+The study's missing-data experiment randomly removes event records from January--June 2024 \citep[Section 4.6]{han2026rank}. Its combined developer--repository ranking is highly concentrated: the top 100,000 nodes account for 51.36\% of the total score. At 10\% random removal, the reported score loss is 1.56\% for that group and 2.23\% for the next 100,000; at 50\% removal, the top group's reported loss is 9.1\%. These are group-specific responses under random deletion, not guarantees for every node or every missingness mechanism.
+
+The 51.36\% concentration belongs to this experiment and is distinct from the August 2025 OpenDigger result in Chapter 4.\footnote{The source's separate aggregate-loss paragraph lists five deletion levels but six mean-loss values. Those ambiguous means are not paired or replotted here. Figure~\ref{fig:ch5-missing} retains the original rank-group panel.}
+
+Figure~\ref{fig:ch5-missing} preserves the source's rank-group analysis. Its 3.2 million developer and repository nodes are sorted by cumulative OpenRank and divided into 32 groups of 100,000. The concentration curve and loss curves share a percentage axis but represent different quantities: a group's share of total score, and its proportional score loss under record deletion.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=.86\linewidth]{figures/chapter05/source_missing_rank.pdf}
+\caption{Sensitivity to missing observations across the combined developer--repository ranking, January--June 2024. Original vector panel from Figure 10 of \citet{han2026rank}; curves, axes, legend, and rank groups are preserved. The black curve is the share of total OpenRank held by each group; the colored curves show score loss under the indicated random deletion levels.}
+\label{fig:ch5-missing}
+\end{figure}
+
+The fixed-point formulation explains why numerical robustness is conditional. For perturbed quantities \(B'\) and \(\boldsymbol q'\), direct subtraction gives
+\begin{equation}
+ \boldsymbol x'^*-\boldsymbol x^*
+ =(I-B')^{-1}\bigl[(B'-B)\boldsymbol x^*
+ +(\boldsymbol q'-\boldsymbol q)\bigr].
+ \label{eq:ch5-perturbation}
+\end{equation}
+This identity is an analytical consequence of the model. A perturbation can enter through the graph, the prior, or both, and its amplification depends on the inverse operator. A contraction bound keeps that amplification finite; it does not make all forms of missingness small. Deleting one platform, one event type, or a concentrated set of reviewers can differ substantially from random record deletion at the same overall rate.
+
+\subsection{Score changes and rank stability are different results}
+Figure~\ref{fig:ch5-retention} redraws the repository and developer coefficient experiments from August 2025. Both use the source's baseline scores of 686.0 for vLLM and 406.0 for SGLang. The repository prior-retention baseline is 0.30; the developer baseline is 0.50. Scores and reported rank correlations are displayed on separate axes because they measure different consequences of the parameter change.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\linewidth]{figures/chapter05/retention_sensitivity.pdf}
+\caption{Parameter sensitivity in August 2025, redrawn from Table 7(a--b) of \citet{han2026rank}. The coefficients are expressed here as prior retention, consistent with the implementation convention. The upper panels show the two example repository scores; the lower panels show the source's Spearman correlations with the baseline ranking. The source does not identify the complete population used for those correlations, so they must not be interpreted as correlations calculated from only the two illustrated repositories.}
+\label{fig:ch5-retention}
+\end{figure}
+
+Increasing repository prior retention from 0.10 to 0.90 reduces the vLLM score from 753.6 to 550.7 and the SGLang score from 444.8 to 334.0. Increasing developer prior retention over the same range instead raises the two scores from 592.7 to 752.2 and from 349.3 to 446.8. These directions follow the published table and differ by node type. They are consistent with the fact that a type-specific coefficient changes both the incoming allocation and the balance of the coupled network; no universal monotonic rule for every repository follows from the recurrence.
+
+The corresponding rank correlations remain high: 0.994--1.000 for the repository coefficient and 0.989--1.000 for the developer coefficient. The source's additional sigmoid experiments report correlations of 0.973--1.000 when varying scale from 0.08 to 0.12, and 0.952--1.000 when varying shift from 40 to 48 \citep[Table 7]{han2026rank}. Those experiments use the tabulated baseline scale 0.10 and shift 44; these rounded settings are kept distinct from Equation~\ref{eq:ch5-sigmoid}.
+
+Rank stability can coexist with substantial score changes. This matters when a deployment uses an absolute threshold or compares raw scores across releases. A high aggregate correlation also leaves open changes near a selection boundary. For a top-\(k\) use, overlap, boundary movements, and the affected objects should be examined alongside correlation. The published results motivate these checks; they do not supply all of them.
+
+
+\section{Interpreting Relational Scores}
+\label{sec:ch5-use}
+
+OpenRank connects measured participation to a reproducible relational allocation. G-OpenRank uses this allocation to represent developer and repository influence across an observed ecosystem; C-OpenRank uses it to recognize participation around a community's collaboration units. Their shared recurrence explains the mathematical relationship between the models, while their different boundaries and priors determine what their scores mean. The empirical studies connect these constructions to diffusion behavior, sensitivity, and the recognition of community work.
+
+\subsection{What the practice contributes to evaluation theory}
+First, the evaluation object is embedded in a relation system. An object's score can change when neighboring participation changes, even if its own activity is unchanged. The object description in \(\mathcal Q\) must therefore be accompanied by the network boundary, reference population, and time. This is a concrete extension of Chapter 4's measurement specification: a relational construct depends on both the measured object and the surrounding evidence through which it is evaluated.
+
+Second, the models make value judgments operational. In C-OpenRank, historical inheritance, behavior weights, reaction weighting, and the merged-PR adjustment express what the recognition system values. The AHP procedure makes one part of that judgment inspectable; cases and participant responses examine its consequences. This relation between explicit commitments and empirical scrutiny is central to Open Source Evaluatology. A weight is neither a substitute for an evaluation objective nor a reason to conceal that objective behind an apparently neutral score.
+
+Third, the studies separate different forms of validity. Existence and convergence concern the algorithm. Correct extraction and reproduction concern its implementation and support. Recognition of coordination concerns the evaluation task. Effects on collaboration concern the broader problem and stakeholders. These distinctions instantiate the five-component architecture in Section~\bookref{sec:ch3-system}{3.2}. A collaboration graph alone does not constitute an object causal model, and its records do not by themselves define a self-contained system in Evaluatology.
+
+Finally, a deployed evaluation can change its own observations. When a community recognizes publicly visible coordination, participants may communicate more publicly or organize work differently. Such changes can be intended benefits, strategic adaptation, or both. They require evidence beyond a rise in the score that the mechanism displays. The contribution measure and the recognition intervention must remain separately identifiable so that practical feedback can refine the evaluation model.
+
+\subsection{A score that can be explained and revised}
+A published result should identify its model version, observation window and cutoff, Activity definition, represented objects, normalization, priors, temporal operations, and solver tolerance. It should also state any conversion from scores to ranks, shares, points, or rewards. These details determine whether another result is comparable. Two values produced by the same equation can still represent different measurements if their graphs or priors differ.
+
+For an observed score change, the first analytical task is to distinguish changes in participation, network context, prior construction, parameters, and numerical approximation. Equation~\ref{eq:ch5-perturbation} supplies the algebraic basis for this separation within a fixed state space. Substantive explanation then requires the event history and community context. A score can direct attention to a contributor or repository; the underlying work explains what that attention reveals.
+
+This chapter has established the algorithm, global and community models, and their principal validation evidence. Their practical contribution depends on maintaining these connections as data and implementations evolve. Chapter 6 develops OpenDigger as the infrastructure for doing so, then examines the OpenRank Leaderboard deployment as a setting in which evaluation is used, observed, and revised.

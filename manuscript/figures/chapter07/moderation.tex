@@ -1,0 +1,19 @@
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\path[use as bounding box] (0,0) rectangle (140,60);
+\node[sebox,text width=32mm,fill=FrameworkBlue!12] (all) at (22,49) {\textbf{85 students}\\Provisional judgments};
+\node[sebox,text width=35mm,fill=FrameworkBlue!5] (notflag) at (22,17) {\textbf{53 not flagged}\\Provisional score retained};
+\node[sebox,text width=40mm,fill=FrameworkBlue!12] (flag) at (100,49) {\textbf{32 flagged for review}\\Rank discrepancy $>20$\\percentile points};
+\draw[searrow] (all)--(flag);
+\draw[searrow] (all)--(notflag);
+\node[selabel,text=FrameworkTeal] (up) at (65,13) {\textbf{15 upward}\\median $+6$};
+\node[selabel,text=FrameworkAmber] (down) at (100,13) {\textbf{11 downward}\\median $-5$};
+\node[selabel] (same) at (130,13) {\textbf{6 retained}\\no change};
+\draw[searrow,draw=FrameworkTeal] (flag.south)--(100,30)--(65,30)--(up.north);
+\draw[searrow,draw=FrameworkAmber] (100,30)--(down.north);
+\draw[searrow] (100,30)--(130,30)--(same.north);
+\node[selabel,anchor=south west,text width=135mm,align=left] at (0,-1) {Cohort outcome: 59 unchanged, 15 upward, 11 downward.};
+\end{tikzpicture}
+\caption{Instructor moderation in the 2025 course. Counts reproduce Table VI and Section V-B of \citet{seetmanuscript}; 53 is calculated as $85-32$. Median changes refer to the 100-point contribution component. Student-initiated corrections occur later and are reported separately.}
+\label{fig:ch7-moderation}
+\end{figure}

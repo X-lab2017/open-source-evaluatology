@@ -1,0 +1,20 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\node[seheading,anchor=west] at (-65,67) {Evaluation changes both work and its visibility};
+\node[sebox,text width=35mm,minimum height=17mm,fill=FrameworkBlue!10] (recognition) at (-44,47) {Public recognition\\and explanations};
+\node[sebox,text width=35mm,minimum height=17mm,fill=FrameworkTeal!11] (practice) at (0,47) {Collaboration\\practices};
+\node[sebox,text width=35mm,minimum height=17mm,fill=FrameworkAmber!11] (records) at (44,47) {Publicly observable\\records};
+\draw[searrow] (recognition) -- (practice);
+\draw[searrow] (practice) -- (records);
+\node[sebox,text width=73mm,minimum height=16mm,fill=FrameworkBlue!5] (score) at (22,19) {Activity and collaboration graphs\\OpenRank scores and displayed rankings};
+\draw[searrow] (records.south) -- (44,30) -- (score.north -| records.south);
+\draw[searrow] (score.west) -| (recognition.south);
+\node[selabel,text width=34mm] at (-44,9) {Model-mediated\\feedback};
+\node[sebox,text width=123mm,minimum height=17mm,fill=FrameworkViolet!9,draw=FrameworkViolet!65] (revision) at (0,-11) {\textbf{Proposed revision and validation}\\Inspect content and task units\quad Separate visibility from work volume\\Preserve histories of model, policy, and observation};
+\draw[sefeedback] (practice.north) -- (0,61) -- (68,61) -- (68,-11) -- (revision.east);
+\draw[sefeedback] (revision.west) -- (-68,-11) -- (-68,47) -- (recognition.west);
+\end{tikzpicture}
+\caption{A feedback model derived from the deployment evidence. Solid arrows describe the proposed interpretation of the reported practices; they are not statistically identified causal effects. Dashed arrows mark this book's proposed revision process. Public discussion, smaller pull requests, reactions, and review practices motivate the distinction between a change in work and a change in the records through which work is evaluated.}
+\label{fig:ch6-feedback}
+\end{figure}

@@ -1,0 +1,20 @@
+name: Review feedback / 评审反馈
+description: Errata, methods, reproduction, or documented cases
+title: "[Review] "
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Chapter, section, or figure / 章节或图号
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Observation and evidence / 问题与证据
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed correction / 修改建议

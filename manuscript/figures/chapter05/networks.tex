@@ -1,0 +1,31 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm,
+ dev/.style={circle,draw=FrameworkBlue,fill=FrameworkBlue!12,minimum size=8mm,inner sep=0pt,font=\sffamily\fontsize{8.5}{10}\selectfont},
+ obj/.style={rectangle,rounded corners=.8mm,draw=FrameworkTeal,fill=FrameworkTeal!12,minimum width=10mm,minimum height=8mm,inner sep=1mm,font=\sffamily\fontsize{8.5}{10}\selectfont},
+ link/.style={<->,>=Stealth,draw=HeadingInk!75,line width=.7pt},
+ ground/.style={<->,>=Stealth,draw=FrameworkAmber!65,densely dashed,line width=.5pt}]
+\fill[FrameworkBlue!6] (0,61) rectangle (66,70);
+\fill[FrameworkTeal!7] (74,61) rectangle (140,70);
+\node[seheading,anchor=west] at (3,65.5) {(a) Global influence};
+\node[seheading,anchor=west] at (77,65.5) {(b) Community contribution};
+\draw[FrameworkRule] (70,2)--(70,70);
+\node[dev] (d1) at (10,48) {$d_1$};\node[dev] (d2) at (33,48) {$d_2$};\node[dev] (d3) at (56,48) {$d_3$};
+\node[obj] (r1) at (19,29) {$r_1$};\node[obj] (r2) at (47,29) {$r_2$};
+\node[circle,draw=FrameworkAmber,fill=FrameworkAmber!13,minimum size=7mm,font=\sffamily\small] (b) at (33,10) {$b$};
+\foreach \n in {d2,r1,r2}{\draw[ground] (b)--(\n);}
+\draw[ground,rounded corners=2mm] (b.west)--(3,10)--(3,48)--(d1.west);
+\draw[ground,rounded corners=2mm] (b.east)--(63,10)--(63,48)--(d3.east);
+\draw[link] (d1)--(r1);\draw[link] (d2)--(r1);\draw[link] (d2)--(r2);\draw[link] (d3)--(r2);
+\draw[FrameworkTeal!40,densely dashed,rounded corners=2mm] (78,19) rectangle (138,56);
+\node[dev] (c1) at (85,48) {$d_1$};\node[dev] (c2) at (108,48) {$d_2$};\node[dev] (c3) at (131,48) {$d_3$};
+\node[obj,draw=FrameworkViolet,fill=FrameworkViolet!12] (i1) at (94,29) {Issue};\node[obj] (p1) at (122,29) {PR};
+\draw[link] (c1)--(i1);\draw[link] (c2)--(i1);\draw[link] (c2)--(p1);\draw[link] (c3)--(p1);
+\node[selabel,align=center] at (108,10) {One project boundary\\Typed collaboration behaviors};
+\node[selabel,align=center] at (33,-2) {Activity-weighted participation\\Background links couple components};
+\node[selabel,align=center] at (108,-2) {Priors: history and reactions\\Merged-PR prior increment: 50\%};
+\node[selabel,anchor=west] at (0,-15) {\textcolor{FrameworkBlue}{Developers}\quad\textcolor{FrameworkTeal}{Repositories / pull requests}\quad\textcolor{FrameworkViolet}{Issues}\quad\textcolor{FrameworkAmber}{Background}};
+\end{tikzpicture}
+\caption{Global and community collaboration networks. Adapted from Figure 1 of \citet{han2026rank}, Figure 4 of \citet{wang2026digger}, and the community model of \citet{zhao2024}. The topology illustrates model structure, with no empirical edge weights implied. The dashed enclosure in (b) denotes a project boundary, not an additional scored node. Prior adjustments are distinct from edge transfer.}
+\label{fig:ch5-networks}
+\end{figure}

@@ -1,0 +1,27 @@
+\begin{table}[tbp]
+\centering
+\caption{Data holdings and service scope in the OpenDigger study.}\label{tab:ch6-inventory}
+\small
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}Xr@{}}
+\toprule
+Source & Type of record & Reported count\\
+\midrule
+Cargo & Package records & 121,000\\
+CVE & Vulnerability records & 200,000\\
+NuGet & Package records & 364,000\\
+PyPI & Package records & 449,000\\
+Maven & Package records & 559,000\\
+Go & Module records & 1,020,000\\
+NPM & Package records & 2,470,000\\
+Stack Overflow & Q\&A posts & 25,000,000\\
+Gitee & Activity records & 36,337,157\\
+GitHub & Activity records & 9,655,977,166\\
+\midrule\multicolumn{3}{@{}l}{\textsf{Associated service inventory}}\\
+Statistical metrics & 17 CHAOSS metrics, stars, participants, Activity & 20\\
+Network metrics & G-OpenRank and C-OpenRank & 2\\
+Label integrations & Covering 413 organizations and over 10,000 repositories & 619\\
+\bottomrule
+\end{tabularx}
+\tablenote{September 2025 snapshot; data counts reproduced from \citet[Table 1]{wang2026digger}; service inventory from Sections 3.4 and A.1. Units differ across sources and must not be added. The 17 CHAOSS metrics are a subset of the 20 statistical metrics. The reported integrated graph contains approximately 800 million nodes and 1.9 billion edges; this is not the population of monthly benchmark networks.}
+\end{table}

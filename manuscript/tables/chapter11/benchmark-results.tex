@@ -1,0 +1,33 @@
+\begin{table}[htbp]
+\caption{Selected OpenPerf results for two representative tasks. Values are transcribed from Tables 3--4 of \citet{han2025openperf}. Bold entries identify the best value within the corresponding published comparison.}
+\label{tab:ch11-results}
+\centering\small\renewcommand{\arraystretch}{1.17}
+\begin{tabularx}{\linewidth}{@{}Xrrl@{}}
+\toprule
+\multicolumn{4}{@{}l}{\textbf{(a) Behaviour completion: NMSE, lower is better}}\\[3pt]
+\textbf{Project} & \textbf{TAMF} & \textbf{Best alternative} & \textbf{Alternative method}\\\midrule
+PyTorch & \textbf{0.041} & 0.161 & iForest\\
+SkyWalking & 0.235 & \textbf{0.143} & iForest\\
+TensorFlow & \textbf{0.024} & 0.031 & TRMF\\
+TiDB & \textbf{0.043} & 0.124 & TRMF\\
+VS Code & \textbf{0.234} & 0.326 & TRMF\\
+\bottomrule
+\end{tabularx}
+\vspace{6mm}
+\begin{tabularx}{\linewidth}{@{}Xrrr@{}}
+\toprule
+\multicolumn{4}{@{}l}{\textbf{(b) Bot classification: higher is better}}\\[3pt]
+\textbf{Method} & \textbf{Accuracy} & \textbf{F1} & \textbf{AUC}\\\midrule
+Logistic regression & 0.9234 & 0.4856 & 0.5760\\
+Decision tree & 0.7995 & 0.3408 & 0.5024\\
+SVM & 0.8936 & 0.4609 & 0.5414\\
+Gaussian naive Bayes & \textbf{0.9548} & 0.5923 & 0.5319\\
+$K$-nearest neighbours & 0.8309 & 0.3706 & 0.5119\\
+Random forest & 0.8817 & 0.4880 & 0.6486\\
+BotHunter & 0.8649 & 0.3405 & 0.5512\\
+BoDeGHa & 0.8286 & 0.3628 & 0.5049\\
+BotHawk & 0.8799 & \textbf{0.8821} & \textbf{0.9472}\\
+\bottomrule
+\end{tabularx}
+\tablenote{Panel (a) selects NMSE from the three reported error measures and retains TAMF plus the best of the seven alternatives for each project. Panel (b) retains all nine methods and three of the five reported measures. Original values are preserved; confusion matrices, uncertainty intervals, and new replications are not supplied here.}
+\end{table}

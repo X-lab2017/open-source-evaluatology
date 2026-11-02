@@ -1,0 +1,35 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm,
+ d/.style={sebox,text width=28mm,inner sep=1.2mm,minimum height=32mm,
+ font=\sffamily\fontsize{8.6}{10.3}\selectfont},
+ top/.style={seband,text width=127mm,minimum height=13mm}]
+\node[top] (f) at (66,0) {A SHARED FOUNDATION FOR SCIENTIFIC INQUIRY\\[-1pt]
+ \normalfont\sffamily\fontsize{8.7}{10.3}\selectfont Basic concepts \quad$\cdot$\quad Axioms and conjectures};
+\node[d,fill=FrameworkAmber!16,draw=FrameworkAmber!70] (m) at (16.5,-37) {};
+\node[d,fill=FrameworkBlue!14,draw=FrameworkBlue!70] (t) at (49.5,-37) {};
+\node[d,fill=FrameworkViolet!16,draw=FrameworkViolet!70] (e) at (82.5,-37) {};
+\node[d,fill=FrameworkTeal!14,draw=FrameworkTeal!70] (i) at (115.5,-37) {};
+\foreach \x/\title in {16.5/METROLOGY,49.5/TESTOLOGY,82.5/EVALUATOLOGY,115.5/INFEROLOGY}
+ {\node[font=\sffamily\bfseries\fontsize{8.6}{10.3}\selectfont,text=HeadingInk] at (\x,-25) {\title};}
+\node[selabel,text=HeadingInk,text width=28mm,anchor=north] at (16.5,-29)
+ {Structural and\\behavioural quantities:\\definition, realization,\\and assignment};
+\node[selabel,text=HeadingInk,text width=28mm,anchor=north] at (49.5,-29)
+ {Testing propositions\\and models; behavioural\\quantities: definition,\\realization and assignment};
+\node[selabel,text=HeadingInk,text width=28mm,anchor=north] at (82.5,-29)
+ {Causes and effects;\\value quantities\\in the narrower\\sense of evaluation};
+\node[selabel,text=HeadingInk,text width=28mm,anchor=north] at (115.5,-29)
+ {Generation of\\new propositions\\and models};
+\draw[draw=HeadingInk!85,line width=.65pt] (f.south)--(66,-13);
+\draw[draw=HeadingInk!85,line width=.65pt] (16.5,-13)--(115.5,-13);
+\foreach \x/\n in {16.5/m,49.5/t,82.5/e,115.5/i}
+ {\draw[searrow] (\x,-13)--(\n.north);}
+\draw[{Stealth[length=1mm]}-{Stealth[length=1mm]},draw=HeadingInk!85,line width=.55pt] (m.east)--(t.west);
+\node[sebox,text width=127mm,minimum height=10mm,fill=HeadingInk!6] (r) at (66,-68)
+ {Mutually supporting forms of inquiry};
+\foreach \x/\n in {16.5/m,49.5/t,82.5/e,115.5/i}
+ {\draw[searrow] (\n.south)--(\x,-63);}
+\end{tikzpicture}
+\caption{Four disciplines within a shared system of inquiry. English adaptation of \citet[Fig.~1.1, p.~3]{zhan2026book}. Shared concepts and axioms support four mutually reinforcing disciplines. Layout and wording are condensed; arrows express conceptual relationships.}
+\label{fig:disciplines}
+\end{figure}

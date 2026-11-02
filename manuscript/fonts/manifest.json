@@ -1,0 +1,52 @@
+[
+  {
+    "name": "SourceSans3-Regular.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-Regular.otf",
+    "sha256": "08df266400933d3178d081a45f94a08814c3e55b4b7dd2e0ff69cb1329f13ab6"
+  },
+  {
+    "name": "SourceSerif4-Semibold.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-Semibold.otf",
+    "sha256": "25e034392847d9965c92f98971b3646436b7ab919ece9118b0c0e5ec94c02efc"
+  },
+  {
+    "name": "SourceSerif4-It.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-It.otf",
+    "sha256": "f8062257f4693e438a8e317c9fe2b4393f0d4eed84d897edcbfd733c30a1c1a1"
+  },
+  {
+    "name": "NotoSansCJKsc-Regular.otf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf",
+    "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+  },
+  {
+    "name": "NotoSerifCJKsc-Regular.otf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Serif/OTF/SimplifiedChinese/NotoSerifCJKsc-Regular.otf",
+    "sha256": "2a2eae2628df83556c54018c41e20fa532c1b862c5256ae8b3f23feb918d12ca"
+  },
+  {
+    "name": "SourceSerif4-SemiboldIt.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-SemiboldIt.otf",
+    "sha256": "fc22addcea5d5ab982dfef6d388fff6bdb3e31ae46c37e0015b8312e634a6e9b"
+  },
+  {
+    "name": "SourceSans3-Semibold.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-Semibold.otf",
+    "sha256": "36f1cd2c344aa3109e64429bce41a41e4b2b923beb2db19b8dbf9bb56f05a4f9"
+  },
+  {
+    "name": "SourceSerif4-Regular.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/OTF/SourceSerif4-Regular.otf",
+    "sha256": "edf160d0d584deee8a3bb2c3371b2a7624ca63580fbe02c57c1f4c91e84d8787"
+  },
+  {
+    "name": "SourceSans3-SemiboldIt.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-SemiboldIt.otf",
+    "sha256": "81204ed282543df2d93db214c98b5ec1c9ce735c4c82e4323d5ae5ee69c6b8b7"
+  },
+  {
+    "name": "SourceSans3-It.otf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/release/OTF/SourceSans3-It.otf",
+    "sha256": "430b9f0eb1170be0981706d14b6cf87122efba9d86c373bbdf69daf276421462"
+  }
+]

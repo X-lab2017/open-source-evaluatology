@@ -1,0 +1,14 @@
+\begin{table}[tbp]
+\caption{Historical feature definitions used for archival-status classification.}
+\label{tab:ch8-metrics}
+\centering\small\renewcommand{\arraystretch}{1.14}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{30mm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{31mm}@{}}\toprule
+Feature & Definition in the study & Main interpretive limit\\\midrule
+Bus Factor Contributors (BFC) & Smallest number of contributors accounting for at least 50\% of code commits. & Concentration of recorded commits; expertise and permissions require further evidence.\\
+Issue response time & Median days from issue creation to the first comment by someone other than its author. & First response need not resolve the problem.\\
+Issue resolution duration & Median days from opening to closing, over closed issues. & Unresolved issues are outside this duration statistic.\\
+PR merge duration & Median days from creation to merge, over merged pull requests. & Rejected and still-open requests are outside this duration statistic.\\
+PR acceptance ratio & Merged pull requests as a proportion of all opened pull requests. & Pending work and end-of-project cleanup can affect the ratio.\\\bottomrule
+\end{tabularx}
+\tablenote{Source: \citet[Section 4.3.4]{xia2024thesis}. These definitions belong to the historical experiment. The thesis does not fully specify feature observation windows, missing-value handling, or all decision-tree fitting parameters. No current OpenDigger definition is substituted for them.}
+\end{table}

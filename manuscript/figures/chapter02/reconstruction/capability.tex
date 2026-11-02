@@ -1,0 +1,30 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\path[use as bounding box] (0,0) rectangle (140,80);
+\node[sebox,text width=36mm,minimum height=21mm,fill=FrameworkBlue!8] (work) at (22,61)
+ {\textbf{Collaborative work}\\Preparation, review,\\coordination, explanation};
+\node[sebox,text width=36mm,minimum height=21mm,fill=FrameworkTeal!8] (artifact) at (70,61)
+ {\textbf{Shared artifacts}\\Software, tests,\\documentation};
+\node[sebox,text width=36mm,minimum height=21mm,fill=FrameworkAmber!10] (effect) at (118,61)
+ {\textbf{Use and effects}\\Reliability, learning,\\effort, adaptation};
+\draw[searrow] (work.east) -- (artifact.west);
+\draw[searrow] (artifact.east) -- (effect.west);
+\node[selabel,anchor=south] at (46,75) {production};
+\node[selabel,anchor=south] at (94,75) {use};
+\node[sebox,text width=78mm,minimum height=18mm,fill=FrameworkViolet!8,draw=FrameworkViolet!65] (capacity) at (70,22)
+ {\textbf{Collective capability}\\Expertise and transferable knowledge;\\working infrastructure; authority and resources};
+\draw[searrow,draw=FrameworkViolet] (capacity.west) -| (work.south);
+\node[selabel,align=left,anchor=west] at (1,37) {enables\\further work};
+\draw[searrow,draw=FrameworkTeal] (artifact.south) -- (capacity.north);
+\node[selabel,fill=white,inner sep=1mm] at (70,41) {preserves and renews};
+\draw[sefeedback] (effect.south) |- (capacity.east);
+\node[selabel,anchor=east,align=right] at (139,37) {requirements\\and feedback};
+\draw[FrameworkRule,line width=.6pt] (2,7) -- (138,7);
+\node[selabel,anchor=north,text width=136mm] at (70,4)
+ {Value: differences in effects interpreted for stakeholders, a reference, and a purpose.};
+\end{tikzpicture}
+\caption{Collaboration, collective capability, and renewal. Work changes artifacts and the conditions of future work; use produces effects and further requirements. Arrows indicate proposed mechanisms, not estimated effects. The value relation applies to a specified comparison.}
+\label{fig:production}
+\tablenote{Book synthesis, informed by the Activity and OpenRank studies and the object--effect account in Evaluatology \citep{xia2024thesis,zhao2025thesis,zhan2026book}.}
+\end{figure}

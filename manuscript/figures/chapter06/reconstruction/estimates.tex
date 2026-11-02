@@ -1,0 +1,21 @@
+\begin{table}[tbp]
+\centering
+\caption{Published changes in collaboration metrics after deployment.}\label{tab:ch6-estimates}
+\fontsize{9.3}{11.8}\selectfont
+\renewcommand{\arraystretch}{1.13}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}Xrrrr@{}}
+\toprule
+Metric & $R^2$ & Level $\gamma$ & Slope $\delta$ & Mean change\\
+\midrule
+Issues New & 0.83 & $28.13^{\dagger}$ & $9.27^{\dagger}$ & $18.05\%$\\
+Issue Comments & 0.98 & $44.43^{\dagger}$ & $255.66^{***}$ & $52.75\%$\\
+Change Requests New & 0.83 & $62.54^{\dagger}$ & $32.32^{**}$ & $67.87\%$\\
+Change Requests Accepted & 0.83 & $43.43^{\dagger}$ & $25.80^{\dagger}$ & $88.73\%$\\
+Change Requests Reviews & 0.87 & $7.50^{\dagger}$ & $19.66^{\dagger}$ & $76.95\%$\\
+Reactions & 0.90 & $16.05^{**}$ & $4.22^{***}$ & $118.18\%$\\
+New Contributors & 0.66 & $44.44^{**}$ & $3.51^{\dagger}$ & $27.50\%$\\
+Participants & 0.92 & $78.48^{**}$ & $3.41^{\dagger}$ & $-1.77\%$\\
+\bottomrule
+\end{tabularx}
+\tablenote{All 32 numerical entries and 16 significance marks reproduce \citet[Table 6]{zhao2024}. Source notation is retained: $\dagger$: $p>0.05$; $**$: $p<0.05$; $***$: $p<0.01$. Level and slope are regression coefficients on the outcome scale; mean change is a separate descriptive percentage. Change requests are pull requests on GitHub. The estimates summarize the published analysis and have not been re-estimated for this book.}
+\end{table}

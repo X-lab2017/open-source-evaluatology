@@ -1,0 +1,30 @@
+\begin{figure}[tbp]
+\centering
+\begin{tikzpicture}[x=1mm,y=1mm,
+ disc/.style={sebox,text width=27.5mm,minimum height=11mm},
+ meth/.style={semethod,text width=60mm,minimum height=10mm}]
+\node[seband,text width=127mm,minimum height=13mm] (b) at (66,0)
+ {GENERAL CONCEPTS\\[-1pt]\normalfont\sffamily\fontsize{8.7}{10.3}\selectfont Objects, relationships, events, subjects, interrogation,\\cause and effect, propositions, models, axiom systems};
+\node[disc,fill=FrameworkAmber!14] (a) at (16.5,-26) {\textbf{Metrology}};
+\node[disc,fill=FrameworkBlue!13] (c) at (49.5,-26) {\textbf{Testology}};
+\node[disc,fill=FrameworkViolet!18] (e) at (82.5,-26) {\textbf{Evaluatology}};
+\node[disc,fill=FrameworkTeal!13] (i) at (115.5,-26) {\textbf{Inferology}};
+\draw[searrow] (b.south)--(66,-14)--(16.5,-14)--(a.north);
+\draw[searrow] (66,-14)--(49.5,-14)--(c.north);
+\draw[searrow] (66,-14)--(82.5,-14)--(e.north);
+\draw[searrow] (66,-14)--(115.5,-14)--(i.north);
+\node[seband,text width=127mm,minimum height=8mm,fill=FrameworkViolet] (h) at (66,-44)
+ {METHOD-SPECIFIC CONCEPTS AND ASSUMPTIONS};
+\draw[searrow] (e.south)--(82.5,-40);
+\node[meth] at (33,-58) {Object causal models};
+\node[meth] at (99,-58) {Design of experiments};
+\node[meth] at (33,-71) {Randomized controlled trials};
+\node[meth] at (99,-71) {Potential outcomes theory};
+\node[meth] at (33,-84) {Quasi-experiments};
+\node[meth] at (99,-84) {Structural equation models};
+\node[meth] at (33,-97) {Structural causal models};
+\node[meth] at (99,-97) {Instrumental variables};
+\end{tikzpicture}
+\caption{From a shared vocabulary to disciplines and evaluation methods. Adapted from \citet[Fig.~1.2, p.~5; Section~1.3]{zhan2026book}. The nine general concepts are supplied from the accompanying text; all eight method families in the original figure are retained. Branches indicate conceptual specialization. The methods overlap and have different assumptions; the diagram assigns no common identification guarantee.}
+\label{fig:hierarchy}
+\end{figure}

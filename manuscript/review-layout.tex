@@ -1,0 +1,118 @@
+% Modern book-review layout built on the unmodified memoir class.
+% Equal left and right margins retain the approved 142 mm text width.
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{SourceSerif4}[
+  Path=fonts/,Extension=.otf,
+  UprightFont=*-Regular,ItalicFont=*-It,
+  BoldFont=*-Semibold,BoldItalicFont=*-SemiboldIt
+]
+\setsansfont{SourceSans3}[
+  Path=fonts/,Extension=.otf,
+  UprightFont=*-Regular,ItalicFont=*-It,
+  BoldFont=*-Semibold,BoldItalicFont=*-SemiboldIt
+]
+\usepackage[english]{babel}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[cmex10]{amsmath}
+\usepackage[authoryear,round]{natbib}
+\usepackage{chapterbib}
+\usepackage{booktabs,tabularx}
+\usepackage{needspace}
+\usepackage{xurl}
+\usepackage{flafter,etoolbox,placeins}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\input{figure-style}
+\definecolor{HeadingInk}{HTML}{17384B}
+\definecolor{MetaInk}{HTML}{56616B}
+\definecolor{FrameworkTeal}{HTML}{287B80}
+\definecolor{FrameworkBlue}{HTML}{3B6F97}
+\definecolor{FrameworkRule}{HTML}{D9E2E7}
+\definecolor{FrameworkAmber}{HTML}{A86E2E}
+\definecolor{FrameworkViolet}{HTML}{71618C}
+\usepackage[hidelinks,unicode,pdfpagelabels]{hyperref}
+
+\setSingleSpace{1.0662}
+\SingleSpacing
+\setlrmarginsandblock{34mm}{34mm}{*}
+\setulmarginsandblock{25mm}{27mm}{*}
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{7mm}
+\setlength{\footskip}{13mm}
+\setmarginnotes{6mm}{22mm}{5mm}
+\checkandfixthelayout
+
+\setlength{\parindent}{1.3em}
+\setlength{\parskip}{2pt plus 0.4pt}
+\emergencystretch=2em
+\tolerance=1800
+\hyphenpenalty=200
+\doublehyphendemerits=500000
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=10000
+\raggedbottom
+\hyphenation{OpenRank OpenDigger evaluatology}
+
+\chapterstyle{section}
+\renewcommand{\chaptitlefont}{\normalfont\sffamily\bfseries\color{HeadingInk}\fontsize{24}{29}\selectfont}
+\renewcommand{\chapnumfont}{\chaptitlefont}
+\setlength{\beforechapskip}{0pt}
+\setlength{\afterchapskip}{20pt}
+\setsecheadstyle{\sffamily\bfseries\color{HeadingInk}\fontsize{14}{18}\selectfont}
+\setsubsecheadstyle{\sffamily\bfseries\color{HeadingInk}\fontsize{11.5}{15}\selectfont}
+\setbeforesecskip{-20pt plus -4pt minus -2pt}
+\setaftersecskip{8pt plus 2pt}
+\setbeforesubsecskip{-14pt plus -3pt minus -2pt}
+\setaftersubsecskip{5pt plus 1pt}
+\pretocmd{\section}{\Needspace{11\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{6\baselineskip}}{}{}
+\setsecnumdepth{section}
+\captionnamefont{\sffamily\bfseries\fontsize{9.3}{12}\selectfont}
+\captiontitlefont{\sffamily\fontsize{9.3}{12}\selectfont}
+\captiondelim{.\enspace}
+\captionstyle{\raggedright}
+\setlength{\abovecaptionskip}{8pt}
+\setlength{\belowcaptionskip}{7pt}
+\setlength{\textfloatsep}{16pt plus 3pt minus 2pt}
+\setlength{\intextsep}{15pt plus 3pt minus 2pt}
+\renewcommand{\topfraction}{.88}
+\renewcommand{\bottomfraction}{.78}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\floatpagefraction}{.72}
+\newcommand{\tablenote}[1]{\par\vspace{5pt}{\sffamily\fontsize{8.6}{11}\selectfont\raggedright #1\par}}
+\newenvironment{definitionbox}{\par\smallskip\begin{adjustwidth}{4mm}{4mm}\noindent\color{HeadingInk}\rule{\linewidth}{.6pt}\par\smallskip\noindent\ignorespaces}{\par\smallskip\noindent\rule{\linewidth}{.6pt}\end{adjustwidth}\smallskip}
+\newcommand{\doi}[1]{\mbox{\href{https://doi.org/#1}{{\sffamily\fontsize{9}{11}\selectfont DOI:\,#1}}}}
+% Cross-chapter references resolve in the integrated proof; the supplied number
+% preserves intelligibility when a chapter is compiled on its own.
+\newcommand{\bookref}[2]{\ifcsname r@#1\endcsname\ref{#1}\else#2\fi}
+\renewcommand{\bibname}{References}
+\AtBeginDocument{\renewcommand{\bibsection}{\section*{References}\pdfbookmark[1]{References}{refs.\thechapter}}}
+\setlength{\bibsep}{5pt}
+\renewcommand{\bibfont}{\fontsize{9.5}{12}\selectfont\raggedright}
+\addto\captionsenglish{\renewcommand{\bibname}{References}}
+
+\makepagestyle{monograph}
+\newcommand{\runningfont}{\sffamily\fontsize{8.5}{10.2}\selectfont\color{MetaInk}}
+\makeevenhead{monograph}{\runningfont Open Source Evaluatology}{}{\runningfont\rightmark}
+\makeoddhead{monograph}{\runningfont Open Source Evaluatology}{}{\runningfont\rightmark}
+\makeevenfoot{monograph}{}{\runningfont\thepage}{}
+\makeoddfoot{monograph}{}{\runningfont\thepage}{}
+\makepagestyle{opening}
+\makeevenfoot{opening}{}{\runningfont\thepage}{}
+\makeoddfoot{opening}{}{\runningfont\thepage}{}
+\aliaspagestyle{chapter}{opening}
+\pagestyle{monograph}
+\renewcommand{\sectionmark}[1]{}
+
+\hypersetup{
+  pdftitle={Open Source Evaluatology: Theory, Methods, and Empirical Studies},
+  pdfsubject={English academic monograph},
+  pdfauthor={},
+  pdfkeywords={open source evaluatology, theory, evaluation, effects, open collaboration},
+  pdfdisplaydoctitle=true
+}

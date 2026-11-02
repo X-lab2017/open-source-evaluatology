@@ -1,0 +1,15 @@
+% Vector-only academic figure system. Geometry is explicit; no decorative imagery.
+\tikzset{
+ sebox/.style={draw=HeadingInk!55,fill=FrameworkBlue!7,line width=.55pt,
+  align=center,inner sep=1.6mm,font=\sffamily\fontsize{9}{10.6}\selectfont,
+  text=HeadingInk,minimum height=12mm},
+ sewide/.style={sebox,text width=124mm,fill=FrameworkBlue!8},
+ searrow/.style={-{Stealth[length=1.7mm,width=1.25mm]},draw=HeadingInk!85,line width=.65pt},
+ sefeedback/.style={searrow,draw=FrameworkTeal,densely dashed},
+ selabel/.style={font=\sffamily\fontsize{8.2}{10}\selectfont,text=MetaInk,align=center},
+ seboundary/.style={draw=MetaInk,line width=.55pt,dashed},
+ seheading/.style={font=\sffamily\bfseries\fontsize{10}{12}\selectfont,text=HeadingInk},
+ seband/.style={sebox,draw=none,text=white,fill=HeadingInk,font=\sffamily\bfseries\fontsize{9.2}{11}\selectfont},
+ semethod/.style={sebox,minimum height=11mm,fill=FrameworkTeal!10,draw=FrameworkTeal!55,
+  font=\sffamily\fontsize{8.5}{10.2}\selectfont}
+}

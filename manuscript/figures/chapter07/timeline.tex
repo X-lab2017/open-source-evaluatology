@@ -1,0 +1,28 @@
+\begin{figure}[htbp]\centering
+\begin{tikzpicture}[x=1mm,y=1mm]
+\path[use as bounding box] (0,-2) rectangle (140,64);
+\node[seheading,anchor=west] at (0,61) {Learning and formative evidence};
+\foreach \x/\title/\desc/\col in {0/S1/Understanding OSS/FrameworkBlue,47/S2/Implementation and review/FrameworkTeal,94/S3/Maintenance and governance/FrameworkViolet}{
+ \fill[\col!10] (\x,41) rectangle +(45,14);
+ \draw[\col,line width=1.2pt] (\x,55)--+(45,0);
+ \node[font=\sffamily\bfseries\small,text=\col,anchor=west] at (\x+2,51) {\title};
+ \node[font=\sffamily\fontsize{8.5}{10}\selectfont,text=HeadingInk,anchor=west] at (\x+2,45) {\desc};
+}
+\node[selabel] at (22.5,35) {Artifact-based report\\no ranks or grades};
+\node[selabel] at (69.5,35) {Artifact-based report\\no ranks or grades};
+\draw[searrow] (22.5,41)--(22.5,39);
+\draw[searrow] (69.5,41)--(69.5,39);
+\draw[searrow] (116.5,41)--(116.5,28)--(3,28)--(3,18);
+\node[font=\sffamily\bfseries\fontsize{9}{11}\selectfont,text=HeadingInk,anchor=west] at (10,23) {Assessment and correction};
+\foreach \x/\num/\lab in {0/1/Record provisional\\rubric scores,36/2/Inspect network\\evidence and moderate,72/3/Release outcome;\\one week for correction,108/4/Finalize grades;\\voluntary survey}{
+ \fill[HeadingInk] (\x+2,15) circle (2.5);
+ \node[font=\sffamily\bfseries\fontsize{8}{9}\selectfont,text=white] at (\x+2,15) {\num};
+ \node[selabel,text width=31mm,anchor=north] at (\x+16,10) {\lab};
+}
+\draw[searrow] (5,15)--(35,15);
+\draw[searrow] (41,15)--(71,15);
+\draw[searrow] (77,15)--(107,15);
+\end{tikzpicture}
+\caption{The 2025 recognition process separates formative reporting from the final decision sequence. Adapted from Figure 1 and Sections III--IV of \citet{seetmanuscript}. Provisional judgments precede inspection of the semester-level OpenRank evidence; correction remains possible before finalization.}
+\label{fig:ch7-timeline}
+\end{figure}

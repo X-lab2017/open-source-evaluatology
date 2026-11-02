@@ -18,6 +18,14 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Ensure Pandoc is available
+        run: |
+          if ! command -v pandoc >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install -y --no-install-recommends pandoc
+          fi
+      - name: Build online reading edition
+        run: python3 scripts/build_reader.py
       - name: Validate preview and exclude PDFs
         run: python3 scripts/check_preview.py
       - uses: actions/configure-pages@v5

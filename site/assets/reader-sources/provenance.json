@@ -1,0 +1,9 @@
+{
+  "source": "Open_Source_Evaluatology_Memoir_LaTeX.zip / source/figures/chapter10/fig10-06-applications.pdf",
+  "source_sha256": "dcb3974ad762d2205a39de341cc8182ac33c23a6a2355cba9cd51f52df36f6a2",
+  "pages": [
+    2,
+    3
+  ],
+  "conversion": "pdftocairo -svg, one SVG per original PDF page; no PDF published"
+}
